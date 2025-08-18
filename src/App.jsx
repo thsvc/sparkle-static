@@ -187,13 +187,22 @@ const Header = ({ sections, activeSection, scrollToSection }) => {
       />
       <div className="relative max-w-6xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <motion.div
+          <motion.button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-lg font-bold font-grotesk text-slate-900 dark:text-white"
+            className="flex items-center"
+            aria-label="Sparkle Ventures – Home"
           >
-            Sparkle Ventures
-          </motion.div>
+            <img
+              src={import.meta.env.BASE_URL + 'images/logo-sparkle.png'}
+              alt="Sparkle Ventures"
+              className="h-7 w-auto md:h-8"
+              decoding="async"
+              loading="eager"
+            />
+          </motion.button>
 
           <nav className="hidden md:flex items-center gap-6 text-sm">
             {sections.map(({ id, label }) => (
