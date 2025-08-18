@@ -107,7 +107,7 @@ const teamData = [
 const historyData = [
   {
     title: "Automotive (1900–1913)",
-    beforeImage: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/303927336_Automotive1900-2013.png", // Corrected URL from outline to match intended image
+    beforeImage: import.meta.env.BASE_URL + 'images/automotive.png', // Corrected URL from outline to match intended image
     caption: "In 1900, cars were a rarity on New York's Fifth Avenue. By 1913, they had become the norm, reshaping mobility, industry, and the urban landscape. From scarcity to ubiquity in barely a decade."
   },
   {
