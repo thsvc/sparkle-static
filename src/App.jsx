@@ -196,7 +196,7 @@ const Header = ({ sections, activeSection, scrollToSection }) => {
             aria-label="Sparkle Ventures – Home"
           >
             <img
-              src={import.meta.env.BASE_URL + 'images/logo-sparkle.png'}
+              src={import.meta.env.BASE_URL + 'images/logo-sparkle.svg'}
               alt="Sparkle Ventures"
               className="h-7 w-auto md:h-8"
               decoding="async"
