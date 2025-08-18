@@ -683,18 +683,127 @@ const PerspectiveSection = () => {
   );
 };
 
-const UniverseSection = () => {
-  const [openIndex, setOpenIndex] = useState(null);
+// === UNIVERSE MOSAIC (catégories + logos interactifs) ===
 
-  useEffect(() => {
-    if (window.innerWidth >= 768) {
-      setOpenIndex(0);
-    }
-  }, []);
+const UNIVERSE_CATEGORIES = [
+  {
+    title: "AI Compute & Platforms",
+    items: [
+      { name: "x.ai", url: "https://x.ai/", logo: "xai.svg" },
+      { name: "FedML", url: "https://fedml.ai/home", logo: "fedml.webp" },
+    ],
+  },
+  {
+    title: "Privacy-Preserving Compute",
+    items: [
+      { name: "Proof", url: "https://proof.cloud/", logo: "proofcloud.png" },
+    ],
+  },
+  {
+    title: "Applied AI Products",
+    items: [
+      { name: "Rowads", url: "https://rowads.app/", logo: "rowads.webp" },
+      { name: "Knode", url: "https://www.knode.ai/", logo: "knode.webp" },
+      { name: "Kinetix", url: "https://www.kinetix.tech/", logo: "kinetix.webp" },
+    ],
+  },
+  {
+    title: "Digital Identity",
+    items: [
+      { name: "TON", url: "https://ton.org/", logo: "ton.webp" },
+      { name: "Freename", url: "https://freename.com/home/", logo: "freename.webp" },
+    ],
+  },
+  {
+    title: "Distributed Finance Infrastructure",
+    items: [
+      { name: "Kiln", url: "https://www.kiln.fi/", logo: "kiln.svg" },
+      { name: "Gattaca", url: "https://gattaca.com/", logo: "gattaca.webp" },
+      { name: "THORChain", url: "https://thorchain.org/", logo: "thorchain.webp" },
+    ],
+  },
+  {
+    title: "Data Intelligence",
+    items: [
+      { name: "Absolute Labs", url: "https://absolutelabs.io/", logo: "absolutelabs.png" },
+    ],
+  },
+  {
+    title: "Spatial Tech",
+    items: [
+      { name: "Loft Orbital", url: "https://loftorbital.com/", logo: "loftorbital.jpg" },
+    ],
+  },
+  {
+    title: "Autonomous Robotics",
+    items: [
+      { name: "Figure", url: "https://www.figure.ai/", logo: "figure.webp" },
+    ],
+  },
+];
 
-  const toggleAccordion = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+function LogoCard({ name, url, logo }) {
+  const src = import.meta.env.BASE_URL + "images/logos/" + logo; // compatible GitHub Pages
+  return (
+    <motion.a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      whileHover={{ y: -4, scale: 1.03 }}
+      whileTap={{ scale: 0.98 }}
+      className="group relative rounded-xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/70
+                 p-5 flex items-center justify-center shadow-sm hover:shadow-lg transition-all"
+      aria-label={name}
+    >
+      {/* halo lumineux */}
+      <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity
+                      bg-gradient-to-br from-blue-500/10 via-cyan-500/10 to-transparent pointer-events-none" />
+      <img
+        src={src}
+        alt={name}
+        className="h-10 md:h-12 w-auto object-contain
+                   brightness-95 group-hover:brightness-110 transition-[filter,transform] duration-300
+                   dark:brightness-125"
+        loading="lazy"
+        decoding="async"
+      />
+    </motion.a>
+  );
+}
+
+const UniverseMosaic = () => {
+  return (
+    <Section id="universe" className="bg-slate-50 dark:bg-slate-900/50">
+      <SectionTitle>Universe of Companies</SectionTitle>
+
+      <div className="space-y-12">
+        {UNIVERSE_CATEGORIES.map((cat) => (
+          <div key={cat.title}>
+            <div className="mb-5 flex items-center justify-between">
+              <h3 className="text-lg md:text-xl font-semibold font-grotesk text-slate-800 dark:text-slate-100">
+                {cat.title}
+              </h3>
+              <span className="text-xs font-mono px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                {cat.items.length}
+              </span>
+            </div>
+
+            {/* Grille responsive : 2 -> 3 -> 5 colonnes */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+              {cat.items.map((c) => (
+                <LogoCard key={c.name} {...c} />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p className="mt-10 text-center text-xs text-slate-500">
+        Logos are trademarks of their respective owners.
+      </p>
+    </Section>
+  );
+};
   
   return (
     <Section id="universe" className="bg-slate-50 dark:bg-slate-900/50">
@@ -1031,7 +1140,7 @@ export default function SparkleVenturesPage() {
           <HeroSection />
           <CapabilitiesSection />
           <PerspectiveSection />
-          <UniverseSection />
+          <UniverseMosaic />
           <ManagementSection />
           <ContactSection onInvestorClick={() => setShowInvestorForm(true)} onFounderClick={() => setShowFounderForm(true)} />
         </main>
