@@ -683,9 +683,8 @@ const PerspectiveSection = () => {
   );
 };
 
-// === UNIVERSE MOSAIC (catégories + logos interactifs) ===
-
-const UNIVERSE_CATEGORIES = [
+// === UNIVERSE PORTFOLIO GRID (logos par catégories, style sobre) ===
+const PORTFOLIO_CATEGORIES = [
   {
     title: "AI Compute & Platforms",
     items: [
@@ -695,9 +694,7 @@ const UNIVERSE_CATEGORIES = [
   },
   {
     title: "Privacy-Preserving Compute",
-    items: [
-      { name: "Proof", url: "https://proof.cloud/", logo: "proofcloud.png" },
-    ],
+    items: [{ name: "Proof", url: "https://proof.cloud/", logo: "proofcloud.png" }],
   },
   {
     title: "Applied AI Products",
@@ -724,81 +721,73 @@ const UNIVERSE_CATEGORIES = [
   },
   {
     title: "Data Intelligence",
-    items: [
-      { name: "Absolute Labs", url: "https://absolutelabs.io/", logo: "absolutelabs.png" },
-    ],
+    items: [{ name: "Absolute Labs", url: "https://absolutelabs.io/", logo: "absolutelabs.png" }],
   },
   {
     title: "Spatial Tech",
-    items: [
-      { name: "Loft Orbital", url: "https://loftorbital.com/", logo: "loftorbital.jpg" },
-    ],
+    items: [{ name: "Loft Orbital", url: "https://loftorbital.com/", logo: "loftorbital.jpg" }],
   },
   {
     title: "Autonomous Robotics",
-    items: [
-      { name: "Figure", url: "https://www.figure.ai/", logo: "figure.webp" },
-    ],
+    items: [{ name: "Figure", url: "https://www.figure.ai/", logo: "figure.webp" }],
   },
 ];
 
-function LogoCard({ name, url, logo }) {
-  const src = import.meta.env.BASE_URL + "images/logos/" + logo; // compatible GitHub Pages
+function LogoTile({ name, url, logo }) {
+  const src = import.meta.env.BASE_URL + "images/logos/" + logo;
   return (
-    <motion.a
+    <a
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      whileHover={{ y: -4, scale: 1.03 }}
-      whileTap={{ scale: 0.98 }}
-      className="group relative rounded-xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/70
-                 p-5 flex items-center justify-center shadow-sm hover:shadow-lg transition-all"
+      className="group flex items-center justify-center h-20 md:h-24 rounded-xl
+                 bg-white/70 dark:bg-slate-800/70 shadow-sm hover:shadow-md transition-shadow"
       aria-label={name}
+      title={name}
     >
-      {/* halo lumineux */}
-      <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity
-                      bg-gradient-to-br from-blue-500/10 via-cyan-500/10 to-transparent pointer-events-none" />
       <img
         src={src}
         alt={name}
-        className="h-10 md:h-12 w-auto object-contain
-                   brightness-95 group-hover:brightness-110 transition-[filter,transform] duration-300
-                   dark:brightness-125"
+        className="max-h-10 md:max-h-12 w-auto object-contain
+                   grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100
+                   group-hover:scale-[1.03] transition-all duration-200"
         loading="lazy"
         decoding="async"
       />
-    </motion.a>
+    </a>
   );
 }
 
-const UniverseMosaic = () => {
+const UniversePortfolioGrid = () => {
   return (
     <Section id="universe" className="bg-slate-50 dark:bg-slate-900/50">
       <SectionTitle>Universe of Companies</SectionTitle>
 
       <div className="space-y-12">
-        {UNIVERSE_CATEGORIES.map((cat) => (
-          <div key={cat.title}>
-            <div className="mb-5 flex items-center justify-between">
-              <h3 className="text-lg md:text-xl font-semibold font-grotesk text-slate-800 dark:text-slate-100">
+        {PORTFOLIO_CATEGORIES.map((cat) => (
+          <section key={cat.title}>
+            {/* En-tête de catégorie */}
+            <div className="mb-4 flex items-center justify-between">
+              <h3 className="text-lg md:text-xl font-semibold font-grotesk text-slate-900 dark:text-white">
                 {cat.title}
               </h3>
-              <span className="text-xs font-mono px-2 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+              <span className="text-[11px] md:text-xs font-mono px-2 py-0.5 rounded-full
+                               bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
                 {cat.items.length}
               </span>
             </div>
 
-            {/* Grille responsive : 2 -> 3 -> 5 colonnes */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+            {/* Grille de logos — pas de trait entre éléments d’une même catégorie */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
               {cat.items.map((c) => (
-                <LogoCard key={c.name} {...c} />
+                <LogoTile key={c.name} {...c} />
               ))}
             </div>
-          </div>
+          </section>
         ))}
       </div>
 
-      <p className="mt-10 text-center text-xs text-slate-500">
+      <p className="mt-12 text-center text-xs text-slate-500">
         Logos are trademarks of their respective owners.
       </p>
     </Section>
@@ -1090,7 +1079,7 @@ export default function SparkleVenturesPage() {
           <HeroSection />
           <CapabilitiesSection />
           <PerspectiveSection />
-          <UniverseMosaic />
+          <UniversePortfolioGrid />
           <ManagementSection />
           <ContactSection onInvestorClick={() => setShowInvestorForm(true)} onFounderClick={() => setShowFounderForm(true)} />
         </main>
