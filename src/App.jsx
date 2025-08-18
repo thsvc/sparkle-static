@@ -112,12 +112,12 @@ const historyData = [
   },
   {
     title: "Semiconductors (1947–Today)",
-    beforeImage: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/f9452f558_Semiconductors1947-today.png",
+    beforeImage: import.meta.env.BASE_URL + 'images/semiconductors.png',
     caption: "The transistor began as a fragile experiment at Bell Labs in 1947. Today, billions are manufactured daily, powering everything from smartphones to satellites. What was once scarce is now the invisible backbone of modern life."
   },
   {
     title: "Satellites (1962–Today)",
-    beforeImage: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/a72bb6edf_Satellites1962-today.png",
+    beforeImage: import.meta.env.BASE_URL + 'images/satellites.png',
     caption: "The Telstar satellite of 1962 opened the era of space-based communications. Today, constellations of satellites provide global internet, defense, and earth observation—once experimental, now indispensable."
   }
 ];
