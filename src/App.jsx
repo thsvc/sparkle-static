@@ -683,7 +683,7 @@ const PerspectiveSection = () => {
   );
 };
 
-// === UNIVERSE PORTFOLIO GRID (logos par catégories, style sobre) ===
+// === UNIVERSE PORTFOLIO — rendu type humla.vc (grille bordurée, logos centrés) ===
 const PORTFOLIO_CATEGORIES = [
   {
     title: "AI Compute & Platforms",
@@ -733,24 +733,25 @@ const PORTFOLIO_CATEGORIES = [
   },
 ];
 
-function LogoTile({ name, url, logo }) {
+function PortfolioCell({ name, url, logo }) {
   const src = import.meta.env.BASE_URL + "images/logos/" + logo;
   return (
     <a
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex items-center justify-center h-20 md:h-24 rounded-xl
-                 bg-white/70 dark:bg-slate-800/70 shadow-sm hover:shadow-md transition-shadow"
-      aria-label={name}
+      className="m-px flex items-center justify-center h-28 sm:h-32 md:h-40 lg:h-48 
+                 border border-slate-300 bg-white dark:bg-white  /* fond blanc comme Humla */
+                 transition-transform duration-150 hover:scale-[1.02]"
       title={name}
+      aria-label={name}
     >
       <img
         src={src}
         alt={name}
-        className="max-h-10 md:max-h-12 w-auto object-contain
-                   grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100
-                   group-hover:scale-[1.03] transition-all duration-200"
+        className="max-h-10 sm:max-h-12 md:max-h-14 lg:max-h-16 w-auto object-contain
+                   grayscale contrast-125 opacity-90
+                   hover:grayscale-0 hover:opacity-100 transition-all duration-200"
         loading="lazy"
         decoding="async"
       />
@@ -760,27 +761,26 @@ function LogoTile({ name, url, logo }) {
 
 const UniversePortfolioGrid = () => {
   return (
-    <Section id="universe" className="bg-slate-50 dark:bg-slate-900/50">
+    <Section id="universe" className="bg-white">
       <SectionTitle>Universe of Companies</SectionTitle>
 
-      <div className="space-y-12">
+      <div className="space-y-14">
         {PORTFOLIO_CATEGORIES.map((cat) => (
           <section key={cat.title}>
             {/* En-tête de catégorie */}
-            <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-lg md:text-xl font-semibold font-grotesk text-slate-900 dark:text-white">
+            <div className="mb-3 flex items-center justify-between">
+              <h3 className="text-base md:text-lg font-semibold font-grotesk text-slate-900">
                 {cat.title}
               </h3>
-              <span className="text-[11px] md:text-xs font-mono px-2 py-0.5 rounded-full
-                               bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+              <span className="text-[11px] md:text-xs font-mono px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
                 {cat.items.length}
               </span>
             </div>
 
-            {/* Grille de logos — pas de trait entre éléments d’une même catégorie */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
+            {/* Grille bordurée façon tableau (truc du -m-px pour lignes fines uniques) */}
+            <div className="-m-px grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4">
               {cat.items.map((c) => (
-                <LogoTile key={c.name} {...c} />
+                <PortfolioCell key={c.name} {...c} />
               ))}
             </div>
           </section>
