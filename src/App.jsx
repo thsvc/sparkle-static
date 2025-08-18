@@ -14,8 +14,7 @@ const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     const storedTheme = window.localStorage.getItem('theme');
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    setTheme(storedTheme || systemTheme);
+    setTheme(storedTheme || 'light');   // light par défaut
   }, []);
 
   useEffect(() => {
