@@ -805,56 +805,6 @@ const UniverseMosaic = () => {
   );
 };
   
-  return (
-    <Section id="universe" className="bg-slate-50 dark:bg-slate-900/50">
-      <SectionTitle>Universe of Companies</SectionTitle>
-      <div className="space-y-4">
-        {companyData.map((group, index) => (
-          <div key={group.group} className="border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden">
-            <button
-              onClick={() => toggleAccordion(index)}
-              className="w-full flex justify-between items-center p-6 text-left hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
-            >
-              <div className="flex items-center gap-4">
-                <span className="font-bold text-lg font-grotesk text-slate-800 dark:text-slate-100">{group.group}</span>
-                <span className="text-xs font-mono px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-full">{group.companies.length}</span>
-              </div>
-              <motion.div animate={{ rotate: openIndex === index ? 180 : 0 }}>
-                <ChevronDown className="w-5 h-5 text-slate-500" />
-              </motion.div>
-            </button>
-            <AnimatePresence>
-              {openIndex === index && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: 'easeInOut' }}
-                  className="overflow-hidden"
-                >
-                  <div className="p-6 border-t border-slate-200 dark:border-slate-700 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-                    {group.companies.map(company => (
-                      <a
-                        key={company.name}
-                        href={company.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex items-center gap-2 text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                      >
-                        {company.name}
-                        <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      </a>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        ))}
-      </div>
-    </Section>
-  );
-};
 
 const ManagementSection = () => {
   return (
