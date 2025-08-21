@@ -175,6 +175,74 @@ const PerspectiveManifold = () => {
   );
 };
 
+// === PERSPECTIVE SECTION ===
+const PerspectiveSection = () => {
+  const stages = [
+    {
+      icon: Rocket,
+      title: "Frontier",
+      description: "Scarce, exploratory, capital-intensive innovations.",
+      examples: "Breakthrough AI models, orbital platforms, novel compute architectures."
+    },
+    {
+      icon: Network,
+      title: "Scaling",
+      description: "Standardization, orchestration, and secure interoperability across ecosystems.",
+      examples: "Unified orchestration stacks, secure compute fabrics, global addressing systems."
+    },
+    {
+      icon: ServerCog,
+      title: "Infrastructure",
+      description: "Invisible, deeply embedded capabilities powering multiple sectors simultaneously.",
+      examples: "AI-native cloud services, sovereign satcom grids, ubiquitous trust layers."
+    }
+  ];
+
+  return (
+    <Section id="perspective" className="bg-white dark:bg-slate-900">
+      <div className="text-center mb-16">
+        <h2 className="text-3xl md:text-4xl font-bold font-grotesk text-slate-900 dark:text-white mb-8">
+          Perspective
+        </h2>
+        <div className="max-w-4xl mx-auto text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+          <p>
+            As frontier technologies mature, they move from scarcity and experimentation to
+            standardization and ubiquity. This transformation is shaped by compounding capabilities,
+            hybrid architectures, and the convergence of multiple domains. We invest across this
+            transition, identifying the architectures and processes that drive adoption and endure
+            across cycles.
+          </p>
+        </div>
+      </div>
+
+      {/* Technology Stages */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+        {stages.map((stage, index) => (
+          <motion.div
+            key={stage.title}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700"
+          >
+            <div className="flex items-center gap-4 mb-4">
+              <div className="bg-white dark:bg-slate-700 p-3 rounded-lg shadow-sm">
+                <stage.icon className="w-6 h-6 text-blue-800 dark:text-blue-500" />
+              </div>
+              <h3 className="text-xl font-bold font-grotesk text-slate-900 dark:text-white">
+                {stage.title}
+              </h3>
+            </div>
+            <p className="text-slate-700 dark:text-slate-300 mb-4">{stage.description}</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">{stage.examples}</p>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Manifold schema */}
+      <PerspectiveManifold />
+
       {/* From Scarcity to Ubiquity Section */}
       <div className="mt-20">
         <motion.h3
@@ -229,7 +297,6 @@ const PerspectiveManifold = () => {
     </Section>
   );
 };
-
 
 // --- THEME PROVIDER & HOOK ---
 const ThemeContext = createContext();
