@@ -45,7 +45,7 @@ const capabilitiesData = [
   {
     icon: BarChart,
     title: "Secondary Solutions",
-    description: "Selective access to LP interests, directs, and structured/pre-IPO blocks across deep-tech adjacencies. Terms shared under NDA."
+    description: "Selective access to LP interests, directs, and structured/pre-IPO blocks across deep-tech adjacencies."
   },
   {
     icon: Zap,
@@ -105,17 +105,17 @@ const teamData = [
 // Historical technology evolution data
 const historyData = [
   {
-    title: "Automotive (1900–1913)",
+    title: "Automotive, 13 years to ubiquity (1900–1913)",
     beforeImage: import.meta.env.BASE_URL + 'images/automotive.png', // Corrected URL from outline to match intended image
     caption: "In 1900, cars were a rarity on New York's Fifth Avenue. By 1913, they had become the norm, reshaping mobility, industry, and the urban landscape. From scarcity to ubiquity in barely a decade."
   },
   {
-    title: "Semiconductors (1947–Today)",
+    title: "Semiconductors, 75 years to mass adoption (1947–Today)",
     beforeImage: import.meta.env.BASE_URL + 'images/semiconductors.png',
     caption: "The transistor began as a fragile experiment at Bell Labs in 1947. Today, billions are manufactured daily, powering everything from smartphones to satellites. What was once scarce is now the invisible backbone of modern life."
   },
   {
-    title: "Satellites (1962–Today)",
+    title: "Satellites, 60 years to global scale (1962–Today)",
     beforeImage: import.meta.env.BASE_URL + 'images/satellites.png',
     caption: "The Telstar satellite of 1962 opened the era of space-based communications. Today, constellations of satellites provide global internet, defense, and earth observation—once experimental, now indispensable."
   }
@@ -271,9 +271,9 @@ const Header = ({ sections, activeSection, scrollToSection }) => {
 
 const TechnologyMaturationDiagram = () => {
   const stages = [
-    { label: "Scarcity", description: "Experimental, capital-intensive" },
-    { label: "Standardization", description: "Interoperable, orchestrated" },
-    { label: "Ubiquity", description: "Invisible, mission-critical" }
+    { label: "Scarcity", description: "Experimental, Capital-intensive" },
+    { label: "Standardization", description: "Interoperable, Orchestrated" },
+    { label: "Ubiquity", description: "Composable, Invisible" }
   ];
 
   return (
