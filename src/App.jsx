@@ -733,38 +733,7 @@ const CapabilitiesSection = () => {
   );
 };
 
-// === PERSPECTIVE SECTION ===
-const PerspectiveSection = () => {
-  return (
-    <Section id="perspective" className="bg-white dark:bg-slate-900">
-      <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-4xl font-bold font-grotesk text-slate-900 dark:text-white mb-8">
-          Perspective
-        </h2>
-        <p className="max-w-3xl mx-auto text-lg text-slate-600 dark:text-slate-400">
-          Stub for build test.
-        </p>
-      </div>
 
-      <PerspectiveManifold />
-
-      <div className="mt-20">
-        <h3 className="text-2xl font-bold font-grotesk text-center mb-6">
-          From Scarcity to Ubiquity
-        </h3>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {historyData.map((item) => (
-            <div key={item.title} className="bg-white dark:bg-slate-800 p-6 rounded-2xl border">
-              <img src={item.beforeImage} alt={item.title} className="w-full h-48 object-cover rounded-xl mb-4" />
-              <h4 className="text-lg font-bold mb-2">{item.title}</h4>
-              <p className="text-sm text-slate-600 dark:text-slate-300">{item.caption}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </Section>
-  );
-};
 
 // === UNIVERSE PORTFOLIO — rendu type humla.vc (grille bordurée, logos centrés) ===
 const PORTFOLIO_CATEGORIES = [
