@@ -666,6 +666,7 @@ const CapabilitiesSection = () => {
   );
 };
 
+// === PERSPECTIVE SECTION ===
 const PerspectiveSection = () => {
   const stages = [
     {
@@ -688,42 +689,6 @@ const PerspectiveSection = () => {
     }
   ];
 
-  const opportunities = [
-    {
-      title: "Composability Flywheel",
-      description: "Modular capabilities integrate faster across domains as standards mature, driving exponential reach.",
-      example: "Containerization enabling global cloud-native software deployment."
-    },
-    {
-      title: "Process-Embedded Advantage",
-      description: "Scalable, repeatable execution is a moat that compounds.",
-      example: "Semiconductor fabs like TSMC leveraging process control as much as tech IP."
-    },
-    {
-      title: "Technological Hybridity",
-      description: "Cross-pollination of hardware, software, and data creates entirely new industries.",
-      example: "SpaceX's integration of propulsion, satellite networks, and AI-based navigation."
-    }
-  ];
-
-  const counterForces = [
-    {
-      title: "Commoditization Flow",
-      description: "As core capabilities standardize, differentiation shifts to integration, orchestration, and trust.",
-      example: "Generic cloud compute vs. AWS ecosystem services."
-    },
-    {
-      title: "Aggregation Gravity",
-      description: "Network effects and ecosystem lock-in increase the strength of dominant platforms.",
-      example: "Apple's integration of hardware, software, and services."
-    },
-    {
-      title: "Deflationary Gain",
-      description: "Each tech generation delivers more at lower cost, broadening market access.",
-      example: "AI inference cost reductions enabling consumer-grade generative tools."
-    }
-  ];
-
   return (
     <Section id="perspective" className="bg-white dark:bg-slate-900">
       <div className="text-center mb-16">
@@ -732,7 +697,11 @@ const PerspectiveSection = () => {
         </h2>
         <div className="max-w-4xl mx-auto text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
           <p>
-            As frontier technologies mature, they move from scarcity and experimentation to standardization and ubiquity. This transformation is shaped by compounding capabilities, hybrid architectures, and the convergence of multiple domains. We invest across this transition, identifying the architectures and processes that drive adoption and endure across cycles.
+            As frontier technologies mature, they move from scarcity and experimentation to
+            standardization and ubiquity. This transformation is shaped by compounding capabilities,
+            hybrid architectures, and the convergence of multiple domains. We invest across this
+            transition, identifying the architectures and processes that drive adoption and endure
+            across cycles.
           </p>
         </div>
       </div>
@@ -752,7 +721,9 @@ const PerspectiveSection = () => {
               <div className="bg-white dark:bg-slate-700 p-3 rounded-lg shadow-sm">
                 <stage.icon className="w-6 h-6 text-blue-800 dark:text-blue-500" />
               </div>
-              <h3 className="text-xl font-bold font-grotesk text-slate-900 dark:text-white">{stage.title}</h3>
+              <h3 className="text-xl font-bold font-grotesk text-slate-900 dark:text-white">
+                {stage.title}
+              </h3>
             </div>
             <p className="text-slate-700 dark:text-slate-300 mb-4">{stage.description}</p>
             <p className="text-sm text-slate-500 dark:text-slate-400">{stage.examples}</p>
@@ -760,7 +731,11 @@ const PerspectiveSection = () => {
         ))}
       </div>
 
-     <PerspectiveManifold />
+      {/* Manifold schema */}
+      <PerspectiveManifold />
+    </Section>
+  );
+};
 
 // === UNIVERSE PORTFOLIO — rendu type humla.vc (grille bordurée, logos centrés) ===
 const PORTFOLIO_CATEGORIES = [
