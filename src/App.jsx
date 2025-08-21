@@ -533,100 +533,177 @@ const PerspectiveSection = () => {
         ))}
       </div>
 
-      {/* Dynamic Forces Visualization */}
-      <div className="my-20 flex justify-center">
-        <motion.div 
-          className="w-full max-w-3xl h-40 relative"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
-        >
-          {/* Central flow line */}
-          <div className="absolute inset-x-0 top-1/2 h-0.5 bg-gradient-to-r from-blue-200 via-blue-500 to-blue-200 dark:from-blue-800 dark:via-blue-400 dark:to-blue-800 transform -translate-y-1/2" />
-          
-          {/* Opportunities arc (upward) */}
-          <motion.svg 
-            className="absolute inset-0 w-full h-full" 
-            viewBox="0 0 600 160"
-            initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: 2, ease: "easeInOut" }}
-          >
-            <path 
-              d="M50 80 Q 300 20, 550 80" 
-              stroke="#0d4c7e" 
-              strokeWidth="3" 
-              fill="none" 
-              className="stroke-blue-600 dark:stroke-blue-400"
-            />
-            <text x="300" y="40" textAnchor="middle" className="fill-blue-600 dark:fill-blue-400 text-sm font-medium">
-              Opportunities
-            </text>
-          </motion.svg>
-          
-          {/* Counter-forces arc (downward) */}
-          <motion.svg 
-            className="absolute inset-0 w-full h-full" 
-            viewBox="0 0 600 160"
-            initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: 2, delay: 0.5, ease: "easeInOut" }}
-          >
-            <path 
-              d="M550 80 Q 300 140, 50 80" 
-              stroke="#0891b2" 
-              strokeWidth="3" 
-              fill="none" 
-              strokeDasharray="8 4"
-              className="stroke-cyan-600 dark:stroke-cyan-400"
-            />
-            <text x="300" y="130" textAnchor="middle" className="fill-cyan-600 dark:fill-cyan-400 text-sm font-medium">
-              Counter-Forces
-            </text>
-          </motion.svg>
-        </motion.div>
+     <PerspectiveManifold />
+
+      // === PERSPECTIVE MANIFOLD — Frontier → Infrastructure + arcs Opp./Counter ===
+const PERSPECTIVE_DATA = {
+  opportunities: [
+    {
+      title: "Composability",
+      note: "Modular building blocks accelerate adoption and ecosystem reach.",
+    },
+    {
+      title: "Scalability",
+      note: "Standards + orchestration unlock predictable, multi-domain scale.",
+    },
+    {
+      title: "Efficiency",
+      note: "Falling cost curves expand markets and enable new use-cases.",
+    },
+  ],
+  counterforces: [
+    {
+      title: "Commoditization",
+      note: "Differentiation shifts to integration, orchestration, and trust.",
+    },
+    {
+      title: "Lock-in",
+      note: "Aggregation gravity & switching costs concentrate power.",
+    },
+    {
+      title: "Deflation",
+      note: "Margins compress with each generation; value migrates up-stack.",
+    },
+  ],
+};
+
+const PerspectiveManifold = () => {
+  // positions relatives (0→1000) pour placer les arcs
+  const anchors = [180, 500, 820]; // 3 points le long de la timeline
+  return (
+    <div className="my-16">
+      {/* Phrase manifeste compactée */}
+      <div className="text-center mb-10">
+        <p className="font-grotesk text-2xl md:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
+          Frontier tech <span className="underline decoration-blue-400/60 underline-offset-4">becomes</span> infrastructure.
+        </p>
+        <p className="mt-3 max-w-3xl mx-auto text-slate-600 dark:text-slate-300">
+          We invest across this transition — where experimental capabilities compound, standardize, and embed
+          into mission-critical infrastructure.
+        </p>
       </div>
 
-      {/* Forces Details */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-        {/* Opportunities */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h3 className="text-2xl font-bold font-grotesk text-blue-800 dark:text-blue-500 mb-8">Opportunities</h3>
-          <div className="space-y-6">
-            {opportunities.map((item, i) => (
-              <div key={i} className="border-l-4 border-blue-200 dark:border-blue-700 pl-6">
-                <h4 className="font-bold text-slate-900 dark:text-white mb-2">{item.title}</h4>
-                <p className="text-slate-600 dark:text-slate-300 mb-2">{item.description}</p>
-                <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">Example: {item.example}</p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+      {/* Timeline + arcs en SVG (vectoriel, léger) */}
+      <motion.svg
+        viewBox="0 0 1000 300"
+        className="w-full h-[260px]"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
+      >
+        {/* Ligne de base Frontier → Infrastructure */}
+        <motion.line
+          x1="60" y1="150" x2="940" y2="150"
+          stroke="currentColor"
+          className="text-slate-300 dark:text-slate-600"
+          strokeWidth="2"
+          strokeLinecap="round"
+          variants={{
+            hidden: { pathLength: 0 },
+            visible: { pathLength: 1, transition: { duration: 1.2, ease: "easeInOut" } },
+          }}
+          style={{ pathLength: 1 }}
+        />
+        {/* Flèche de direction */}
+        <polygon points="940,150 920,144 920,156" className="fill-slate-400 dark:fill-slate-500" />
 
-        {/* Counter-Forces */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h3 className="text-2xl font-bold font-grotesk text-cyan-600 dark:text-cyan-400 mb-8">Counter-Forces</h3>
-          <div className="space-y-6">
-            {counterForces.map((item, i) => (
-              <div key={i} className="border-l-4 border-cyan-200 dark:border-cyan-700 pl-6">
-                <h4 className="font-bold text-slate-900 dark:text-white mb-2">{item.title}</h4>
-                <p className="text-slate-600 dark:text-slate-300 mb-2">{item.description}</p>
-                <p className="text-sm text-cyan-600 dark:text-cyan-400 font-medium">Example: {item.example}</p>
-              </div>
+        {/* Labels extrémités */}
+        <text x="60" y="136" className="fill-slate-700 dark:fill-slate-300 text-[12px] font-semibold">Frontier Tech</text>
+        <text x="940" y="136" textAnchor="end" className="fill-slate-700 dark:fill-slate-300 text-[12px] font-semibold">Infrastructure</text>
+
+        {/* Titre zones */}
+        <text x="500" y="38" textAnchor="middle" className="fill-emerald-600 dark:fill-emerald-400 text-[12px] font-semibold">
+          Opportunities
+        </text>
+        <text x="500" y="288" textAnchor="middle" className="fill-rose-600 dark:fill-rose-400 text-[12px] font-semibold">
+          Counter-forces
+        </text>
+
+        {/* Arcs Opportunités (au-dessus) */}
+        {PERSPECTIVE_DATA.opportunities.map((o, i) => (
+          <g key={o.title}>
+            <motion.path
+              d={`M ${anchors[i]} 150 C ${anchors[i]} 80, ${anchors[i] + 80} 80, ${anchors[i] + 80} 150`}
+              fill="none"
+              className="stroke-emerald-500 dark:stroke-emerald-400"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              variants={{
+                hidden: { pathLength: 0, opacity: 0 },
+                visible: { pathLength: 1, opacity: 1, transition: { duration: 1.0, delay: 0.2 + i * 0.15 } },
+              }}
+            />
+            <text
+              x={anchors[i] + 40}
+              y={72}
+              textAnchor="middle"
+              className="fill-slate-700 dark:fill-slate-200 text-[11px] font-semibold"
+            >
+              {o.title}
+            </text>
+          </g>
+        ))}
+
+        {/* Arcs Contre-forces (en dessous) */}
+        {PERSPECTIVE_DATA.counterforces.map((c, i) => (
+          <g key={c.title}>
+            <motion.path
+              d={`M ${anchors[i] + 40} 150 C ${anchors[i] + 40} 220, ${anchors[i] + 120} 220, ${anchors[i] + 120} 150`}
+              fill="none"
+              className="stroke-rose-500 dark:stroke-rose-400"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              variants={{
+                hidden: { pathLength: 0, opacity: 0 },
+                visible: { pathLength: 1, opacity: 1, transition: { duration: 1.0, delay: 0.35 + i * 0.15 } },
+              }}
+            />
+            <text
+              x={anchors[i] + 80}
+              y={238}
+              textAnchor="middle"
+              className="fill-slate-700 dark:fill-slate-200 text-[11px] font-semibold"
+            >
+              {c.title}
+            </text>
+          </g>
+        ))}
+
+        {/* Pont vers la galerie historique */}
+        <text x="940" y="95" textAnchor="end" className="fill-slate-500 dark:fill-slate-400 text-[11px] italic">
+          Scarcity → Ubiquity (historical proof)
+        </text>
+      </motion.svg>
+
+      {/* Légendes concises sous le schéma */}
+      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="rounded-xl border border-emerald-200/60 dark:border-emerald-900/40 bg-emerald-50/40 dark:bg-emerald-900/10 p-4">
+          <h4 className="text-emerald-700 dark:text-emerald-400 font-semibold mb-2 text-sm">Opportunities</h4>
+          <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300">
+            {PERSPECTIVE_DATA.opportunities.map((o) => (
+              <li key={o.title}><span className="font-medium">{o.title} — </span>{o.note}</li>
             ))}
-          </div>
-        </motion.div>
+          </ul>
+        </div>
+        <div className="rounded-xl border border-rose-200/60 dark:border-rose-900/40 bg-rose-50/40 dark:bg-rose-900/10 p-4">
+          <h4 className="text-rose-700 dark:text-rose-400 font-semibold mb-2 text-sm">Counter-forces</h4>
+          <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300">
+            {PERSPECTIVE_DATA.counterforces.map((c) => (
+              <li key={c.title}><span className="font-medium">{c.title} — </span>{c.note}</li>
+            ))}
+          </ul>
+        </div>
       </div>
+
+      {/* Hybridity = next frontier */}
+      <div className="mt-8 text-center">
+        <span className="inline-block px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-medium">
+          What remains the next valuable frontier: <span className="font-semibold">Technological hybridity</span>.
+        </span>
+      </div>
+    </div>
+  );
+};
 
       {/* From Scarcity to Ubiquity Section */}
       <div className="mt-20">
