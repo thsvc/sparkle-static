@@ -878,29 +878,19 @@ const HeroSection = () => {
             <motion.div
               key={i}
               className="absolute w-96 h-96 opacity-5 dark:opacity-10"
-              animate={{
-                x: [0, 100, 0],
-                y: [0, -50, 0],
-                rotate: [0, 180, 360],
-              }}
-              transition={{
-                duration: 20 + i * 5,
-                repeat: Infinity,
-                ease: "linear",
-              }}
+              animate={{ x: [0, 100, 0], y: [0, -50, 0], rotate: [0, 180, 360] }}
+              transition={{ duration: 20 + i * 5, repeat: Infinity, ease: "linear" }}
               style={{
                 left: `${10 + i * 15}%`,
                 top: `${10 + (i % 3) * 30}%`,
-                background: `linear-gradient(45deg, ${
-                  i % 2 ? "#0f172a" : "#1e40af"
-                }, transparent)`,
+                background: `linear-gradient(45deg, ${i % 2 ? "#0f172a" : "#1e40af"}, transparent)`,
               }}
             />
           ))}
         </div>
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center pt-8 md:pt-10">
         {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
@@ -911,16 +901,28 @@ const HeroSection = () => {
           Frontier tech becomes infrastructure.
         </motion.h1>
 
-       {/* Trait horizontal animé + glow */}
+        {/* Trait horizontal animé + glow */}
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="relative mx-auto mb-8 h-0.5 w-28 bg-gradient-to-r from-blue-500 to-cyan-400 origin-center rounded-full"
+          className="relative mx-auto mb-6 h-0.5 w-28 bg-gradient-to-r from-blue-500 to-cyan-400 origin-center rounded-full"
         >
-          {/* Halo lumineux */}
-          <div className="absolute inset-0 blur-md bg-gradient-to-r from-blue-500/40 to-cyan-400/40 rounded-full" />
+          <div
+            className="absolute inset-0 blur-md bg-gradient-to-r from-blue-500/40 to-cyan-400/40 rounded-full"
+            aria-hidden="true"
+          />
         </motion.div>
+
+        {/* Subline (nouvelle ligne) */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="text-lg md:text-xl max-w-3xl mx-auto text-slate-700 dark:text-slate-300 leading-relaxed mb-10 font-medium italic"
+        >
+          We position capital where technologies evolve from scarcity to ubiquity.
+        </motion.p>
 
         {/* Carte institutionnelle */}
         <BusinessCardIntro />
