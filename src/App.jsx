@@ -404,7 +404,7 @@ const teamData = [
     title: "Managing Partner",
     blurb:
       "Former Computer Vision Engineer at Safran Defense, Director at Goldman Sachs, and CIO at Nomura DO.",
-    photo: import.meta.env.BASE_URL + "images/team/julien-pageaud.jpg",
+    photo: import.meta.env.BASE_URL + "images/team/julien-pageaud.png",
     linkedin: "https://www.linkedin.com/in/julien-pageaud-5ba56b10/"
   },
   {
@@ -412,7 +412,7 @@ const teamData = [
     title: "Research Partner",
     blurb:
       "Former Head of adoption and technical support at Nomadic Labs and Computer Scientist at IBM.",
-    photo: import.meta.env.BASE_URL + "images/team/thibaut-chesse.jpg",
+    photo: import.meta.env.BASE_URL + "images/team/thibaut-chesse.png",
     linkedin: "https://fr.linkedin.com/in/thibautchesse"
   },
   {
@@ -420,7 +420,7 @@ const teamData = [
     title: "Operating Partner",
     blurb:
       "Former independent Semiologist and Talent Manager at Allianz.",
-    photo: import.meta.env.BASE_URL + "images/team/victoria-reullin.jpg",
+    photo: import.meta.env.BASE_URL + "images/team/victoria-reullin.png",
     linkedin: "https://www.linkedin.com/in/victoria-r-b72173274/"
   },
   {
@@ -428,7 +428,7 @@ const teamData = [
     title: "AI/ML Venture Partner",
     blurb:
       "Former Principal Engineer Llama at Meta, and Research Director at Google DeepMind.",
-    photo: import.meta.env.BASE_URL + "images/team/michal-valko.jpg",
+    photo: import.meta.env.BASE_URL + "images/team/michal-valko.png",
     linkedin: "https://www.linkedin.com/in/michalvalko/"
   },
   {
@@ -436,7 +436,7 @@ const teamData = [
     title: "AI/ML Research Advisor",
     blurb:
       "Research Director for Google DeepMind, and former head of EMEA at Facebook AI Research.",
-    photo: import.meta.env.BASE_URL + "images/team/armand-joulin.jpg",
+    photo: import.meta.env.BASE_URL + "images/team/armand-joulin.png",
     linkedin: "https://www.linkedin.com/in/armand-joulin-0274254/"
   },
   {
@@ -444,7 +444,7 @@ const teamData = [
     title: "Board Member",
     blurb:
       "Corporate Director at Edmond de Rothschild.",
-    photo: import.meta.env.BASE_URL + "images/team/aurelie-astruc.jpg",
+    photo: import.meta.env.BASE_URL + "images/team/aurelie-astruc.png",
     linkedin: "https://www.linkedin.com/in/aurelieastruc/"
   },
   {
@@ -452,7 +452,7 @@ const teamData = [
     title: "AI/ML Research Advisor",
     blurb:
       "Professor & Associate VP Research at MBZUAI, Professor at McGill University.",
-    photo: import.meta.env.BASE_URL + "images/team/steve-liu.jpg",
+    photo: import.meta.env.BASE_URL + "images/team/steve-liu.png",
     linkedin: "https://ca.linkedin.com/in/xueliu"
   },
   {
@@ -460,7 +460,7 @@ const teamData = [
     title: "Board Member",
     blurb:
       "Partner at Opportunity Financial Services.",
-    photo: import.meta.env.BASE_URL + "images/team/hugo-vautier.jpg",
+    photo: import.meta.env.BASE_URL + "images/team/hugo-vautier.png",
     linkedin: "https://www.linkedin.com/in/hugo-vautier-01a74042/"
   },
   {
@@ -468,7 +468,7 @@ const teamData = [
     title: "General Counsel",
     blurb:
       "Former Lawyer at Baker McKenzie Wong & Leow.",
-    photo: import.meta.env.BASE_URL + "images/team/gerald-heng.jpg",
+    photo: import.meta.env.BASE_URL + "images/team/gerald-heng.png",
     linkedin: "https://www.linkedin.com/in/gerald-heng-b14577a3/"
   }
 ];
