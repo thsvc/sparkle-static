@@ -402,7 +402,12 @@ const PerspectiveSection = () => {
           >
             History shows how quickly frontier technologies evolve from rare experiments to everyday infrastructure.
           </motion.p>
-
+          
+        {/* Technology maturation diagram – déplacé ici */}
+        <div className="mt-12 max-w-4xl mx-auto">
+          <TechnologyMaturationDiagram />
+        </div>
+          
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {historyData.map((item, index) => (
               <motion.div
@@ -927,7 +932,6 @@ const HeroSection = () => {
         {/* Carte institutionnelle */}
         <BusinessCardIntro />
 
-        <TechnologyMaturationDiagram />
       </div>
     </section>
   );
