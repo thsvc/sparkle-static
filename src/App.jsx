@@ -397,16 +397,80 @@ const companyData = [
   }
 ];
 
+// --- TEAM DATA (ordre mis à jour) ---
 const teamData = [
-  { name: "Julien Pageaud", role: "Managing Partner", linkedin: "https://www.linkedin.com/in/julien-pageaud-5ba56b10/" },
-  { name: "Thibaut Chessé", role: "Research Partner", linkedin: "https://fr.linkedin.com/in/thibautchesse" },
-  { name: "Victoria Reullin", role: "Head of Operations", linkedin: "https://www.linkedin.com/in/victoria-r-b72173274/" },
-  { name: "Michal Valko", role: "AI/ML Venture Partner", linkedin: "https://www.linkedin.com/in/michalvalko/" },
-  { name: "Armand Joulin", role: "AI/ML Research Advisor", linkedin: "https://www.linkedin.com/in/armand-joulin-0274254/" },
-  { name: "Cyril Cottu", role: "FinTech Venture Partner", linkedin: null },
-  { name: "Aurélie Astruc", role: "Board Member", linkedin: "https://www.linkedin.com/in/aurelieastruc/" },
-  { name: "Hugo Vautier", role: "Board Member", linkedin: "https://www.linkedin.com/in/hugo-vautier-01a74042/" },
-  { name: "Gérald Heng", role: "General Counsel", linkedin: "https://www.linkedin.com/in/gerald-heng-b14577a3/" }
+  {
+    name: "Eng. Julien Pageaud",
+    title: "Managing Partner",
+    blurb:
+      "Former Computer Vision Engineer at Safran Defense, Director at Goldman Sachs, and CIO at Nomura DO.",
+    photo: import.meta.env.BASE_URL + "images/team/julien-pageaud.jpg",
+    linkedin: "https://www.linkedin.com/in/julien-pageaud-5ba56b10/"
+  },
+  {
+    name: "Eng. Thibaut Chessé",
+    title: "Research Partner",
+    blurb:
+      "Former Head of adoption and technical support at Nomadic Labs and Computer Scientist at IBM.",
+    photo: import.meta.env.BASE_URL + "images/team/thibaut-chesse.jpg",
+    linkedin: "https://fr.linkedin.com/in/thibautchesse"
+  },
+  {
+    name: "Dr. Victoria Reullin",
+    title: "Operating Partner",
+    blurb:
+      "Former independent Semiologist and Talent Manager at Allianz.",
+    photo: import.meta.env.BASE_URL + "images/team/victoria-reullin.jpg",
+    linkedin: "https://www.linkedin.com/in/victoria-r-b72173274/"
+  },
+  {
+    name: "Prof. Michal Valko",
+    title: "AI/ML Venture Partner",
+    blurb:
+      "Former Principal Engineer Llama at Meta, and Research Director at Google DeepMind.",
+    photo: import.meta.env.BASE_URL + "images/team/michal-valko.jpg",
+    linkedin: "https://www.linkedin.com/in/michalvalko/"
+  },
+  {
+    name: "Dr. Armand Joulin",
+    title: "AI/ML Research Advisor",
+    blurb:
+      "Research Director for Google DeepMind, and former head of EMEA at Facebook AI Research.",
+    photo: import.meta.env.BASE_URL + "images/team/armand-joulin.jpg",
+    linkedin: "https://www.linkedin.com/in/armand-joulin-0274254/"
+  },
+  {
+    name: "Aurélie Astruc",
+    title: "Board Member",
+    blurb:
+      "Corporate Director at Edmond de Rothschild.",
+    photo: import.meta.env.BASE_URL + "images/team/aurelie-astruc.jpg",
+    linkedin: "https://www.linkedin.com/in/aurelieastruc/"
+  },
+  {
+    name: "Prof. Steve Liu",
+    title: "AI/ML Research Advisor",
+    blurb:
+      "Professor & Associate VP Research at MBZUAI, Professor at McGill University.",
+    photo: import.meta.env.BASE_URL + "images/team/steve-liu.jpg",
+    linkedin: "https://ca.linkedin.com/in/xueliu"
+  },
+  {
+    name: "Hugo Vautier",
+    title: "Board Member",
+    blurb:
+      "Partner at Opportunity Financial Services.",
+    photo: import.meta.env.BASE_URL + "images/team/hugo-vautier.jpg",
+    linkedin: "https://www.linkedin.com/in/hugo-vautier-01a74042/"
+  },
+  {
+    name: "Dr. Gerald Heng",
+    title: "General Counsel",
+    blurb:
+      "Former Lawyer at Baker McKenzie Wong & Leow.",
+    photo: import.meta.env.BASE_URL + "images/team/gerald-heng.jpg",
+    linkedin: "https://www.linkedin.com/in/gerald-heng-b14577a3/"
+  }
 ];
 
 // Historical technology evolution data
@@ -864,31 +928,68 @@ const ManagementSection = () => {
   return (
     <Section id="management">
       <SectionTitle>Management</SectionTitle>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {teamData.map((member, index) => (
           <motion.div
             key={member.name}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: index * 0.05 }}
-            className="group relative bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 text-center transition-all duration-300 hover:shadow-xl"
+            transition={{ duration: 0.35, delay: index * 0.05 }}
+            className="group relative bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all duration-300"
           >
-            <div className="w-24 h-24 bg-gradient-to-br from-blue-400 to-blue-600 dark:from-blue-500 dark:to-blue-700 rounded-full mx-auto mb-4 flex items-center justify-center text-white font-semibold text-3xl font-grotesk ring-4 ring-white dark:ring-slate-800 transition-transform group-hover:scale-105">
-              {member.name.split(' ').map(n => n[0]).join('')}
-            </div>
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white">{member.name}</h3>
-            <p className="text-slate-500 dark:text-slate-400 mb-4">{member.role}</p>
+            {/* Photo / Initiales */}
+            {member.photo ? (
+              <div className="w-24 h-24 mx-auto mb-4 rounded-xl overflow-hidden ring-4 ring-white dark:ring-slate-800 shadow-sm">
+                <img
+                  src={member.photo}
+                  alt={member.name}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                    const fallback = e.currentTarget.nextElementSibling;
+                    if (fallback) fallback.classList.remove("hidden");
+                  }}
+                />
+                {/* Fallback initiales */}
+                <div className="hidden w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white font-semibold text-2xl">
+                  {member.name.split(' ').map(n => n[0]).join('')}
+                </div>
+              </div>
+            ) : (
+              <div className="w-24 h-24 mx-auto mb-4 rounded-xl flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white font-semibold text-2xl ring-4 ring-white dark:ring-slate-800">
+                {member.name.split(' ').map(n => n[0]).join('')}
+              </div>
+            )}
+
+            {/* Nom + Titre */}
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white text-center">
+              {member.name}
+            </h3>
+            <p className="text-sm text-blue-700 dark:text-blue-300 text-center font-medium mb-3">
+              {member.title}
+            </p>
+
+            {/* Blurb */}
+            <p className="text-sm text-slate-600 dark:text-slate-300 text-center leading-relaxed">
+              {member.blurb}
+            </p>
+
+            {/* LinkedIn */}
             {member.linkedin && (
-              <a
-                href={member.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block p-2 text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                aria-label={`${member.name}'s LinkedIn`}
-              >
-                <Linkedin size={20} />
-              </a>
+              <div className="mt-4 flex justify-center">
+                <a
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  aria-label={`${member.name} on LinkedIn`}
+                >
+                  <Linkedin size={18} />
+                  <span className="text-xs">LinkedIn</span>
+                </a>
+              </div>
             )}
           </motion.div>
         ))}
