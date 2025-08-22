@@ -965,7 +965,7 @@ const HeroSection = () => {
   );
 };
 
-const CapabilitiesSection = () => {
+const BusinessSection = () => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -980,7 +980,7 @@ const CapabilitiesSection = () => {
   };
 
   return (
-    <Section id="capabilities" className="bg-slate-50 dark:bg-slate-900/50">
+    <Section id="business" className="bg-slate-50 dark:bg-slate-900/50">
       <SectionTitle>Capabilities</SectionTitle>
       <motion.div 
         variants={containerVariants}
@@ -1090,10 +1090,10 @@ function PortfolioCell({ name, url, logo }) {
   );
 }
 
-const UniversePortfolioGrid = () => {
+const Companies = () => {
   return (
-    <Section id="universe" className="bg-white">
-      <SectionTitle>Universe of Companies</SectionTitle>
+    <Section id="companies" className="bg-white">
+      <SectionTitle>Companies</SectionTitle>
 
       <div className="space-y-14">
         {PORTFOLIO_CATEGORIES.map((cat) => (
@@ -1126,9 +1126,9 @@ const UniversePortfolioGrid = () => {
 };
   
 
-const ManagementSection = () => {
+const TeamSection = () => {
   return (
-    <Section id="management">
+    <Section id="team">
       <SectionTitle>Management</SectionTitle>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -1445,10 +1445,10 @@ export default function SparkleVenturesPage() {
         
         <main>
           <HeroSection />
-          <CapabilitiesSection />
+          <BusinessSection />
           <PerspectiveSection />
-          <UniversePortfolioGrid />
-          <ManagementSection />
+          <CompaniesSection />
+          <TeamSection />
           <ContactSection onInvestorClick={() => setShowInvestorForm(true)} onFounderClick={() => setShowFounderForm(true)} />
         </main>
         
