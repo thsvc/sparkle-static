@@ -53,6 +53,7 @@ const PERSPECTIVE_DATA = {
 const PerspectiveManifold = () => {
   // positions relatives (0→1000) pour placer les arcs
   const anchors = [180, 500, 820]; // 3 points le long de la timeline
+
   return (
     <div className="my-16">
       {/* Phrase manifeste compactée */}
@@ -61,18 +62,36 @@ const PerspectiveManifold = () => {
           Frontier tech <span className="underline decoration-blue-400/60 underline-offset-4">becomes</span> infrastructure.
         </p>
         <p className="mt-3 max-w-3xl mx-auto text-slate-600 dark:text-slate-300">
-          We invest across this transition — conscious of the tension frontier technologies create between accelerating opportunities and inevitable counter-forces, as they compound, standardize, and embed into mission-critical infrastructure.
+          We invest across this transition — conscious of the tension frontier technologies create between accelerating opportunities
+          and inevitable counter-forces, as they compound, standardize, and embed into mission-critical infrastructure.
         </p>
       </div>
 
       {/* Timeline + arcs en SVG (vectoriel, léger) */}
       <motion.svg
         viewBox="0 0 1000 300"
-        className="w-full h-[260px]"
+        className="w-full h-[300px]"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
       >
+        {/* --- defs pour halos & styles texte --- */}
+        <defs>
+          <style>
+            {`.label-strong{font-weight:700;font-size:14px}`}
+          </style>
+          {/* Halo vert (Frontier) */}
+          <radialGradient id="haloFrontier" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="rgba(16,185,129,0.40)" />
+            <stop offset="100%" stopColor="rgba(16,185,129,0)" />
+          </radialGradient>
+          {/* Halo bleu (Infrastructure) */}
+          <radialGradient id="haloInfra" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="rgba(59,130,246,0.35)" />
+            <stop offset="100%" stopColor="rgba(59,130,246,0)" />
+          </radialGradient>
+        </defs>
+
         {/* Ligne de base Frontier → Infrastructure */}
         <motion.line
           x1="60" y1="150" x2="940" y2="150"
@@ -86,76 +105,110 @@ const PerspectiveManifold = () => {
           }}
           style={{ pathLength: 1 }}
         />
+
         {/* Flèche de direction */}
         <polygon points="940,150 920,144 920,156" className="fill-slate-400 dark:fill-slate-500" />
 
-        {/* Labels extrémités */}
-        <text x="60" y="136" className="fill-slate-700 dark:fill-slate-300 text-[12px] font-semibold">Frontier Tech</text>
-        <text x="940" y="136" textAnchor="end" className="fill-slate-700 dark:fill-slate-300 text-[12px] font-semibold">Infrastructure</text>
+        {/* === Labels extrémités avec halo === */}
+        {/* FRONTIER TECH (gauche) */}
+        <g>
+          <circle cx="95" cy="150" r="46" fill="url(#haloFrontier)" />
+          <circle cx="95" cy="150" r="5" className="fill-emerald-500" />
+          <text
+            x="95"
+            y="155"
+            textAnchor="middle"
+            className="label-strong fill-slate-900 dark:fill-white"
+          >
+            Frontier Tech
+          </text>
+        </g>
 
-        {/* Titre zones */}
-        <text x="500" y="38" textAnchor="middle" className="fill-emerald-600 dark:fill-emerald-400 text-[12px] font-semibold">
+        {/* INFRASTRUCTURE (droite) */}
+        <g>
+          <circle cx="905" cy="150" r="52" fill="url(#haloInfra)" />
+          <circle cx="905" cy="150" r="5" className="fill-blue-500" />
+          <text
+            x="905"
+            y="155"
+            textAnchor="middle"
+            className="label-strong fill-slate-900 dark:fill-white"
+          >
+            Infrastructure
+          </text>
+        </g>
+
+        {/* Titres de zones */}
+        <text
+          x="500"
+          y="34"
+          textAnchor="middle"
+          className="fill-emerald-600 dark:fill-emerald-400 text-[13px] font-semibold tracking-wide"
+        >
           Opportunities
         </text>
-        <text x="500" y="288" textAnchor="middle" className="fill-rose-600 dark:fill-rose-400 text-[12px] font-semibold">
+        <text
+          x="500"
+          y="296"
+          textAnchor="middle"
+          className="fill-rose-600 dark:fill-rose-400 text-[13px] font-semibold tracking-wide"
+        >
           Counter-forces
         </text>
 
         {/* Arcs Opportunités (au-dessus) */}
-{PERSPECTIVE_DATA.opportunities.map((o, i) => (
-  <g key={o.title}>
-    <motion.path
-      d={`M ${anchors[i]} 150 C ${anchors[i]} 80, ${anchors[i] + 80} 80, ${anchors[i] + 80} 150`}
-      fill="none"
-      className="stroke-emerald-500 dark:stroke-emerald-400"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      variants={{
-        hidden: { pathLength: 0, opacity: 0 },
-        visible: { pathLength: 1, opacity: 1, transition: { duration: 1.0, delay: 0.2 + i * 0.15 } },
-      }}
-    />
+        {PERSPECTIVE_DATA.opportunities.map((o, i) => (
+          <g key={o.title}>
+            <motion.path
+              d={`M ${anchors[i]} 150 C ${anchors[i]} 80, ${anchors[i] + 80} 80, ${anchors[i] + 80} 150`}
+              fill="none"
+              className="stroke-emerald-500 dark:stroke-emerald-400"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              variants={{
+                hidden: { pathLength: 0, opacity: 0 },
+                visible: { pathLength: 1, opacity: 1, transition: { duration: 1.0, delay: 0.2 + i * 0.15 } },
+              }}
+            />
 
-    {/* Texte interactif */}
-    <HoverCard.Root>
-      <HoverCard.Trigger asChild>
-        <text
-          x={anchors[i] + 40}
-          y={72}
-          textAnchor="middle"
-          className="cursor-pointer fill-slate-700 dark:fill-slate-200 text-[13px] font-bold"
-        >
-          {o.title}
-        </text>
-      </HoverCard.Trigger>
-      <HoverCard.Portal>
-        <HoverCard.Content
-          side="top"
-          className="z-50 w-64 rounded-lg bg-white dark:bg-slate-800 p-4 shadow-xl border border-slate-200 dark:border-slate-700"
-        >
-          <h4 className="font-semibold text-slate-900 dark:text-white mb-1">
-            {o.title}
-          </h4>
-          <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-            {o.note}
-          </p>
-          {o.link && (
-            <a
-              href={o.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-2 inline-flex items-center text-xs text-emerald-600 dark:text-emerald-400 hover:underline"
-            >
-              Learn more <ArrowUpRight className="w-3 h-3 ml-1" />
-            </a>
-          )}
-        </HoverCard.Content>
-      </HoverCard.Portal>
-    </HoverCard.Root>
-  </g>
-))}
+            {/* Mot-clé en “pill” + HoverCard */}
+            <foreignObject x={anchors[i] + 0} y={56} width="160" height="40">
+              <HoverCard.Root>
+                <HoverCard.Trigger asChild>
+                  <div
+                    className="mx-auto w-max px-3 py-1.5 rounded-full border border-emerald-300/60 bg-white/80 dark:bg-slate-900/40 backdrop-blur
+                               cursor-pointer text-[13px] font-semibold text-emerald-700 dark:text-emerald-400
+                               hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition"
+                  >
+                    {o.title}
+                  </div>
+                </HoverCard.Trigger>
+                <HoverCard.Portal>
+                  <HoverCard.Content
+                    side="top"
+                    className="z-50 w-64 rounded-xl bg-white dark:bg-slate-800 p-4 shadow-xl border border-slate-200 dark:border-slate-700"
+                    sideOffset={6}
+                  >
+                    <h4 className="font-semibold text-slate-900 dark:text-white mb-1">{o.title}</h4>
+                    <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{o.note}</p>
+                    {o.link && (
+                      <a
+                        href={o.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-flex items-center text-xs text-emerald-600 dark:text-emerald-400 hover:underline"
+                      >
+                        Learn more <ArrowUpRight className="w-3 h-3 ml-1" />
+                      </a>
+                    )}
+                  </HoverCard.Content>
+                </HoverCard.Portal>
+              </HoverCard.Root>
+            </foreignObject>
+          </g>
+        ))}
 
-        {/* Arcs Contre-forces (en-dessous) */}
+        {/* Arcs Contre-forces (en dessous) */}
 {PERSPECTIVE_DATA.counterforces.map((c, i) => (
   <g key={c.title}>
     <motion.path
@@ -170,50 +223,53 @@ const PerspectiveManifold = () => {
       }}
     />
 
-    {/* Texte interactif */}
-    <HoverCard.Root>
-      <HoverCard.Trigger asChild>
-        <text
-          x={anchors[i] + 40}
-          y={232}
-          textAnchor="middle"
-          className="cursor-pointer fill-slate-700 dark:fill-slate-200 text-[13px] font-bold"
-        >
-          {c.title}
-        </text>
-      </HoverCard.Trigger>
-      <HoverCard.Portal>
-        <HoverCard.Content
-          side="bottom"
-          className="z-50 w-64 rounded-lg bg-white dark:bg-slate-800 p-4 shadow-xl border border-slate-200 dark:border-slate-700"
-        >
-          <h4 className="font-semibold text-slate-900 dark:text-white mb-1">
+    {/* Mot-clé en “pill” + HoverCard */}
+    <foreignObject x={anchors[i] + 0} y={226} width="180" height="40">
+      <HoverCard.Root>
+        <HoverCard.Trigger asChild>
+          <div
+            className="mx-auto w-max px-3 py-1.5 rounded-full border border-rose-300/60 bg-white/80 dark:bg-slate-900/40 backdrop-blur
+                       cursor-pointer text-[13px] font-semibold text-rose-700 dark:text-rose-400
+                       hover:bg-rose-50 dark:hover:bg-rose-900/20 transition"
+          >
             {c.title}
-          </h4>
-          <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-            {c.note}
-          </p>
-          {c.link && (
-            <a
-              href={c.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-2 inline-flex items-center text-xs text-rose-600 dark:text-rose-400 hover:underline"
-            >
-              Learn more <ArrowUpRight className="w-3 h-3 ml-1" />
-            </a>
-          )}
-        </HoverCard.Content>
-      </HoverCard.Portal>
-    </HoverCard.Root>
+          </div>
+        </HoverCard.Trigger>
+        <HoverCard.Portal>
+          <HoverCard.Content
+            side="bottom"
+            className="z-50 w-64 rounded-xl bg-white dark:bg-slate-800 p-4 shadow-xl border border-slate-200 dark:border-slate-700"
+            sideOffset={6}
+          >
+            <h4 className="font-semibold text-slate-900 dark:text-white mb-1">{c.title}</h4>
+            <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{c.note}</p>
+            {c.link && (
+              <a
+                href={c.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 inline-flex items-center text-xs text-rose-600 dark:text-rose-400 hover:underline"
+              >
+                Learn more <ArrowUpRight className="w-3 h-3 ml-1" />
+              </a>
+            )}
+          </HoverCard.Content>
+        </HoverCard.Portal>
+      </HoverCard.Root>
+    </foreignObject>
   </g>
 ))}
 
-        {/* Pont vers la galerie historique */}
-        <text x="940" y="95" textAnchor="end" className="fill-slate-500 dark:fill-slate-400 text-[11px] italic">
-          Scarcity → Ubiquity (historical proof)
-        </text>
-      </motion.svg>
+{/* Pont vers la galerie historique */}
+<text
+  x="940"
+  y="95"
+  textAnchor="end"
+  className="fill-slate-500 dark:fill-slate-400 text-[11px] italic"
+>
+  Scarcity → Ubiquity (historical proof)
+</text>
+</motion.svg>  {/* ✅ unique fermeture ici */}
 
       {/* Légendes concises sous le schéma */}
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -987,7 +1043,7 @@ const UniversePortfolioGrid = () => {
       </div>
 
       <p className="mt-12 text-center text-xs text-slate-500">
-        Logos are trademarks of their respective owners.
+        ***
       </p>
     </Section>
   );
