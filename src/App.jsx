@@ -1090,7 +1090,7 @@ function PortfolioCell({ name, url, logo }) {
   );
 }
 
-const Companies = () => {
+const CompaniesSection = () => {
   return (
     <Section id="companies" className="bg-white">
       <SectionTitle>Companies</SectionTitle>
@@ -1405,13 +1405,13 @@ export default function SparkleVenturesPage() {
   const [showFounderForm, setShowFounderForm] = useState(false);
 
   const sections = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'capabilities', label: 'Capabilities' },
-    { id: 'perspective', label: 'Perspective' },
-    { id: 'universe', label: 'Universe' },
-    { id: 'management', label: 'Management' },
-    { id: 'contact', label: 'Contact' },
-  ];
+  { id: 'overview',    label: 'Overview' },
+  { id: 'business',    label: 'Business' },     // ex-Capabilities
+  { id: 'perspective', label: 'Perspective' },
+  { id: 'companies',   label: 'Companies' },    // ex-Universe
+  { id: 'team',        label: 'Team' },         // ex-Management
+  { id: 'contact',     label: 'Contact' },
+];
 
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
