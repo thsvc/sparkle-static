@@ -836,33 +836,50 @@ const TechnologyMaturationDiagram = () => {
   );
 };
 
-// === Carte de visite institutionnelle ===
+// === Option A : Minimaliste institutionnel (version raffinée) ===
 const BusinessCardIntro = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.2 }}
-      className="max-w-3xl mx-auto mb-10"
-    >
-      <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/70 backdrop-blur-md shadow-lg p-6 md:p-8 text-left">
-        <p className="text-base md:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
-          <span className="font-semibold text-slate-900 dark:text-white">
-            Sparkle Ventures
-          </span>{" "}
-          is an independent investment firm established in 2021, with offices in
-          Luxembourg, Paris, New York, and Abu Dhabi. Authorized as a fund manager
-          and regulated by the Luxembourg CSSF, Sparkle acts as a trusted partner
-          for a select group of investors worldwide.
-        </p>
-        <p className="mt-4 text-base md:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
-          Our mandate is to position capital on behalf of HNWI, family offices,
-          corporates, and financial institutions where frontier technologies
-          evolve into mission-critical infrastructure, supporting both early
-          enablers and late-stage platforms with enduring market gravity.
-        </p>
-      </div>
-    </motion.div>
+    <div className="mx-auto max-w-3xl text-left md:text-center bg-white/70 dark:bg-slate-900/40 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/60 rounded-xl p-6 md:p-8 shadow-sm">
+      
+      {/* Paragraphe institutionnel */}
+      <p className="text-base md:text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+        Sparkle Ventures is an{" "}
+        <span className="font-semibold text-slate-900 dark:text-white">
+          independent investment firm
+        </span>{" "}
+        established in 2021, with offices in Luxembourg, Paris, New York, and Abu Dhabi. 
+        Authorized as a fund manager and{" "}
+        <span className="font-semibold text-slate-900 dark:text-white">
+          regulated by the Luxembourg CSSF
+        </span>
+        , we serve a select group of global investors.
+      </p>
+
+      {/* Mandat */}
+      <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+        Our mandate is to position capital on behalf of{" "}
+        <span className="font-semibold text-slate-900 dark:text-white">
+          HNWI
+        </span>
+        ,{" "}
+        <span className="font-semibold text-slate-900 dark:text-white">
+          family offices
+        </span>
+        ,{" "}
+        <span className="font-semibold text-slate-900 dark:text-white">
+          corporates
+        </span>
+        , and{" "}
+        <span className="font-semibold text-slate-900 dark:text-white">
+          financial institutions
+        </span>{" "}
+        where frontier technologies evolve into{" "}
+        <span className="font-semibold text-slate-900 dark:text-white">
+          mission-critical infrastructure
+        </span>
+        .
+      </p>
+    </div>
   );
 };
 
