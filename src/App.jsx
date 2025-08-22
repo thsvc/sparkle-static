@@ -831,13 +831,47 @@ const TechnologyMaturationDiagram = () => {
   );
 };
 
+// === Carte de visite institutionnelle ===
+const BusinessCardIntro = () => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+      className="max-w-3xl mx-auto mb-10"
+    >
+      <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/70 backdrop-blur-md shadow-lg p-6 md:p-8 text-left">
+        <p className="text-base md:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+          <span className="font-semibold text-slate-900 dark:text-white">
+            Sparkle Ventures
+          </span>{" "}
+          is an independent investment firm established in 2021, with offices in
+          Luxembourg, Paris, New York, and Abu Dhabi. Authorized as a fund manager
+          and regulated by the Luxembourg CSSF, Sparkle acts as a trusted partner
+          for a select group of investors worldwide.
+        </p>
+        <p className="mt-4 text-base md:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+          Our mandate is to position capital on behalf of HNWI, family offices,
+          corporates, and financial institutions where frontier technologies
+          evolve into mission-critical infrastructure, supporting both early
+          enablers and late-stage platforms with enduring market gravity.
+        </p>
+      </div>
+    </motion.div>
+  );
+};
+
+// === Hero Section mise à jour ===
 const HeroSection = () => {
   return (
-    <section id="overview" className="relative min-h-screen flex items-center justify-center">
+    <section
+      id="overview"
+      className="relative min-h-screen flex items-center justify-center"
+    >
       {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-cyan-50/30 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900" />
-        
+
         {/* Animated geometric shapes */}
         <div className="absolute inset-0">
           {[...Array(6)].map((_, i) => (
@@ -852,20 +886,22 @@ const HeroSection = () => {
               transition={{
                 duration: 20 + i * 5,
                 repeat: Infinity,
-                ease: "linear"
+                ease: "linear",
               }}
               style={{
                 left: `${10 + i * 15}%`,
                 top: `${10 + (i % 3) * 30}%`,
-                background: `linear-gradient(45deg, ${i % 2 ? '#0f172a' : '#1e40af'}, transparent)`
+                background: `linear-gradient(45deg, ${
+                  i % 2 ? "#0f172a" : "#1e40af"
+                }, transparent)`,
               }}
             />
           ))}
         </div>
       </div>
-      
+
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -873,16 +909,10 @@ const HeroSection = () => {
         >
           Frontier tech becomes infrastructure.
         </motion.h1>
-        
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-lg md:text-xl max-w-4xl mx-auto text-slate-700 dark:text-slate-300 leading-relaxed mb-8"
-        >
-          We position capital to accelerate the convergence of multiple technological domains towards ubiquity, supporting both early enablers and late-stage platforms with enduring market gravity.
-        </motion.p>
-        
+
+        {/* Carte institutionnelle */}
+        <BusinessCardIntro />
+
         <TechnologyMaturationDiagram />
       </div>
     </section>
