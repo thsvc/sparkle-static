@@ -199,99 +199,112 @@ const PerspectiveSection = () => {
   ];
 
   return (
-    <Section id="perspective" className="bg-white dark:bg-slate-900">
-      <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-4xl font-bold font-grotesk text-slate-900 dark:text-white mb-8">
-          Perspective
-        </h2>
-        <div className="max-w-4xl mx-auto text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-          <p>
-            As frontier technologies mature, they move from scarcity and experimentation to
-            standardization and ubiquity. This transformation is shaped by compounding capabilities,
-            hybrid architectures, and the convergence of multiple domains. We invest across this
-            transition, identifying the architectures and processes that drive adoption and endure
-            across cycles.
-          </p>
+    <Section id="perspective" className="relative overflow-hidden bg-slate-50 dark:bg-slate-900">
+      {/* --- Fond décoratif --- */}
+      <div className="absolute inset-0">
+        {/* Grille en opacité */}
+        <div className="absolute inset-0 bg-grid-slate-200/40 dark:bg-grid-slate-800/40 [mask-image:linear-gradient(to_bottom,white,transparent)]" />
+        {/* Halo radial */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-gradient-radial from-blue-200/30 to-transparent dark:from-blue-900/20" />
+      </div>
+
+      {/* --- Contenu au-dessus du décor --- */}
+      <div className="relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold font-grotesk text-slate-900 dark:text-white mb-4">
+            Perspective
+          </h2>
+          {/* Barre d’accent */}
+          <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-emerald-400 mx-auto mb-6 rounded-full" />
+
+          <div className="max-w-4xl mx-auto text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p>
+              As frontier technologies mature, they move from scarcity and experimentation to
+              standardization and ubiquity. This transformation is shaped by compounding capabilities,
+              hybrid architectures, and the convergence of multiple domains. We invest across this
+              transition, identifying the architectures and processes that drive adoption and endure
+              across cycles.
+            </p>
+          </div>
         </div>
-      </div>
 
-      {/* Technology Stages */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-        {stages.map((stage, index) => (
-          <motion.div
-            key={stage.title}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700"
-          >
-            <div className="flex items-center gap-4 mb-4">
-              <div className="bg-white dark:bg-slate-700 p-3 rounded-lg shadow-sm">
-                <stage.icon className="w-6 h-6 text-blue-800 dark:text-blue-500" />
-              </div>
-              <h3 className="text-xl font-bold font-grotesk text-slate-900 dark:text-white">
-                {stage.title}
-              </h3>
-            </div>
-            <p className="text-slate-700 dark:text-slate-300 mb-4">{stage.description}</p>
-            <p className="text-sm text-slate-500 dark:text-slate-400">{stage.examples}</p>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Manifold schema */}
-      <PerspectiveManifold />
-
-      {/* From Scarcity to Ubiquity Section */}
-      <div className="mt-20">
-        <motion.h3
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-2xl font-bold font-grotesk text-slate-900 dark:text-white text-center mb-6"
-        >
-          From Scarcity to Ubiquity
-        </motion.h3>
-        
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="text-lg text-slate-600 dark:text-slate-400 text-center mb-12 max-w-3xl mx-auto"
-        >
-          History shows how quickly frontier technologies evolve from rare experiments to everyday infrastructure.
-        </motion.p>
-
-        {/* Historical Gallery */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {historyData.map((item, index) => (
+        {/* Technology Stages */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+          {stages.map((stage, index) => (
             <motion.div
-              key={item.title}
+              key={stage.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="group bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:scale-105 transition-all duration-300"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm"
             >
-              <div className="mb-6">
-                <img
-                  src={item.beforeImage}
-                  alt={item.title}
-                  className="w-full h-48 object-cover rounded-xl border border-slate-200 dark:border-slate-600"
-                />
+              <div className="flex items-center gap-4 mb-4">
+                <div className="bg-white dark:bg-slate-700 p-3 rounded-lg shadow-sm">
+                  <stage.icon className="w-6 h-6 text-blue-800 dark:text-blue-500" />
+                </div>
+                <h3 className="text-xl font-bold font-grotesk text-slate-900 dark:text-white">
+                  {stage.title}
+                </h3>
               </div>
-              
-              <h4 className="text-lg font-bold font-grotesk text-slate-900 dark:text-white mb-4">
-                {item.title}
-              </h4>
-              
-              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                {item.caption}
-              </p>
+              <p className="text-slate-700 dark:text-slate-300 mb-4">{stage.description}</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400">{stage.examples}</p>
             </motion.div>
           ))}
+        </div>
+
+        {/* Manifold schema */}
+        <PerspectiveManifold />
+
+        {/* Historical Gallery (Scarcity → Ubiquity) */}
+        <div className="mt-20">
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl font-bold font-grotesk text-slate-900 dark:text-white text-center mb-6"
+          >
+            From Scarcity to Ubiquity
+          </motion.h3>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-lg text-slate-600 dark:text-slate-400 text-center mb-12 max-w-3xl mx-auto"
+          >
+            History shows how quickly frontier technologies evolve from rare experiments to everyday infrastructure.
+          </motion.p>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {historyData.map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                className="group bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:scale-105 transition-all duration-300"
+              >
+                <div className="mb-6">
+                  <img
+                    src={item.beforeImage}
+                    alt={item.title}
+                    className="w-full h-48 object-cover rounded-xl border border-slate-200 dark:border-slate-600"
+                  />
+                </div>
+
+                <h4 className="text-lg font-bold font-grotesk text-slate-900 dark:text-white mb-4">
+                  {item.title}
+                </h4>
+
+                <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                  {item.caption}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </Section>
