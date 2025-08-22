@@ -948,7 +948,18 @@ const HeroSection = () => {
 
         {/* Carte institutionnelle */}
         <BusinessCardIntro />
+      </div>
 
+      {/* Indicateur scroll (Option B : trois points en fade) */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-1">
+        {[...Array(3)].map((_, i) => (
+          <motion.span
+            key={i}
+            className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-500"
+            animate={{ opacity: [0.2, 1, 0.2] }}
+            transition={{ repeat: Infinity, duration: 1.8, delay: i * 0.3 }}
+          />
+        ))}
       </div>
     </section>
   );
