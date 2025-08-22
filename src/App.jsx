@@ -4,37 +4,50 @@
 import React, { useState, useEffect, createContext, useContext, useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Linkedin, Menu, X, Sun, Moon, Briefcase, BarChart, Zap, Handshake, ChevronDown, Check, Rocket, Network, ServerCog, ArrowUpRight, RefreshCcw, ChevronRight } from 'lucide-react';
+import * as HoverCard from "@radix-ui/react-hover-card";
 
-// === PERSPECTIVE MANIFOLD — Frontier → Infrastructure + arcs Opp./Counter ===
+// === PERSPECTIVE MANIFOLD — contenu enrichi pour HoverCards ===
 const PERSPECTIVE_DATA = {
   opportunities: [
     {
       title: "Composability",
-      note: "Modular building blocks accelerate adoption and ecosystem reach.",
+      note:
+        "Modular building blocks and open interfaces let capabilities plug together and scale across ecosystems.",
+      link: "https://ethereum.org/en/developers/docs/scaling/" // ex: modular rollups & composability
     },
     {
       title: "Scalability",
-      note: "Standards + orchestration unlock predictable, multi-domain scale.",
+      note:
+        "Standards + orchestration enable predictable growth and multi-domain deployment at low friction.",
+      link: "https://kubernetes.io/docs/concepts/" // ex: Kubernetes as orchestration standard
     },
     {
       title: "Efficiency",
-      note: "Falling cost curves expand markets and enable new use-cases.",
-    },
+      note:
+        "Falling cost/performance curves expand markets and unlock new use-cases as infra gets cheaper.",
+      link: "https://en.wikipedia.org/wiki/Moore%27s_law" // ex: Moore’s law as historical driver
+    }
   ],
   counterforces: [
     {
       title: "Commoditization",
-      note: "Differentiation shifts to integration, orchestration, and trust.",
+      note:
+        "As primitives standardize, differentiation shifts to integration, orchestration, data and trust layers.",
+      link: "https://en.wikipedia.org/wiki/Commoditization"
     },
     {
       title: "Lock-in",
-      note: "Aggregation gravity & switching costs concentrate power.",
+      note:
+        "Aggregation gravity and switching costs concentrate power; portability requires early design choices.",
+      link: "https://en.wikipedia.org/wiki/Vendor_lock-in"
     },
     {
       title: "Deflation",
-      note: "Margins compress with each generation; value migrates up-stack.",
-    },
-  ],
+      note:
+        "Each generation compresses unit margins; value migrates up-stack into systems, networks and services.",
+      link: "https://en.wikipedia.org/wiki/Experience_curve_effects"
+    }
+  ]
 };
 
 const PerspectiveManifold = () => {
@@ -48,8 +61,7 @@ const PerspectiveManifold = () => {
           Frontier tech <span className="underline decoration-blue-400/60 underline-offset-4">becomes</span> infrastructure.
         </p>
         <p className="mt-3 max-w-3xl mx-auto text-slate-600 dark:text-slate-300">
-          We invest across this transition — where experimental capabilities compound, standardize, and embed
-          into mission-critical infrastructure.
+          We invest across this transition — conscious of the tension frontier technologies create between accelerating opportunities and inevitable counter-forces, as they compound, standardize, and embed into mission-critical infrastructure.
         </p>
       </div>
 
@@ -90,54 +102,112 @@ const PerspectiveManifold = () => {
         </text>
 
         {/* Arcs Opportunités (au-dessus) */}
-        {PERSPECTIVE_DATA.opportunities.map((o, i) => (
-          <g key={o.title}>
-            <motion.path
-              d={`M ${anchors[i]} 150 C ${anchors[i]} 80, ${anchors[i] + 80} 80, ${anchors[i] + 80} 150`}
-              fill="none"
-              className="stroke-emerald-500 dark:stroke-emerald-400"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              variants={{
-                hidden: { pathLength: 0, opacity: 0 },
-                visible: { pathLength: 1, opacity: 1, transition: { duration: 1.0, delay: 0.2 + i * 0.15 } },
-              }}
-            />
-            <text
-              x={anchors[i] + 40}
-              y={72}
-              textAnchor="middle"
-              className="fill-slate-700 dark:fill-slate-200 text-[11px] font-semibold"
-            >
-              {o.title}
-            </text>
-          </g>
-        ))}
+{PERSPECTIVE_DATA.opportunities.map((o, i) => (
+  <g key={o.title}>
+    <motion.path
+      d={`M ${anchors[i]} 150 C ${anchors[i]} 80, ${anchors[i] + 80} 80, ${anchors[i] + 80} 150`}
+      fill="none"
+      className="stroke-emerald-500 dark:stroke-emerald-400"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      variants={{
+        hidden: { pathLength: 0, opacity: 0 },
+        visible: { pathLength: 1, opacity: 1, transition: { duration: 1.0, delay: 0.2 + i * 0.15 } },
+      }}
+    />
 
-        {/* Arcs Contre-forces (en dessous) */}
-        {PERSPECTIVE_DATA.counterforces.map((c, i) => (
-          <g key={c.title}>
-            <motion.path
-              d={`M ${anchors[i] + 40} 150 C ${anchors[i] + 40} 220, ${anchors[i] + 120} 220, ${anchors[i] + 120} 150`}
-              fill="none"
-              className="stroke-rose-500 dark:stroke-rose-400"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              variants={{
-                hidden: { pathLength: 0, opacity: 0 },
-                visible: { pathLength: 1, opacity: 1, transition: { duration: 1.0, delay: 0.35 + i * 0.15 } },
-              }}
-            />
-            <text
-              x={anchors[i] + 80}
-              y={238}
-              textAnchor="middle"
-              className="fill-slate-700 dark:fill-slate-200 text-[11px] font-semibold"
+    {/* Texte interactif */}
+    <HoverCard.Root>
+      <HoverCard.Trigger asChild>
+        <text
+          x={anchors[i] + 40}
+          y={72}
+          textAnchor="middle"
+          className="cursor-pointer fill-slate-700 dark:fill-slate-200 text-[13px] font-bold"
+        >
+          {o.title}
+        </text>
+      </HoverCard.Trigger>
+      <HoverCard.Portal>
+        <HoverCard.Content
+          side="top"
+          className="z-50 w-64 rounded-lg bg-white dark:bg-slate-800 p-4 shadow-xl border border-slate-200 dark:border-slate-700"
+        >
+          <h4 className="font-semibold text-slate-900 dark:text-white mb-1">
+            {o.title}
+          </h4>
+          <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            {o.note}
+          </p>
+          {o.link && (
+            <a
+              href={o.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-flex items-center text-xs text-emerald-600 dark:text-emerald-400 hover:underline"
             >
-              {c.title}
-            </text>
-          </g>
-        ))}
+              Learn more <ArrowUpRight className="w-3 h-3 ml-1" />
+            </a>
+          )}
+        </HoverCard.Content>
+      </HoverCard.Portal>
+    </HoverCard.Root>
+  </g>
+))}
+
+        {/* Arcs Contre-forces (en-dessous) */}
+{PERSPECTIVE_DATA.counterforces.map((c, i) => (
+  <g key={c.title}>
+    <motion.path
+      d={`M ${anchors[i]} 150 C ${anchors[i]} 220, ${anchors[i] + 80} 220, ${anchors[i] + 80} 150`}
+      fill="none"
+      className="stroke-rose-500 dark:stroke-rose-400"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      variants={{
+        hidden: { pathLength: 0, opacity: 0 },
+        visible: { pathLength: 1, opacity: 1, transition: { duration: 1.0, delay: 0.2 + i * 0.15 } },
+      }}
+    />
+
+    {/* Texte interactif */}
+    <HoverCard.Root>
+      <HoverCard.Trigger asChild>
+        <text
+          x={anchors[i] + 40}
+          y={232}
+          textAnchor="middle"
+          className="cursor-pointer fill-slate-700 dark:fill-slate-200 text-[13px] font-bold"
+        >
+          {c.title}
+        </text>
+      </HoverCard.Trigger>
+      <HoverCard.Portal>
+        <HoverCard.Content
+          side="bottom"
+          className="z-50 w-64 rounded-lg bg-white dark:bg-slate-800 p-4 shadow-xl border border-slate-200 dark:border-slate-700"
+        >
+          <h4 className="font-semibold text-slate-900 dark:text-white mb-1">
+            {c.title}
+          </h4>
+          <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            {c.note}
+          </p>
+          {c.link && (
+            <a
+              href={c.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-flex items-center text-xs text-rose-600 dark:text-rose-400 hover:underline"
+            >
+              Learn more <ArrowUpRight className="w-3 h-3 ml-1" />
+            </a>
+          )}
+        </HoverCard.Content>
+      </HoverCard.Portal>
+    </HoverCard.Root>
+  </g>
+))}
 
         {/* Pont vers la galerie historique */}
         <text x="940" y="95" textAnchor="end" className="fill-slate-500 dark:fill-slate-400 text-[11px] italic">
