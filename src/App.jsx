@@ -911,13 +911,16 @@ const HeroSection = () => {
           Frontier tech becomes infrastructure.
         </motion.h1>
 
-        {/* Trait horizontal animé */}
+       {/* Trait horizontal animé + glow */}
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mx-auto mb-8 h-0.5 w-24 bg-gradient-to-r from-blue-500 to-cyan-400 origin-center"
-        />
+          className="relative mx-auto mb-8 h-0.5 w-28 bg-gradient-to-r from-blue-500 to-cyan-400 origin-center rounded-full"
+        >
+          {/* Halo lumineux */}
+          <div className="absolute inset-0 blur-md bg-gradient-to-r from-blue-500/40 to-cyan-400/40 rounded-full" />
+        </motion.div>
 
         {/* Carte institutionnelle */}
         <BusinessCardIntro />
