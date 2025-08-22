@@ -901,14 +901,23 @@ const HeroSection = () => {
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+        {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold font-grotesk mb-8 text-slate-900 dark:text-white leading-tight"
+          className="text-3xl md:text-5xl lg:text-6xl font-bold font-grotesk mb-6 text-slate-900 dark:text-white leading-tight"
         >
           Frontier tech becomes infrastructure.
         </motion.h1>
+
+        {/* Trait horizontal animé */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mx-auto mb-8 h-0.5 w-24 bg-gradient-to-r from-blue-500 to-cyan-400 origin-center"
+        />
 
         {/* Carte institutionnelle */}
         <BusinessCardIntro />
