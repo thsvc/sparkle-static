@@ -404,7 +404,6 @@ const PerspectiveSection = () => {
             </motion.div>
           ))}
         </div>
-        </div>
       </div>
     </Section>
   );
