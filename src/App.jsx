@@ -305,51 +305,47 @@ const PerspectiveSection = () => {
     }
   ];
 
-const ribbonRef = useRef(null);
-const [autoPlay, setAutoPlay] = useState(true);
+  // Auto-scroll ribbon hooks
+  const ribbonRef = useRef(null);
+  const [autoPlay, setAutoPlay] = useState(true);
 
-useEffect(() => {
-  const el = ribbonRef.current;
-  if (!el) return;
+  useEffect(() => {
+    const el = ribbonRef.current;
+    if (!el) return;
 
-  // Respecte l’accessibilité
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (reduceMotion.matches) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reduceMotion.matches) return;
+    if (!autoPlay) return;
 
-  if (!autoPlay) return;
+    const step = () => {
+      const max = el.scrollWidth - el.clientWidth;
+      const atEnd = Math.abs(el.scrollLeft - max) < 4;
+      if (atEnd) {
+        el.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        const delta = Math.min(el.clientWidth * 0.9, max - el.scrollLeft);
+        el.scrollBy({ left: delta, behavior: 'smooth' });
+      }
+    };
 
-  const step = () => {
-    const max = el.scrollWidth - el.clientWidth;
-    const atEnd = Math.abs(el.scrollLeft - max) < 4;
-    if (atEnd) {
-      el.scrollTo({ left: 0, behavior: 'smooth' });
-    } else {
-      const delta = Math.min(el.clientWidth * 0.9, max - el.scrollLeft);
-      el.scrollBy({ left: delta, behavior: 'smooth' });
-    }
-  };
+    const id = setInterval(step, 4500);
+    return () => clearInterval(id);
+  }, [autoPlay]);
 
-  const id = setInterval(step, 4500);
-  return () => clearInterval(id);
-}, [autoPlay]);
-  
   return (
     <Section id="perspective" className="relative overflow-hidden bg-slate-50 dark:bg-slate-900">
       {/* --- Fond décoratif --- */}
       <div className="absolute inset-0">
-        {/* Grille en opacité */}
         <div className="absolute inset-0 bg-grid-slate-200/40 dark:bg-grid-slate-800/40 [mask-image:linear-gradient(to_bottom,white,transparent)]" />
-        {/* Halo radial */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-gradient-radial from-blue-200/30 to-transparent dark:from-blue-900/20" />
       </div>
 
-      {/* --- Contenu au-dessus du décor --- */}
+      {/* --- Contenu --- */}
       <div className="relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold font-grotesk text-slate-900 dark:text-white mb-4">
             Perspective
           </h2>
-          {/* Barre d’accent */}
           <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-emerald-400 mx-auto mb-6 rounded-full" />
 
           <div className="max-w-4xl mx-auto text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -388,12 +384,12 @@ useEffect(() => {
           ))}
         </div>
 
-       {/* Manifold schema (Frontier → Infrastructure + arcs + tooltips) */}
-              <div className="mt-6 mb-8">
-                <PerspectiveManifold />
-              </div>
-        
-       {/* Transition text (no title) */}
+        {/* Manifold schema */}
+        <div className="mt-6 mb-12">
+          <PerspectiveManifold />
+        </div>
+
+        {/* Transition text */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -404,55 +400,53 @@ useEffect(() => {
           From scarcity to ubiquity, innovators have shown how quickly frontier technologies
           evolve from rare experiments to everyday infrastructure.
         </motion.p>
-        
-       {/* Historical Gallery — horizontal ribbon */}
-       <div className="relative mt-2">
-        {/* Fades de bords */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-slate-50 dark:from-slate-900 to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-slate-50 dark:from-slate-900 to-transparent" />
-      
-        <div
-          ref={ribbonRef}
-          className="overflow-x-auto pb-4"
-          role="region"
-          aria-label="Historical examples — From scarcity to ubiquity"
-          onMouseEnter={() => setAutoPlay(false)}
-          onMouseLeave={() => setAutoPlay(true)}
-          onFocusCapture={() => setAutoPlay(false)}
-          onBlurCapture={() => setAutoPlay(true)}
-        >
-          <div className="flex gap-6 snap-x snap-mandatory px-1">
-            {/* ...tes cartes motion.div comme avant... */}
-            {historyData.map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.06 }}
-                className="snap-start shrink-0 w-80 md:w-[420px] bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-              >
-                {/* ...image + titre + texte inchangés... */}
-                <div className="mb-5">
-                  <img
-                    src={item.beforeImage}
-                    alt={item.title}
-                    className="w-full h-48 object-cover rounded-xl border border-slate-200 dark:border-slate-600"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <h4 className="text-lg font-bold font-grotesk text-slate-900 dark:text-white mb-3">
-                  {item.title}
-                </h4>
-                <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                  {item.caption}
-                </p>
-              </motion.div>
-            ))}
+
+        {/* Historical Gallery — auto-scroll ribbon */}
+        <div className="relative mt-2">
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-slate-50 dark:from-slate-900 to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-slate-50 dark:from-slate-900 to-transparent" />
+
+          <div
+            ref={ribbonRef}
+            className="overflow-x-auto pb-4"
+            role="region"
+            aria-label="Historical examples — From scarcity to ubiquity"
+            onMouseEnter={() => setAutoPlay(false)}
+            onMouseLeave={() => setAutoPlay(true)}
+            onFocusCapture={() => setAutoPlay(false)}
+            onBlurCapture={() => setAutoPlay(true)}
+          >
+            <div className="flex gap-6 snap-x snap-mandatory px-1">
+              {historyData.map((item, index) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.06 }}
+                  className="snap-start shrink-0 w-80 md:w-[420px] bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                >
+                  <div className="mb-5">
+                    <img
+                      src={item.beforeImage}
+                      alt={item.title}
+                      className="w-full h-48 object-cover rounded-xl border border-slate-200 dark:border-slate-600"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <h4 className="text-lg font-bold font-grotesk text-slate-900 dark:text-white mb-3">
+                    {item.title}
+                  </h4>
+                  <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                    {item.caption}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
-        </div>
+      </div>
     </Section>
   );
 };
