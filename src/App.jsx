@@ -305,7 +305,7 @@ const PerspectiveSection = () => {
     }
   ];
 
-  // Auto-scroll ribbon hooks
+  // --- Auto-scroll du ruban d'exemples ---
   const ribbonRef = useRef(null);
   const [autoPlay, setAutoPlay] = useState(true);
 
@@ -342,35 +342,69 @@ const PerspectiveSection = () => {
 
       {/* --- Contenu --- */}
       <div className="relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold font-grotesk text-slate-900 dark:text-white mb-4">
+        {/* En-tête + sous-titre */}
+        <div className="text-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-bold font-grotesk text-slate-900 dark:text-white">
             Perspective
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-emerald-400 mx-auto mb-6 rounded-full" />
+          <p className="mt-1 text-base md:text-lg font-medium text-slate-600 dark:text-slate-300">
+            Frontier tech becomes infrastructure.
+          </p>
+          <div className="mt-5 w-20 h-1 bg-gradient-to-r from-blue-500 to-emerald-400 mx-auto rounded-full" />
+        </div>
 
-          <div className="max-w-4xl mx-auto text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
-            <p>
-              As frontier technologies mature, they move from scarcity and experimentation to
-              standardization and ubiquity. This transformation is shaped by compounding capabilities,
-              hybrid architectures, and the convergence of multiple domains. We invest across this
-              transition, identifying the architectures and processes that drive adoption and endure
-              across cycles.
-            </p>
+        {/* Paragraphe (gauche) + carte action (droite) */}
+        <div className="mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-5 gap-6 mb-12">
+          <p className="md:col-span-3 text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+            Technologies rarely move in a straight line. Their path is defined by opposing forces:
+            scalability versus cost, performance versus accessibility, openness versus control.
+            <br className="hidden md:block" />
+            <span className="block mt-3">
+              We invest across this transition. When these tensions are successfully balanced, a technology makes the decisive leap — from scarcity to ubiquity — becoming globally adopted, accessible, and ultimately inevitable as infrastructure.
+            </span>
+          </p>
+
+          <div className="md:col-span-2">
+            <div className="h-full rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/60 backdrop-blur p-5">
+              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">
+                How we invest across the transition
+              </h3>
+              <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300">
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 mt-0.5 text-emerald-600 dark:text-emerald-400" />
+                  Identify compounding capabilities and standardization points.
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 mt-0.5 text-emerald-600 dark:text-emerald-400" />
+                  Back architectures that scale across domains and cycles.
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 mt-0.5 text-emerald-600 dark:text-emerald-400" />
+                  Align governance & distribution to accelerate adoption.
+                </li>
+              </ul>
+              <a
+                href="#business"
+                className="mt-4 inline-flex items-center text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              >
+                Explore our business <ArrowUpRight className="w-4 h-4 ml-1" />
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* Technology Stages */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+        {/* Grille “stages” */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
           {stages.map((stage, index) => (
             <motion.div
               key={stage.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
               className="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm"
             >
-              <div className="flex items-center gap-4 mb-4">
+              <div className="flex items-center gap-4 mb-3">
                 <div className="bg-white dark:bg-slate-700 p-3 rounded-lg shadow-sm">
                   <stage.icon className="w-6 h-6 text-blue-800 dark:text-blue-500" />
                 </div>
@@ -378,31 +412,40 @@ const PerspectiveSection = () => {
                   {stage.title}
                 </h3>
               </div>
-              <p className="text-slate-700 dark:text-slate-300 mb-4">{stage.description}</p>
+              <p className="text-slate-700 dark:text-slate-300 mb-2">{stage.description}</p>
               <p className="text-sm text-slate-500 dark:text-slate-400">{stage.examples}</p>
             </motion.div>
           ))}
         </div>
 
-        {/* Manifold schema */}
-        <div className="mt-6 mb-12">
+        {/* Schéma principal (Frontier → Infrastructure + arcs + tooltips) */}
+        <div className="mt-2 mb-6">
           <PerspectiveManifold />
         </div>
 
-        {/* Transition text */}
+        {/* Capsule sur les tradeoffs */}
+        <div className="mt-4 mb-8 text-center">
+          <span className="inline-block px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-medium">
+            The journey isn’t about eliminating tradeoffs, but aligning them — leveraging tension to unlock
+            compounding opportunities at the right time.
+          </span>
+        </div>
+
+        {/* Texte de transition */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-lg text-slate-700 dark:text-slate-300 text-center mb-10 max-w-3xl mx-auto"
+          transition={{ duration: 0.5 }}
+          className="text-lg text-slate-700 dark:text-slate-300 text-center mb-6 max-w-3xl mx-auto"
         >
           From scarcity to ubiquity, innovators have shown how quickly frontier technologies
           evolve from rare experiments to everyday infrastructure.
         </motion.p>
 
-        {/* Historical Gallery — auto-scroll ribbon */}
-        <div className="relative mt-2">
+        {/* Ruban horizontal — exemples historiques */}
+        <div className="relative">
+          {/* Fades de bords */}
           <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-slate-50 dark:from-slate-900 to-transparent" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-slate-50 dark:from-slate-900 to-transparent" />
 
