@@ -271,30 +271,11 @@ const PerspectiveManifold = () => {
 </text>
 </motion.svg>  {/* ✅ unique fermeture ici */}
 
-      {/* Légendes concises sous le schéma */}
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="rounded-xl border border-emerald-200/60 dark:border-emerald-900/40 bg-emerald-50/40 dark:bg-emerald-900/10 p-4">
-          <h4 className="text-emerald-700 dark:text-emerald-400 font-semibold mb-2 text-sm">Opportunities</h4>
-          <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300">
-            {PERSPECTIVE_DATA.opportunities.map((o) => (
-              <li key={o.title}><span className="font-medium">{o.title} — </span>{o.note}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="rounded-xl border border-rose-200/60 dark:border-rose-900/40 bg-rose-50/40 dark:bg-rose-900/10 p-4">
-          <h4 className="text-rose-700 dark:text-rose-400 font-semibold mb-2 text-sm">Counter-forces</h4>
-          <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300">
-            {PERSPECTIVE_DATA.counterforces.map((c) => (
-              <li key={c.title}><span className="font-medium">{c.title} — </span>{c.note}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
       {/* Hybridity = next frontier */}
       <div className="mt-8 text-center">
-        <span className="inline-block px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-medium">
-          What remains the next valuable frontier: <span className="font-semibold">Technological hybridity</span>.
+        <span className="inline-block px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-medium">
+          The journey is not about eliminating tradeoffs, but about aligning them — 
+          leveraging tension to unlock compounding opportunities at the right time.
         </span>
       </div>
     </div>
@@ -379,63 +360,50 @@ const PerspectiveSection = () => {
           ))}
         </div>
 
-        {/* Manifold schema */}
-        <PerspectiveManifold />
-
-        {/* Historical Gallery (Scarcity → Ubiquity) */}
-        <div className="mt-20">
-          <motion.h3
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-2xl font-bold font-grotesk text-slate-900 dark:text-white text-center mb-6"
-          >
-            From Scarcity to Ubiquity
-          </motion.h3>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-lg text-slate-600 dark:text-slate-400 text-center mb-12 max-w-3xl mx-auto"
-          >
-            History shows how quickly frontier technologies evolve from rare experiments to everyday infrastructure.
-          </motion.p>
-          
+       {/* Transition text (no title) */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-lg text-slate-700 dark:text-slate-300 text-center mb-10 max-w-3xl mx-auto"
+        >
+          From scarcity to ubiquity, innovators have shown how quickly frontier technologies
+          evolve from rare experiments to everyday infrastructure.
+        </motion.p>
+        
         {/* Technology maturation diagram – déplacé ici */}
-        <div className="mt-12 max-w-4xl mx-auto">
+        <div className="mt-2 mb-14">
           <TechnologyMaturationDiagram />
         </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {historyData.map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="group bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:scale-105 transition-all duration-300"
-              >
-                <div className="mb-6">
-                  <img
-                    src={item.beforeImage}
-                    alt={item.title}
-                    className="w-full h-48 object-cover rounded-xl border border-slate-200 dark:border-slate-600"
-                  />
-                </div>
-
-                <h4 className="text-lg font-bold font-grotesk text-slate-900 dark:text-white mb-4">
-                  {item.title}
-                </h4>
-
-                <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                  {item.caption}
-                </p>
-              </motion.div>
-            ))}
-          </div>
+        
+        {/* Historical Gallery */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {historyData.map((item, index) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
+              className="group bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:scale-105 transition-all duration-300"
+            >
+              <div className="mb-6">
+                <img
+                  src={item.beforeImage}
+                  alt={item.title}
+                  className="w-full h-48 object-cover rounded-xl border border-slate-200 dark:border-slate-600"
+                />
+              </div>
+              <h4 className="text-lg font-bold font-grotesk text-slate-900 dark:text-white mb-4">
+                {item.title}
+              </h4>
+              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                {item.caption}
+              </p>
+            </motion.div>
+          ))}
+        </div>
         </div>
       </div>
     </Section>
