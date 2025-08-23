@@ -360,6 +360,11 @@ const PerspectiveSection = () => {
           ))}
         </div>
 
+       {/* Manifold schema (Frontier → Infrastructure + arcs + tooltips) */}
+              <div className="mt-6 mb-8">
+                <PerspectiveManifold />
+              </div>
+        
        {/* Transition text (no title) */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
