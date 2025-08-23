@@ -305,6 +305,34 @@ const PerspectiveSection = () => {
     }
   ];
 
+const ribbonRef = useRef(null);
+const [autoPlay, setAutoPlay] = useState(true);
+
+useEffect(() => {
+  const el = ribbonRef.current;
+  if (!el) return;
+
+  // Respecte l’accessibilité
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (reduceMotion.matches) return;
+
+  if (!autoPlay) return;
+
+  const step = () => {
+    const max = el.scrollWidth - el.clientWidth;
+    const atEnd = Math.abs(el.scrollLeft - max) < 4;
+    if (atEnd) {
+      el.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      const delta = Math.min(el.clientWidth * 0.9, max - el.scrollLeft);
+      el.scrollBy({ left: delta, behavior: 'smooth' });
+    }
+  };
+
+  const id = setInterval(step, 4500);
+  return () => clearInterval(id);
+}, [autoPlay]);
+  
   return (
     <Section id="perspective" className="relative overflow-hidden bg-slate-50 dark:bg-slate-900">
       {/* --- Fond décoratif --- */}
@@ -377,39 +405,54 @@ const PerspectiveSection = () => {
           evolve from rare experiments to everyday infrastructure.
         </motion.p>
         
-        {/* Technology maturation diagram – déplacé ici */}
-        <div className="mt-2 mb-14">
-          <TechnologyMaturationDiagram />
+       {/* Historical Gallery — horizontal ribbon */}
+       <div className="relative mt-2">
+        {/* Fades de bords */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-slate-50 dark:from-slate-900 to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-slate-50 dark:from-slate-900 to-transparent" />
+      
+        <div
+          ref={ribbonRef}
+          className="overflow-x-auto pb-4"
+          role="region"
+          aria-label="Historical examples — From scarcity to ubiquity"
+          onMouseEnter={() => setAutoPlay(false)}
+          onMouseLeave={() => setAutoPlay(true)}
+          onFocusCapture={() => setAutoPlay(false)}
+          onBlurCapture={() => setAutoPlay(true)}
+        >
+          <div className="flex gap-6 snap-x snap-mandatory px-1">
+            {/* ...tes cartes motion.div comme avant... */}
+            {historyData.map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.06 }}
+                className="snap-start shrink-0 w-80 md:w-[420px] bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              >
+                {/* ...image + titre + texte inchangés... */}
+                <div className="mb-5">
+                  <img
+                    src={item.beforeImage}
+                    alt={item.title}
+                    className="w-full h-48 object-cover rounded-xl border border-slate-200 dark:border-slate-600"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <h4 className="text-lg font-bold font-grotesk text-slate-900 dark:text-white mb-3">
+                  {item.title}
+                </h4>
+                <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                  {item.caption}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
-        
-        {/* Historical Gallery */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {historyData.map((item, index) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              className="group bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:scale-105 transition-all duration-300"
-            >
-              <div className="mb-6">
-                <img
-                  src={item.beforeImage}
-                  alt={item.title}
-                  className="w-full h-48 object-cover rounded-xl border border-slate-200 dark:border-slate-600"
-                />
-              </div>
-              <h4 className="text-lg font-bold font-grotesk text-slate-900 dark:text-white mb-4">
-                {item.title}
-              </h4>
-              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                {item.caption}
-              </p>
-            </motion.div>
-          ))}
         </div>
-      </div>
     </Section>
   );
 };
