@@ -342,14 +342,11 @@ const PerspectiveSection = () => {
 
       {/* --- Contenu --- */}
       <div className="relative z-10">
-        {/* En-tête + sous-titre */}
+        {/* En-tête */}
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold font-grotesk text-slate-900 dark:text-white">
-            Perspective
+            PERSPECTIVE
           </h2>
-          <p className="mt-1 text-base md:text-lg font-medium text-slate-600 dark:text-slate-300">
-            Frontier tech becomes infrastructure.
-          </p>
           <div className="mt-5 w-20 h-1 bg-gradient-to-r from-blue-500 to-emerald-400 mx-auto rounded-full" />
         </div>
 
@@ -421,14 +418,6 @@ const PerspectiveSection = () => {
         {/* Schéma principal (Frontier → Infrastructure + arcs + tooltips) */}
         <div className="mt-2 mb-6">
           <PerspectiveManifold />
-        </div>
-
-        {/* Capsule sur les tradeoffs */}
-        <div className="mt-4 mb-8 text-center">
-          <span className="inline-block px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-medium">
-            The journey isn’t about eliminating tradeoffs, but aligning them — leveraging tension to unlock
-            compounding opportunities at the right time.
-          </span>
         </div>
 
         {/* Texte de transition */}
