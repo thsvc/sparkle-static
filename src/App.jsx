@@ -1034,7 +1034,7 @@ const BusinessSection = () => {
 
 
 
-// === UNIVERSE PORTFOLIO — rendu type humla.vc (grille bordurée, logos centrés) ===
+// === UNIVERSE PORTFOLIO ===
 const PORTFOLIO_CATEGORIES = [
   {
     title: "AI Compute & Platforms",
@@ -1110,12 +1110,16 @@ function PortfolioCell({ name, url, logo }) {
   );
 }
 
+// === COMPANIES — Unified grid with category pill ===
 const CompaniesSection = () => {
-  // On aplatit UNIVERSE_CATEGORIES -> [{ name, url, logo, category }]
+  // On aplatit PORTFOLIO_CATEGORIES -> [{ name, url, logo, category }]
   const allCompanies = React.useMemo(() => {
-    // UNIVERSE_CATEGORIES doit exister déjà (même structure qu'actuelle)
-    return UNIVERSE_CATEGORIES.flatMap(cat =>
-      cat.items.map(item => ({ ...item, category: cat.title }))
+    return PORTFOLIO_CATEGORIES.flatMap(cat =>
+      cat.items.map(item => ({
+        ...item,
+        category: cat.title,
+        src: import.meta.env.BASE_URL + "images/logos/" + item.logo,
+      }))
     );
   }, []);
 
@@ -1142,7 +1146,7 @@ const CompaniesSection = () => {
 
             {/* Logo */}
             <img
-              src={c.logo}
+              src={c.src}
               alt={c.name}
               loading="lazy"
               decoding="async"
