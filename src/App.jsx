@@ -1111,40 +1111,54 @@ function PortfolioCell({ name, url, logo }) {
 }
 
 const CompaniesSection = () => {
+  // On aplatit UNIVERSE_CATEGORIES -> [{ name, url, logo, category }]
+  const allCompanies = React.useMemo(() => {
+    // UNIVERSE_CATEGORIES doit exister déjà (même structure qu'actuelle)
+    return UNIVERSE_CATEGORIES.flatMap(cat =>
+      cat.items.map(item => ({ ...item, category: cat.title }))
+    );
+  }, []);
+
   return (
-    <Section id="companies" className="bg-white">
+    <Section id="companies" className="bg-white dark:bg-slate-900">
       <SectionTitle>Companies</SectionTitle>
 
-      <div className="space-y-14">
-        {PORTFOLIO_CATEGORIES.map((cat) => (
-          <section key={cat.title}>
-            {/* En-tête de catégorie */}
-            <div className="mb-3 flex items-center justify-between">
-              <h3 className="text-base md:text-lg font-semibold font-grotesk text-slate-900">
-                {cat.title}
-              </h3>
-              <span className="text-[11px] md:text-xs font-mono px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
-                {cat.items.length}
-              </span>
-            </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6">
+        {allCompanies.map(c => (
+          <a
+            key={`${c.category}-${c.name}`}
+            href={c.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative group aspect-[5/3] rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center justify-center hover:shadow-md transition"
+            aria-label={c.name}
+          >
+            {/* Pastille catégorie */}
+            <span className="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-full text-[10px] font-medium
+                             bg-slate-100/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700
+                             text-slate-700 dark:text-slate-300">
+              {c.category}
+            </span>
 
-            {/* Grille bordurée façon tableau (truc du -m-px pour lignes fines uniques) */}
-            <div className="-m-px grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4">
-              {cat.items.map((c) => (
-                <PortfolioCell key={c.name} {...c} />
-              ))}
-            </div>
-          </section>
+            {/* Logo */}
+            <img
+              src={c.logo}
+              alt={c.name}
+              loading="lazy"
+              decoding="async"
+              className="max-w-[70%] max-h-[70%] object-contain opacity-80 grayscale
+                         group-hover:opacity-100 group-hover:grayscale-0 transition"
+            />
+          </a>
         ))}
       </div>
 
-      <p className="mt-12 text-center text-xs text-slate-500">
-        ***
+      <p className="mt-10 text-center text-xs text-slate-500">
+        Logos are trademarks of their respective owners.
       </p>
     </Section>
   );
 };
-  
 
 const TeamSection = () => {
   return (
