@@ -705,10 +705,19 @@ const Header = ({ sections, activeSection, scrollToSection }) => {
             className="flex items-center"
             aria-label="Sparkle Ventures – Home"
           >
+            {/* Logo clair (mode light) */}
             <img
               src={import.meta.env.BASE_URL + 'images/logo-sparkle.svg'}
               alt="Sparkle Ventures"
-              className="h-7 w-auto md:h-8"
+              className="block dark:hidden h-9 md:h-10 lg:h-11 w-auto"
+              decoding="async"
+              loading="eager"
+            />
+            {/* Logo blanc (mode dark) */}
+            <img
+              src={import.meta.env.BASE_URL + 'images/logo-sparkle-light.png'}
+              alt="Sparkle Ventures"
+              className="hidden dark:block h-9 md:h-10 lg:h-11 w-auto"
               decoding="async"
               loading="eager"
             />
