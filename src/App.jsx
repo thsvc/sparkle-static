@@ -321,44 +321,74 @@ const PerspectiveSection = () => {
       </div>
 
       <div className="relative z-10">
-        {/* En-tête + sous-titre */}
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold font-grotesk text-slate-900 dark:text-white">Perspective</h2>
-          <p className="mt-2 text-base md:text-lg text-slate-600 dark:text-slate-300">
-            Frontier tech becomes infrastructure.
-          </p>
-          <div className="mt-3 w-20 h-1 bg-gradient-to-r from-blue-500 to-emerald-400 mx-auto rounded-full" />
+        {/* En-tête */}
+        <div className="text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold font-grotesk text-slate-900 dark:text-white">
+            PERSPECTIVE
+          </h2>
+          <div className="mt-4 w-20 h-1 bg-gradient-to-r from-blue-500 to-emerald-400 mx-auto rounded-full" />
         </div>
-
-        {/* Grille : texte (gauche) + encadré (droite) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          {/* Colonne principale */}
-          <div className="lg:col-span-8">
-            {/* Manifeste avec barre verticale */}
-            <div className="relative pl-5 md:pl-6">
-              <div className="absolute left-0 top-0 bottom-0 w-1 rounded-full bg-gradient-to-b from-blue-500 to-cyan-400" />
-              <div className="space-y-4">
-                <p className="text-lg md:text-xl leading-relaxed text-slate-800 dark:text-slate-200">
-                  Technologies rarely move in a straight line. Their trajectory is defined by opposing forces — scalability
-                  versus cost, performance versus accessibility, openness versus control. We invest across this transition.
-                </p>
-                <p className="text-lg md:text-xl leading-relaxed text-slate-800 dark:text-slate-200">
-                  When these tensions are aligned rather than denied, technologies make the decisive leap:
-                  from scarcity to ubiquity — becoming globally adopted, accessible, and ultimately inevitable as infrastructure.
-                </p>
-              </div>
+        
+        {/* Grille 3/2 : texte à gauche, carte à droite */}
+        <div className="mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-5 gap-8 mb-12">
+          {/* Colonne gauche (3) : Manifeste + texte fusionné */}
+          <div className="md:col-span-3">
+            <motion.h3
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="font-grotesk font-extrabold tracking-tight text-2xl md:text-4xl lg:text-5xl text-slate-900 dark:text-white"
+            >
+              Frontier tech becomes infrastructure.
+            </motion.h3>
+        
+            <div className="mt-5 text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+              <p>
+                Technologies rarely move in a straight line. Their trajectory is defined by opposing forces —
+                scalability versus cost, performance versus accessibility, openness versus control.{" "}
+                <span className="font-medium">We invest across this transition.</span>
+              </p>
+              <p className="mt-4">
+                When these tensions are aligned rather than denied, technologies make the decisive leap:{" "}
+                <span className="font-medium">from scarcity to ubiquity</span> — becoming globally adopted,
+                accessible, and ultimately <span className="font-medium">inevitable as infrastructure</span>.
+              </p>
             </div>
+          </div>
+        
+          {/* Colonne droite (2) : Carte “How we invest…” */}
+          <div className="md:col-span-2">
+            <div className="h-full rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/60 backdrop-blur p-5">
+              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">
+                How we invest across the transition
+              </h3>
+              <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300">
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 mt-0.5 text-emerald-600 dark:text-emerald-400" />
+                  Identify compounding capabilities and standardization points.
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 mt-0.5 text-emerald-600 dark:text-emerald-400" />
+                  Back architectures that scale across domains and cycles.
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 mt-0.5 text-emerald-600 dark:text-emerald-400" />
+                  Align governance & distribution to accelerate adoption.
+                </li>
+              </ul>
+              <a
+                href="#companies"
+                className="mt-4 inline-flex items-center text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              >
+                Companies <ArrowUpRight className="w-4 h-4 ml-1" />
+              </a>
+            </div>
+          </div>
 
             {/* Schéma interactif (Frontier → Infrastructure + arcs + tooltips) */}
             <div className="mt-8">
               <PerspectiveManifold />
-            </div>
-
-            {/* Capsule stratégique */}
-            <div className="mt-6 text-center">
-              <span className="inline-block px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-medium">
-                The journey isn’t about eliminating tradeoffs — it’s about aligning them and investing where tension compounds into durable advantage.
-              </span>
             </div>
 
             {/* Transition vers les exemples */}
