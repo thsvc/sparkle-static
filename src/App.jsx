@@ -284,7 +284,7 @@ const PerspectiveManifold = () => {
 
 // === PERSPECTIVE SECTION ===
 const PerspectiveSection = () => {
-  // Auto-scroll du ruban d'exemples
+  // --- Auto-scroll du ruban d'exemples ---
   const ribbonRef = useRef(null);
   const [autoPlay, setAutoPlay] = useState(true);
 
@@ -293,7 +293,8 @@ const PerspectiveSection = () => {
     if (!el) return;
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (reduceMotion.matches || !autoPlay) return;
+    if (reduceMotion.matches) return;
+    if (!autoPlay) return;
 
     const step = () => {
       const max = el.scrollWidth - el.clientWidth;
@@ -328,41 +329,26 @@ const PerspectiveSection = () => {
           <div className="mt-4 w-20 h-1 bg-gradient-to-r from-blue-500 to-emerald-400 mx-auto rounded-full" />
         </div>
 
-        {/* Grille 3/2 : manifeste + texte (gauche) / carte (droite) */}
-        <div className="mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-5 gap-8 mb-12">
-          {/* Colonne gauche (3) */}
+        {/* Intro (gauche) + Carte (droite) */}
+        <div className="mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
+          {/* Colonne texte (manifeste) */}
           <div className="md:col-span-3">
-            <motion.h3
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="font-grotesk font-extrabold tracking-tight text-2xl md:text-4xl lg:text-5xl text-slate-900 dark:text-white"
-            >
+            <h3 className="text-2xl md:text-3xl font-bold font-grotesk text-slate-900 dark:text-white mb-3">
               Frontier tech becomes infrastructure.
-            </motion.h3>
-
-            <div className="mt-5 text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
-              <p>
-                Technologies rarely move in a straight line. Their trajectory is defined by opposing
-                forces — scalability versus cost, performance versus accessibility, openness versus
-                control. <span className="font-medium">We invest across this transition.</span>
-              </p>
-              <p className="mt-4">
-                When these tensions are aligned rather than denied, technologies make the decisive
-                leap: <span className="font-medium">from scarcity to ubiquity</span> — becoming
-                globally adopted, accessible, and ultimately
-                <span className="font-medium"> inevitable as infrastructure</span>.
-              </p>
-            </div>
+            </h3>
+            <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+              Frontier technologies begin as scarce, experimental, and resource-intensive.
+              Their trajectories are shaped by opposing forces: scalability versus cost,
+              performance versus accessibility, openness versus control.
+            </p>
           </div>
 
-          {/* Colonne droite (2) : Carte action */}
-          <div className="md:col-span-2">
-            <aside className="h-full rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/60 backdrop-blur p-5">
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">
+          {/* Carte action (droite) */}
+          <aside className="md:col-span-2">
+            <div className="h-full rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/60 backdrop-blur p-5">
+              <h4 className="font-semibold text-slate-900 dark:text-white mb-2">
                 How we invest across the transition
-              </h3>
+              </h4>
               <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300">
                 <li className="flex items-start gap-2">
                   <Check className="w-4 h-4 mt-0.5 text-emerald-600 dark:text-emerald-400" />
@@ -383,16 +369,24 @@ const PerspectiveSection = () => {
               >
                 Companies <ArrowUpRight className="w-4 h-4 ml-1" />
               </a>
-            </aside>
-          </div>
+            </div>
+          </aside>
         </div>
 
-        {/* Schéma principal (Frontier → Infrastructure + arcs + tooltips) */}
+        {/* Transition centrée (flèche) */}
+        <p className="text-center text-base md:text-lg text-slate-700 dark:text-slate-300 mb-6">
+          <span className="mr-2">➝</span>
+          When these tensions are aligned, what was once rare becomes broadly standardized and
+          globally distributed. At that point, the technology is no longer optional, and becomes
+          embedded infrastructure.
+        </p>
+
+        {/* Schéma principal */}
         <div className="mt-2 mb-6">
           <PerspectiveManifold />
         </div>
 
-        {/* Texte de transition */}
+        {/* Texte vers l’historique */}
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
