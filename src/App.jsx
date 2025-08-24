@@ -1127,14 +1127,15 @@ const CompaniesSection = () => {
     <Section id="companies" className="bg-white dark:bg-slate-900">
       <SectionTitle>Companies</SectionTitle>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-6 md:gap-8">
         {allCompanies.map(c => (
           <a
             key={`${c.category}-${c.name}`}
             href={c.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative group aspect-[5/3] rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center justify-center hover:shadow-md transition"
+            className="relative group rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center justify-center hover:shadow-md transition
+                       min-h-[100px] md:min-h-[120px] lg:min-h-[140px]"
             aria-label={c.name}
           >
             {/* Pastille catégorie */}
