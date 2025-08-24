@@ -282,9 +282,9 @@ const PerspectiveManifold = () => {
   );
 };
 
-// === PERSPECTIVE SECTION — Pattern B + Encadré latéral ===
+// === PERSPECTIVE SECTION ===
 const PerspectiveSection = () => {
-  // Auto-scroll du ruban d’exemples
+  // Auto-scroll du ruban d'exemples
   const ribbonRef = useRef(null);
   const [autoPlay, setAutoPlay] = useState(true);
 
@@ -292,10 +292,8 @@ const PerspectiveSection = () => {
     const el = ribbonRef.current;
     if (!el) return;
 
-    // Respecte "reduce motion"
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (reduceMotion.matches) return;
-    if (!autoPlay) return;
+    if (reduceMotion.matches || !autoPlay) return;
 
     const step = () => {
       const max = el.scrollWidth - el.clientWidth;
@@ -314,12 +312,13 @@ const PerspectiveSection = () => {
 
   return (
     <Section id="perspective" className="relative overflow-hidden bg-slate-50 dark:bg-slate-900">
-      {/* Décor de fond discret */}
+      {/* --- Fond décoratif --- */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-grid-slate-200/40 dark:bg-grid-slate-800/40 [mask-image:linear-gradient(to_bottom,white,transparent)]" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-gradient-radial from-blue-200/30 to-transparent dark:from-blue-900/20" />
       </div>
 
+      {/* --- Contenu --- */}
       <div className="relative z-10">
         {/* En-tête */}
         <div className="text-center mb-8">
@@ -328,10 +327,10 @@ const PerspectiveSection = () => {
           </h2>
           <div className="mt-4 w-20 h-1 bg-gradient-to-r from-blue-500 to-emerald-400 mx-auto rounded-full" />
         </div>
-        
-        {/* Grille 3/2 : texte à gauche, carte à droite */}
+
+        {/* Grille 3/2 : manifeste + texte (gauche) / carte (droite) */}
         <div className="mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-5 gap-8 mb-12">
-          {/* Colonne gauche (3) : Manifeste + texte fusionné */}
+          {/* Colonne gauche (3) */}
           <div className="md:col-span-3">
             <motion.h3
               initial={{ opacity: 0, y: 16 }}
@@ -342,24 +341,25 @@ const PerspectiveSection = () => {
             >
               Frontier tech becomes infrastructure.
             </motion.h3>
-        
+
             <div className="mt-5 text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
               <p>
-                Technologies rarely move in a straight line. Their trajectory is defined by opposing forces —
-                scalability versus cost, performance versus accessibility, openness versus control.{" "}
-                <span className="font-medium">We invest across this transition.</span>
+                Technologies rarely move in a straight line. Their trajectory is defined by opposing
+                forces — scalability versus cost, performance versus accessibility, openness versus
+                control. <span className="font-medium">We invest across this transition.</span>
               </p>
               <p className="mt-4">
-                When these tensions are aligned rather than denied, technologies make the decisive leap:{" "}
-                <span className="font-medium">from scarcity to ubiquity</span> — becoming globally adopted,
-                accessible, and ultimately <span className="font-medium">inevitable as infrastructure</span>.
+                When these tensions are aligned rather than denied, technologies make the decisive
+                leap: <span className="font-medium">from scarcity to ubiquity</span> — becoming
+                globally adopted, accessible, and ultimately
+                <span className="font-medium"> inevitable as infrastructure</span>.
               </p>
             </div>
           </div>
-        
-          {/* Colonne droite (2) : Carte “How we invest…” */}
+
+          {/* Colonne droite (2) : Carte action */}
           <div className="md:col-span-2">
-            <div className="h-full rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/60 backdrop-blur p-5">
+            <aside className="h-full rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/60 backdrop-blur p-5">
               <h3 className="font-semibold text-slate-900 dark:text-white mb-2">
                 How we invest across the transition
               </h3>
@@ -383,110 +383,78 @@ const PerspectiveSection = () => {
               >
                 Companies <ArrowUpRight className="w-4 h-4 ml-1" />
               </a>
-            </div>
+            </aside>
           </div>
+        </div>
 
-            {/* Schéma interactif (Frontier → Infrastructure + arcs + tooltips) */}
-            <div className="mt-8">
-              <PerspectiveManifold />
-            </div>
+        {/* Schéma principal (Frontier → Infrastructure + arcs + tooltips) */}
+        <div className="mt-2 mb-6">
+          <PerspectiveManifold />
+        </div>
 
-            {/* Transition vers les exemples */}
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="mt-10 text-lg text-slate-700 dark:text-slate-300 text-center"
-            >
-              From scarcity to ubiquity, innovators have shown how quickly frontier technologies evolve
-              from rare experiments to everyday infrastructure.
-            </motion.p>
+        {/* Texte de transition */}
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-lg text-slate-700 dark:text-slate-300 text-center mb-6 max-w-3xl mx-auto"
+        >
+          From scarcity to ubiquity, innovators have shown how quickly frontier technologies
+          evolve from rare experiments to everyday infrastructure.
+        </motion.p>
 
-            {/* Ruban horizontal — exemples historiques */}
-            <div className="relative mt-4">
-              {/* Fades latéraux */}
-              <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-slate-50 dark:from-slate-900 to-transparent" />
-              <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-slate-50 dark:from-slate-900 to-transparent" />
+        {/* Ruban horizontal — exemples historiques */}
+        <div className="relative">
+          {/* Fades de bords */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-slate-50 dark:from-slate-900 to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-slate-50 dark:from-slate-900 to-transparent" />
 
-              <div
-                ref={ribbonRef}
-                className="overflow-x-auto pb-4"
-                role="region"
-                aria-label="Historical examples — From scarcity to ubiquity"
-                onMouseEnter={() => setAutoPlay(false)}
-                onMouseLeave={() => setAutoPlay(true)}
-                onFocusCapture={() => setAutoPlay(false)}
-                onBlurCapture={() => setAutoPlay(true)}
-              >
-                <div className="flex gap-6 snap-x snap-mandatory px-1">
-                  {historyData.map((item, index) => (
-                    <motion.div
-                      key={item.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: index * 0.06 }}
-                      className="snap-start shrink-0 w-80 md:w-[420px] bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-                    >
-                      <div className="mb-5">
-                        <img
-                          src={item.beforeImage}
-                          alt={item.title}
-                          className="w-full h-48 object-cover rounded-xl border border-slate-200 dark:border-slate-600"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </div>
-                      <h4 className="text-lg font-bold font-grotesk text-slate-900 dark:text-white mb-3">
-                        {item.title}
-                      </h4>
-                      <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                        {item.caption}
-                      </p>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Encadré latéral (sticky) */}
-          <aside className="lg:col-span-4">
-            <div className="lg:sticky lg:top-24">
-              <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/60 backdrop-blur p-6 shadow-sm">
-                <h3 className="text-base font-semibold text-slate-900 dark:text-white">
-                  How we invest across the transition
-                </h3>
-                <ul className="mt-4 space-y-3 text-sm text-slate-700 dark:text-slate-300">
-                  <li className="flex gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-blue-500" />
-                    Identify compounding capabilities and standardization points.
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                    Back architectures that scale across domains and cycles.
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-cyan-500" />
-                    Align governance & distribution to accelerate adoption.
-                  </li>
-                </ul>
-
-                <a
-                  href="#business"
-                  className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-blue-700 dark:text-blue-300 hover:underline"
+          <div
+            ref={ribbonRef}
+            className="overflow-x-auto pb-4"
+            role="region"
+            aria-label="Historical examples — From scarcity to ubiquity"
+            onMouseEnter={() => setAutoPlay(false)}
+            onMouseLeave={() => setAutoPlay(true)}
+            onFocusCapture={() => setAutoPlay(false)}
+            onBlurCapture={() => setAutoPlay(true)}
+          >
+            <div className="flex gap-6 snap-x snap-mandatory px-1">
+              {historyData.map((item, index) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.06 }}
+                  className="snap-start shrink-0 w-80 md:w-[420px] bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                 >
-                  Explore our business <ArrowUpRight className="w-4 h-4" />
-                </a>
-              </div>
+                  <div className="mb-5">
+                    <img
+                      src={item.beforeImage}
+                      alt={item.title}
+                      className="w-full h-48 object-cover rounded-xl border border-slate-200 dark:border-slate-600"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <h4 className="text-lg font-bold font-grotesk text-slate-900 dark:text-white mb-3">
+                    {item.title}
+                  </h4>
+                  <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                    {item.caption}
+                  </p>
+                </motion.div>
+              ))}
             </div>
-          </aside>
+          </div>
         </div>
       </div>
     </Section>
   );
 };
+
 
 // --- THEME PROVIDER & HOOK ---
 const ThemeContext = createContext();
