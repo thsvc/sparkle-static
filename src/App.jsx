@@ -1001,7 +1001,7 @@ const BusinessSection = () => {
       <div className="max-w-6xl mx-auto px-6 text-center">
         {/* Titre section */}
         <h2 className="text-3xl md:text-4xl font-bold font-grotesk text-slate-900 dark:text-white mb-14">
-          Business
+          BUSINESS
         </h2>
 
         {/* Grid des cartes */}
@@ -1168,7 +1168,7 @@ const CompaniesSection = () => {
 const TeamSection = () => {
   return (
     <Section id="team">
-      <SectionTitle>Management</SectionTitle>
+      <SectionTitle>TEAM</SectionTitle>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {teamData.map((member, index) => (
