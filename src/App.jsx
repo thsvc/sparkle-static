@@ -324,10 +324,10 @@ const PerspectiveSection = () => {
 
       <div className="relative z-10">
         {/* En-tête de section */}
-        <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold font-grotesk text-slate-900 dark:text-white">Perspective</h2>
-          <div className="mt-4 w-20 h-1 bg-gradient-to-r from-blue-500 to-emerald-400 mx-auto rounded-full" />
-        </div>
+        <SectionHeader
+          title="Perspective"
+          subtitle="Frontier tech becomes infrastructure."
+        />
 
         {/* Schéma Manifold (sans titre) */}
         <div className="mt-2 mb-8">
@@ -599,6 +599,26 @@ const SectionTitle = ({ children }) => (
     {children}
   </motion.h2>
 );
+
+const SectionHeader = ({
+  title,
+  subtitle,
+  className = "",
+  // tu peux ajuster ces classes si besoin
+  titleClass = "text-3xl md:text-4xl font-bold text-slate-900 dark:text-white",
+  subtitleClass = "text-base md:text-lg font-medium text-slate-600 dark:text-slate-300"
+}) => {
+  return (
+    <div className={`mb-10 md:mb-12`}>
+      <div className={`flex items-baseline justify-center gap-3 md:gap-4 ${className}`}>
+        <h2 className={`${titleClass} font-grotesk tracking-tight`}>{title}</h2>
+        <span className="select-none text-slate-300 dark:text-slate-600">|</span>
+        <p className={`${subtitleClass} leading-snug`}>{subtitle}</p>
+      </div>
+    </div>
+  );
+};
+
 
 // --- REVEAL (fade-in + slide-up réutilisable) ---
 const Reveal = ({ children, delay = 0 }) => (
@@ -968,10 +988,11 @@ const BusinessSection = () => {
   return (
     <section id="business" className="py-24 bg-white dark:bg-slate-900">
       <div className="max-w-6xl mx-auto px-6 text-center">
-        {/* Titre section */}
-        <h2 className="text-3xl md:text-4xl font-bold font-grotesk text-slate-900 dark:text-white mb-14">
-          BUSINESS
-        </h2>
+        {/* Section header with pipe */}
+        <SectionHeader
+          title="Business"
+          subtitle="Our tailored offerings to capture value"
+        />
 
         {/* Grid des cartes */}
         <div className="grid gap-10 md:grid-cols-3">
@@ -1094,7 +1115,12 @@ const CompaniesSection = () => {
 
   return (
     <Section id="companies" className="bg-white dark:bg-slate-900">
-      <SectionTitle>Companies</SectionTitle>
+      <div className="mb-10">
+        <SectionHeader
+          title="Companies"
+          subtitle="20+ teams shaping tomorrow’s infrastructure"
+        />
+      </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-6 md:gap-8">
         {allCompanies.map(c => (
@@ -1136,8 +1162,11 @@ const CompaniesSection = () => {
 
 const TeamSection = () => {
   return (
-    <Section id="team">
-      <SectionTitle>Team</SectionTitle>
+    <Section id="team" className="bg-white dark:bg-slate-900">
+    <SectionHeader
+      title="Team"
+      subtitle="Cultivating expertise from operators, researchers, and partners"
+    />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {teamData.map((member, index) => (
@@ -1744,6 +1773,8 @@ export default function SparkleVenturesPage() {
           <PerspectiveSection />
           <SectionSeparator />
           <CompaniesSection />
+          <SectionSeparator />
+          <TeamSection />
           <SectionSeparator />
           <ContactSection onInvestorClick={() => setShowInvestorForm(true)} onFounderClick={() => setShowFounderForm(true)} />
         </main>
