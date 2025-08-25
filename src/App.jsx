@@ -582,6 +582,12 @@ const Section = ({ id, children, className = '', full = false }) => (
   </section>
 );
 
+const SectionSeparator = () => (
+  <div className="h-16 md:h-24 w-full">
+    <div className="h-full w-full bg-gradient-to-b from-transparent via-slate-100/70 to-transparent dark:via-slate-800/50" />
+  </div>
+);
+
 const SectionTitle = ({ children }) => (
   <motion.h2 
     initial={{ opacity: 0, y: 20 }}
@@ -1378,7 +1384,6 @@ const InvestorForm = ({ isOpen, onClose }) => {
           <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Thank you</h3>
           <p className="text-slate-600 dark:text-slate-300 max-w-md mx-auto">
             Your inquiry has been received. Our investment team reviews submissions continuously and will reach out if there’s a strong fit.
-            In the meantime, feel free to share any additional context or materials by email.
           </p>
           <button onClick={onClose} className="mt-6 form-button-primary">Close</button>
         </div>
@@ -1733,10 +1738,14 @@ export default function SparkleVenturesPage() {
         
         <main>
           <HeroSection />
+          <SectionSeparator />
           <BusinessSection />
+          <SectionSeparator />
           <PerspectiveSection />
+          <SectionSeparator />
           <CompaniesSection />
-          <TeamSection />
+          <SectionSeparator />
+          <ContactSection />
           <ContactSection onInvestorClick={() => setShowInvestorForm(true)} onFounderClick={() => setShowFounderForm(true)} />
         </main>
         
