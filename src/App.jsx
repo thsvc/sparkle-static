@@ -334,16 +334,9 @@ const PerspectiveSection = () => {
           <PerspectiveManifold />
         </div>
 
-        {/* Capsule de principe */}
-        <div className="mt-2 mb-10 text-center">
-          <span className="inline-block px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm md:text-[15px]">
-            The journey is not about eliminating tradeoffs, but about aligning them — leveraging tension to unlock compounding opportunities at the right time.
-          </span>
-        </div>
-
         {/* Légende + ruban horizontal d’exemples */}
         <div className="max-w-6xl mx-auto">
-          <p className="text-sm text-slate-500 dark:text-slate-400 mb-3">
+          <p className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
             From scarcity to ubiquity — examples of frontier tech becoming everyday infrastructure.
           </p>
 
@@ -594,6 +587,18 @@ const SectionTitle = ({ children }) => (
   >
     {children}
   </motion.h2>
+);
+
+// --- REVEAL (fade-in + slide-up réutilisable) ---
+const Reveal = ({ children, delay = 0 }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.3 }}
+    transition={{ duration: 0.6, delay }}
+  >
+    {children}
+  </motion.div>
 );
 
 // --- UI COMPONENTS ---
