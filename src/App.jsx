@@ -284,7 +284,7 @@ const PerspectiveManifold = () => {
 
 // === PERSPECTIVE SECTION ===
 const PerspectiveSection = () => {
-  // --- Auto-scroll du ruban d'exemples ---
+  // Auto-scroll du ruban d'exemples
   const ribbonRef = useRef(null);
   const [autoPlay, setAutoPlay] = useState(true);
 
@@ -313,134 +313,94 @@ const PerspectiveSection = () => {
 
   return (
     <Section id="perspective" className="relative overflow-hidden bg-slate-50 dark:bg-slate-900">
-      {/* --- Fond décoratif --- */}
+      {/* Décor de fond discret */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-grid-slate-200/40 dark:bg-grid-slate-800/40 [mask-image:linear-gradient(to_bottom,white,transparent)]" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-gradient-radial from-blue-200/30 to-transparent dark:from-blue-900/20" />
       </div>
 
-      {/* --- Contenu --- */}
       <div className="relative z-10">
-        {/* En-tête */}
+        {/* En-tête de section */}
         <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold font-grotesk text-slate-900 dark:text-white">
-            PERSPECTIVE
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold font-grotesk text-slate-900 dark:text-white">Perspective</h2>
           <div className="mt-4 w-20 h-1 bg-gradient-to-r from-blue-500 to-emerald-400 mx-auto rounded-full" />
         </div>
 
-        {/* Intro (gauche) + Carte (droite) */}
-        <div className="mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
-          {/* Colonne texte (manifeste) */}
-          <div className="md:col-span-3">
-            <h3 className="text-2xl md:text-3xl font-bold font-grotesk text-slate-900 dark:text-white mb-3">
-              Frontier tech becomes infrastructure.
-            </h3>
-            <p className="text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
-              Frontier technologies begin as scarce, experimental, and resource-intensive.
-              Their trajectories are shaped by opposing forces: scalability versus cost,
-              performance versus accessibility, openness versus control.
-            </p>
-          </div>
-
-          {/* Carte action (droite) */}
-          <aside className="md:col-span-2">
-            <div className="h-full rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/60 backdrop-blur p-5">
-              <h4 className="font-semibold text-slate-900 dark:text-white mb-2">
-                How we invest across the transition
-              </h4>
-              <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300">
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 mt-0.5 text-emerald-600 dark:text-emerald-400" />
-                  Identify compounding capabilities and standardization points.
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 mt-0.5 text-emerald-600 dark:text-emerald-400" />
-                  Back architectures that scale across domains and cycles.
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 mt-0.5 text-emerald-600 dark:text-emerald-400" />
-                  Align governance & distribution to accelerate adoption.
-                </li>
-              </ul>
-              <a
-                href="#companies"
-                className="mt-4 inline-flex items-center text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
-              >
-                Companies <ArrowUpRight className="w-4 h-4 ml-1" />
-              </a>
-            </div>
-          </aside>
+        {/* Manifeste court */}
+        <div className="text-center mb-6">
+          <h3 className="text-2xl md:text-3xl font-bold font-grotesk text-slate-900 dark:text-white mb-4">
+            Frontier tech becomes infrastructure.
+          </h3>
+          <p className="max-w-4xl mx-auto text-lg md:text-xl text-slate-700 dark:text-slate-300 leading-relaxed">
+            Frontier technologies begin as scarce, experimental, and resource-intensive.
+            Their trajectories are shaped by opposing forces: scalability versus cost,
+            performance versus accessibility, openness versus control.
+          </p>
         </div>
 
-        {/* Transition centrée (flèche) */}
-        <p className="text-center text-base md:text-lg text-slate-700 dark:text-slate-300 mb-6">
-          <span className="mr-2">➝</span>
-          When these tensions are aligned, what was once rare becomes broadly standardized and
-          globally distributed. At that point, the technology is no longer optional, and becomes
-          embedded infrastructure.
+        {/* Transition courte (flèche) */}
+        <p className="text-center text-base md:text-lg italic text-slate-600 dark:text-slate-300 mb-8">
+          ➝ When these tensions are aligned, what was once rare becomes broadly standardized and globally distributed.
+          At that point, the technology is no longer optional, and becomes embedded infrastructure.
         </p>
 
-        {/* Schéma principal */}
+        {/* Schéma Manifold (sans titre) */}
         <div className="mt-2 mb-6">
           <PerspectiveManifold />
         </div>
 
-        {/* Texte vers l’historique */}
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-lg text-slate-700 dark:text-slate-300 text-center mb-6 max-w-3xl mx-auto"
-        >
-          From scarcity to ubiquity, innovators have shown how quickly frontier technologies
-          evolve from rare experiments to everyday infrastructure.
-        </motion.p>
+        {/* Capsule de principe */}
+        <div className="mt-2 mb-10 text-center">
+          <span className="inline-block px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm md:text-[15px]">
+            The journey is not about eliminating tradeoffs, but about aligning them — leveraging tension to unlock compounding opportunities at the right time.
+          </span>
+        </div>
 
-        {/* Ruban horizontal — exemples historiques */}
-        <div className="relative">
-          {/* Fades de bords */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-slate-50 dark:from-slate-900 to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-slate-50 dark:from-slate-900 to-transparent" />
+        {/* Légende + ruban horizontal d’exemples */}
+        <div className="max-w-6xl mx-auto">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mb-3">
+            From scarcity to ubiquity — examples of frontier tech becoming everyday infrastructure.
+          </p>
 
-          <div
-            ref={ribbonRef}
-            className="overflow-x-auto pb-4"
-            role="region"
-            aria-label="Historical examples — From scarcity to ubiquity"
-            onMouseEnter={() => setAutoPlay(false)}
-            onMouseLeave={() => setAutoPlay(true)}
-            onFocusCapture={() => setAutoPlay(false)}
-            onBlurCapture={() => setAutoPlay(true)}
-          >
-            <div className="flex gap-6 snap-x snap-mandatory px-1">
-              {historyData.map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.06 }}
-                  className="snap-start shrink-0 w-80 md:w-[420px] bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-                >
-                  <div className="mb-5">
-                    <img
-                      src={item.beforeImage}
-                      alt={item.title}
-                      className="w-full h-48 object-cover rounded-xl border border-slate-200 dark:border-slate-600"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <h4 className="text-lg font-bold font-grotesk text-slate-900 dark:text-white mb-3">
-                    {item.title}
-                  </h4>
-                  <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                    {item.caption}
-                  </p>
-                </motion.div>
-              ))}
+          <div className="relative">
+            {/* Fades de bords */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-slate-50 dark:from-slate-900 to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-slate-50 dark:from-slate-900 to-transparent" />
+
+            <div
+              ref={ribbonRef}
+              className="overflow-x-auto pb-4"
+              role="region"
+              aria-label="Historical examples — From scarcity to ubiquity"
+              onMouseEnter={() => setAutoPlay(false)}
+              onMouseLeave={() => setAutoPlay(true)}
+              onFocusCapture={() => setAutoPlay(false)}
+              onBlurCapture={() => setAutoPlay(true)}
+            >
+              <div className="flex gap-6 snap-x snap-mandatory px-1">
+                {historyData.map((item, index) => (
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.06 }}
+                    className="snap-start shrink-0 w-80 md:w-[420px] bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                  >
+                    <div className="mb-5">
+                      <img
+                        src={item.beforeImage}
+                        alt={item.title}
+                        className="w-full h-48 object-cover rounded-xl border border-slate-200 dark:border-slate-600"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                    <h4 className="text-lg font-bold font-grotesk text-slate-900 dark:text-white mb-3">{item.title}</h4>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">{item.caption}</p>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -448,7 +408,6 @@ const PerspectiveSection = () => {
     </Section>
   );
 };
-
 
 // --- THEME PROVIDER & HOOK ---
 const ThemeContext = createContext();
@@ -1168,7 +1127,7 @@ const CompaniesSection = () => {
       </div>
 
       <p className="mt-10 text-center text-xs text-slate-500">
-        Logos are trademarks of their respective owners.
+        +20 founding teams transforming frontier technologies into global infrastructure.
       </p>
     </Section>
   );
@@ -1177,7 +1136,7 @@ const CompaniesSection = () => {
 const TeamSection = () => {
   return (
     <Section id="team">
-      <SectionTitle>TEAM</SectionTitle>
+      <SectionTitle>Team</SectionTitle>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {teamData.map((member, index) => (
