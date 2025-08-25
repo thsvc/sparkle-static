@@ -569,8 +569,13 @@ const historyData = [
 ];
 
 // --- STYLED COMPONENTS & HELPERS ---
-const Section = ({ id, children, className = '' }) => (
-  <section id={id} className={`py-20 md:py-28 ${className}`}>
+const Section = ({ id, children, className = '', full = false }) => (
+  <section
+    id={id}
+    className={`snap-start scroll-mt-[88px] md:scroll-mt-[96px] ${
+      full ? "min-h-[100svh] py-16 md:py-20" : "py-20 md:py-28"
+    } ${className}`}
+  >
     <div className="max-w-6xl mx-auto px-6">
       {children}
     </div>
