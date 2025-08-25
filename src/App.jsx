@@ -1745,7 +1745,6 @@ export default function SparkleVenturesPage() {
           <SectionSeparator />
           <CompaniesSection />
           <SectionSeparator />
-          <ContactSection />
           <ContactSection onInvestorClick={() => setShowInvestorForm(true)} onFounderClick={() => setShowFounderForm(true)} />
         </main>
         
