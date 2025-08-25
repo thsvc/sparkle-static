@@ -1282,163 +1282,217 @@ const FormDialog = ({ isOpen, onClose, children }) => {
 };
 
 const InvestorForm = ({ isOpen, onClose }) => {
+  const formRef = useRef(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  // ⚠️ Remplace par ton email destinataire
+  const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/thibaut@sparkle.vc";
+
   const [formData, setFormData] = useState({
-    fullName: '',
-    organization: '',
-    workEmail: '',
-    country: '',
-    investorType: '',
-    message: '',
+    fullName: "",
+    organization: "",
+    workEmail: "",
+    country: "",
+    investorType: "",
+    message: "",
     professionalInvestor: false,
     notPublicOffering: false,
     privacyConsent: false,
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (submitting) return;
-    setSubmitting(true);
-    setErrorMsg('');
+    setErrorMsg("");
+
+    // Validation HTML5 native
+    if (!formRef.current.checkValidity()) {
+      formRef.current.reportValidity();
+      return;
+    }
 
     try {
-      // FormSubmit AJAX endpoint
-      const endpoint = 'https://formsubmit.co/ajax/thibaut@sparkle.vc'; // ← ton email ici
+      setIsSending(true);
 
-      const fd = new FormData();
-      // Métadonnées FormSubmit
-      fd.append('_subject', 'Sparkle — Investment Inquiry');
-      fd.append('_template', 'table');
-      fd.append('_captcha', 'false');
-      fd.append('_honey', ''); // honeypot
+      // Prépare la charge utile pour FormSubmit (AJAX)
+      const data = new FormData();
+      data.append("Full Name", formData.fullName);
+      data.append("Organization", formData.organization);
+      data.append("Work Email", formData.workEmail);
+      data.append("Country", formData.country);
+      data.append("Investor Type", formData.investorType);
+      data.append("Message", formData.message);
+      data.append("Confirmed Professional/Qualified Investor", formData.professionalInvestor ? "Yes" : "No");
+      data.append("Acknowledged Not a Public Offering", formData.notPublicOffering ? "Yes" : "No");
+      data.append("Consented to Privacy Policy", formData.privacyConsent ? "Yes" : "No");
 
-      // Données utilisateur
-      fd.append('fullName', formData.fullName);
-      fd.append('organization', formData.organization);
-      fd.append('workEmail', formData.workEmail);
-      fd.append('country', formData.country);
-      fd.append('investorType', formData.investorType);
-      fd.append('message', formData.message || '');
-      fd.append('isProfessional/QualifiedInvestor', formData.professionalInvestor ? 'Yes' : 'No');
-      fd.append('ackNotPublicOffering', formData.notPublicOffering ? 'Yes' : 'No');
-      fd.append('privacyConsent', formData.privacyConsent ? 'Yes' : 'No');
+      // Options FormSubmit
+      data.append("_subject", "New Investment Inquiry — Website");
+      data.append("_template", "table");
+      data.append("_captcha", "false"); // désactive le captcha FormSubmit
 
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        body: fd,
-        headers: { Accept: 'application/json' },
+      const res = await fetch(FORMSUBMIT_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: data,
       });
 
-      if (!res.ok) throw new Error('Submission failed');
+      if (!res.ok) {
+        const txt = await res.text();
+        throw new Error(txt || "Submission failed");
+      }
+
       setIsSubmitted(true);
     } catch (err) {
-      setErrorMsg('Something went wrong. Please try again in a moment.');
+      setErrorMsg("Sorry, something went wrong. Please try again in a moment or email us directly.");
+      console.error("FormSubmit error:", err);
     } finally {
-      setSubmitting(false);
+      setIsSending(false);
     }
   };
 
-  // Auto-close + reset comme avant
-  useEffect(() => {
-    if (isSubmitted) {
-      const timer = setTimeout(() => {
-        onClose();
-        setIsSubmitted(false);
-        setFormData({
-          fullName: '',
-          organization: '',
-          workEmail: '',
-          country: '',
-          investorType: '',
-          message: '',
-          professionalInvestor: false,
-          notPublicOffering: false,
-          privacyConsent: false,
-        });
-      }, 2500);
-      return () => clearTimeout(timer);
-    }
-  }, [isSubmitted, onClose]);
+  // Bouton disabled si champs essentiels manquants (UX)
+  const isReady =
+    formData.fullName.trim() &&
+    formData.organization.trim() &&
+    /\S+@\S+\.\S+/.test(formData.workEmail) &&
+    formData.country &&
+    formData.investorType &&
+    formData.message.trim() &&
+    formData.professionalInvestor &&
+    formData.notPublicOffering &&
+    formData.privacyConsent;
 
   return (
     <FormDialog isOpen={isOpen} onClose={onClose}>
       {isSubmitted ? (
-        <div className="text-center py-12">
-          <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-16 h-16 bg-green-100 dark:bg-green-900/50 rounded-full mx-auto mb-4 flex items-center justify-center">
+        <div className="text-center py-10">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="w-16 h-16 bg-green-100 dark:bg-green-900/50 rounded-full mx-auto mb-4 flex items-center justify-center"
+          >
             <Check className="w-8 h-8 text-green-600 dark:text-green-400" />
           </motion.div>
-          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Thank You</h3>
-          <p className="text-slate-600 dark:text-slate-300">We'll be in touch shortly.</p>
+          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Thank you</h3>
+          <p className="text-slate-600 dark:text-slate-300 max-w-md mx-auto">
+            Your inquiry has been received. Our investment team reviews submissions continuously and will reach out if there’s a strong fit.
+            In the meantime, feel free to share any additional context or materials by email.
+          </p>
+          <button onClick={onClose} className="mt-6 form-button-primary">Close</button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+        <form ref={formRef} onSubmit={handleSubmit} className="space-y-6" noValidate>
           <div className="text-center">
             <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 font-grotesk">Investment Inquiry</h3>
             <p className="text-slate-600 dark:text-slate-300">Connect with our investment team</p>
           </div>
 
           {errorMsg && (
-            <div className="text-sm text-rose-600 dark:text-rose-400 text-center">{errorMsg}</div>
+            <div className="text-sm text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-900/20 border border-rose-200/60 dark:border-rose-800/50 rounded-lg p-3">
+              {errorMsg}
+            </div>
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input type="text" placeholder="Full Name" required className="form-input"
-              value={formData.fullName} onChange={e => setFormData({ ...formData, fullName: e.target.value })}/>
-            <input type="text" placeholder="Organization" required className="form-input"
-              value={formData.organization} onChange={e => setFormData({ ...formData, organization: e.target.value })}/>
-            <input type="email" placeholder="Work Email" required className="form-input"
-              value={formData.workEmail} onChange={e => setFormData({ ...formData, workEmail: e.target.value })}/>
-            <select required className="form-input"
-              value={formData.country} onChange={e => setFormData({ ...formData, country: e.target.value })}>
-              <option value="">Select Country</option>
-              <option value="US">United States</option><option value="FR">France</option>
-              <option value="LU">Luxembourg</option><option value="AE">United Arab Emirates</option>
-              <option value="GB">United Kingdom</option><option value="DE">Germany</option>
-              <option value="CH">Switzerland</option><option value="other">Other</option>
+            <input
+              type="text"
+              required
+              placeholder="Full Name"
+              className="form-input"
+              onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+            />
+            <input
+              type="text"
+              required
+              placeholder="Organization"
+              className="form-input"
+              onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
+            />
+            <input
+              type="email"
+              required
+              placeholder="Work Email"
+              className="form-input"
+              onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
+            />
+            <select
+              required
+              className="form-input"
+              defaultValue=""
+              onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+            >
+              <option value="" disabled>Select Country</option>
+              <option value="US">United States</option>
+              <option value="FR">France</option>
+              <option value="LU">Luxembourg</option>
+              <option value="AE">United Arab Emirates</option>
+              <option value="GB">United Kingdom</option>
+              <option value="DE">Germany</option>
+              <option value="CH">Switzerland</option>
+              <option value="other">Other</option>
             </select>
           </div>
 
-          <select required className="form-input"
-            value={formData.investorType} onChange={e => setFormData({ ...formData, investorType: e.target.value })}>
-            <option value="">Investor Type</option>
+          <select
+            required
+            className="form-input"
+            defaultValue=""
+            onChange={(e) => setFormData({ ...formData, investorType: e.target.value })}
+          >
+            <option value="" disabled>Investor Type</option>
             <option value="institutional">Institutional</option>
             <option value="professional">Professional</option>
             <option value="corporate">Corporate</option>
             <option value="family-office">Family Office</option>
           </select>
 
-          <textarea placeholder="Message" rows={3} className="form-input resize-none"
-            value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })}/>
+          <textarea
+            required
+            rows={3}
+            placeholder="Message"
+            className="form-input resize-none"
+            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+          />
 
           <div className="space-y-3">
             <label className="form-checkbox">
-              <input type="checkbox" required
-                checked={formData.professionalInvestor}
-                onChange={e => setFormData({ ...formData, professionalInvestor: e.target.checked })}/>
+              <input
+                type="checkbox"
+                required
+                onChange={(e) => setFormData({ ...formData, professionalInvestor: e.target.checked })}
+              />
               <span>I confirm I am a professional/qualified investor</span>
             </label>
             <label className="form-checkbox">
-              <input type="checkbox" required
-                checked={formData.notPublicOffering}
-                onChange={e => setFormData({ ...formData, notPublicOffering: e.target.checked })}/>
+              <input
+                type="checkbox"
+                required
+                onChange={(e) => setFormData({ ...formData, notPublicOffering: e.target.checked })}
+              />
               <span>I acknowledge this is not a public offering</span>
             </label>
             <label className="form-checkbox">
-              <input type="checkbox" required
-                checked={formData.privacyConsent}
-                onChange={e => setFormData({ ...formData, privacyConsent: e.target.checked })}/>
+              <input
+                type="checkbox"
+                required
+                onChange={(e) => setFormData({ ...formData, privacyConsent: e.target.checked })}
+              />
               <span>I consent to the privacy policy</span>
             </label>
           </div>
 
           <div className="flex gap-4 pt-2">
-            <button type="button" onClick={onClose} className="form-button-secondary" disabled={submitting}>
+            <button type="button" onClick={onClose} className="form-button-secondary">
               Cancel
             </button>
-            <button type="submit" className="form-button-primary" disabled={submitting}>
-              {submitting ? 'Submitting…' : 'Submit'}
+            <button
+              type="submit"
+              className="form-button-primary disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={!isReady || isSending}
+            >
+              {isSending ? "Sending…" : "Submit"}
             </button>
           </div>
         </form>
@@ -1448,138 +1502,182 @@ const InvestorForm = ({ isOpen, onClose }) => {
 };
 
 const FounderForm = ({ isOpen, onClose }) => {
+  const formRef = useRef(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  // ⚠️ Remplace par ton email destinataire pour les founders
+  const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/thibaut@sparkle.vc";
+
   const [formData, setFormData] = useState({
-    fullName: '',
-    company: '',
-    workEmail: '',
-    url: '',
-    message: '',
+    fullName: "",
+    company: "",
+    workEmail: "",
+    url: "",
+    message: "",
     notPublicOffering: false,
     privacyConsent: false,
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (submitting) return;
-    setSubmitting(true);
-    setErrorMsg('');
+    setErrorMsg("");
+
+    // Validation HTML5 native
+    if (!formRef.current.checkValidity()) {
+      formRef.current.reportValidity();
+      return;
+    }
 
     try {
-      const endpoint = 'https://formsubmit.co/ajax/thibaut@sparkle.vc'; // ← ton email ici
-      const fd = new FormData();
+      setIsSending(true);
 
-      // Métadonnées
-      fd.append('_subject', 'Sparkle — Deck Submission');
-      fd.append('_template', 'table');
-      fd.append('_captcha', 'false');
-      fd.append('_honey', '');
+      // Payload pour FormSubmit
+      const data = new FormData();
+      data.append("Full Name", formData.fullName);
+      data.append("Company", formData.company);
+      data.append("Work Email", formData.workEmail);
+      if (formData.url) data.append("Deck/Website URL", formData.url);
+      data.append("Message", formData.message);
+      data.append("Acknowledged Not a Public Offering", formData.notPublicOffering ? "Yes" : "No");
+      data.append("Consented to Privacy Policy", formData.privacyConsent ? "Yes" : "No");
 
-      // Données
-      fd.append('fullName', formData.fullName);
-      fd.append('company', formData.company);
-      fd.append('workEmail', formData.workEmail);
-      fd.append('deckOrWebsiteUrl', formData.url || '');
-      fd.append('message', formData.message);
-      fd.append('ackNotPublicOffering', formData.notPublicOffering ? 'Yes' : 'No');
-      fd.append('privacyConsent', formData.privacyConsent ? 'Yes' : 'No');
+      // Options FormSubmit
+      data.append("_subject", "New Founder Submission — Website");
+      data.append("_template", "table");
+      data.append("_captcha", "false");
 
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        body: fd,
-        headers: { Accept: 'application/json' },
+      const res = await fetch(FORMSUBMIT_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: data,
       });
 
-      if (!res.ok) throw new Error('Submission failed');
+      if (!res.ok) {
+        const txt = await res.text();
+        throw new Error(txt || "Submission failed");
+      }
+
       setIsSubmitted(true);
     } catch (err) {
-      setErrorMsg('Something went wrong. Please try again in a moment.');
+      setErrorMsg("Sorry, something went wrong. Please try again in a moment or email us directly.");
+      console.error("FormSubmit error:", err);
     } finally {
-      setSubmitting(false);
+      setIsSending(false);
     }
   };
 
-  // Auto-close + reset comme avant
-  useEffect(() => {
-    if (isSubmitted) {
-      const timer = setTimeout(() => {
-        onClose();
-        setIsSubmitted(false);
-        setFormData({
-          fullName: '',
-          company: '',
-          workEmail: '',
-          url: '',
-          message: '',
-          notPublicOffering: false,
-          privacyConsent: false,
-        });
-      }, 2500);
-      return () => clearTimeout(timer);
-    }
-  }, [isSubmitted, onClose]);
+  // Bouton disabled si champs essentiels manquants (UX)
+  const isReady =
+    formData.fullName.trim() &&
+    formData.company.trim() &&
+    /\S+@\S+\.\S+/.test(formData.workEmail) &&
+    formData.message.trim() &&
+    formData.notPublicOffering &&
+    formData.privacyConsent;
 
   return (
     <FormDialog isOpen={isOpen} onClose={onClose}>
       {isSubmitted ? (
-        <div className="text-center py-12">
-          <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-16 h-16 bg-green-100 dark:bg-green-900/50 rounded-full mx-auto mb-4 flex items-center justify-center">
+        <div className="text-center py-10">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="w-16 h-16 bg-green-100 dark:bg-green-900/50 rounded-full mx-auto mb-4 flex items-center justify-center"
+          >
             <Check className="w-8 h-8 text-green-600 dark:text-green-400" />
           </motion.div>
-          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Thank You</h3>
-          <p className="text-slate-600 dark:text-slate-300">We'll review your submission.</p>
+          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Thank you</h3>
+          <p className="text-slate-600 dark:text-slate-300 max-w-md mx-auto">
+            We’ve received your submission. Our team reviews opportunities continuously and will reach out if there’s a strong fit.
+            You can share updates or additional materials by email at any time.
+          </p>
+          <button onClick={onClose} className="mt-6 form-button-primary">Close</button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+        <form ref={formRef} onSubmit={handleSubmit} className="space-y-6" noValidate>
           <div className="text-center">
             <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 font-grotesk">Founder Application</h3>
             <p className="text-slate-600 dark:text-slate-300">Share your innovation with us</p>
           </div>
 
           {errorMsg && (
-            <div className="text-sm text-rose-600 dark:text-rose-400 text-center">{errorMsg}</div>
+            <div className="text-sm text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-900/20 border border-rose-200/60 dark:border-rose-800/50 rounded-lg p-3">
+              {errorMsg}
+            </div>
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input type="text" placeholder="Full Name" required className="form-input"
-              value={formData.fullName} onChange={e => setFormData({ ...formData, fullName: e.target.value })}/>
-            <input type="text" placeholder="Company" required className="form-input"
-              value={formData.company} onChange={e => setFormData({ ...formData, company: e.target.value })}/>
+            <input
+              type="text"
+              required
+              placeholder="Full Name"
+              className="form-input"
+              onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+            />
+            <input
+              type="text"
+              required
+              placeholder="Company"
+              className="form-input"
+              onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+            />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input type="email" placeholder="Work Email" required className="form-input"
-              value={formData.workEmail} onChange={e => setFormData({ ...formData, workEmail: e.target.value })}/>
-            <input type="url" placeholder="Deck or Website URL" className="form-input"
-              value={formData.url} onChange={e => setFormData({ ...formData, url: e.target.value })}/>
+            <input
+              type="email"
+              required
+              placeholder="Work Email"
+              className="form-input"
+              onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
+            />
+            <input
+              type="url"
+              placeholder="Deck or Website URL (optional)"
+              className="form-input"
+              onChange={(e) => setFormData({ ...formData, url: e.target.value })}
+            />
           </div>
 
-          <textarea placeholder="Tell us about your company..." required rows={4} className="form-input resize-none"
-            value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })}/>
+          <textarea
+            required
+            rows={4}
+            placeholder="Tell us about your company..."
+            className="form-input resize-none"
+            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+          />
 
           <div className="space-y-3">
             <label className="form-checkbox">
-              <input type="checkbox" required
-                checked={formData.notPublicOffering}
-                onChange={e => setFormData({ ...formData, notPublicOffering: e.target.checked })}/>
+              <input
+                type="checkbox"
+                required
+                onChange={(e) => setFormData({ ...formData, notPublicOffering: e.target.checked })}
+              />
               <span>I acknowledge this is not a public offering</span>
             </label>
             <label className="form-checkbox">
-              <input type="checkbox" required
-                checked={formData.privacyConsent}
-                onChange={e => setFormData({ ...formData, privacyConsent: e.target.checked })}/>
+              <input
+                type="checkbox"
+                required
+                onChange={(e) => setFormData({ ...formData, privacyConsent: e.target.checked })}
+              />
               <span>I consent to the privacy policy</span>
             </label>
           </div>
 
           <div className="flex gap-4 pt-2">
-            <button type="button" onClick={onClose} className="form-button-secondary" disabled={submitting}>
+            <button type="button" onClick={onClose} className="form-button-secondary">
               Cancel
             </button>
-            <button type="submit" className="form-button-primary" disabled={submitting}>
-              {submitting ? 'Submitting…' : 'Submit'}
+            <button
+              type="submit"
+              className="form-button-primary disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={!isReady || isSending}
+            >
+              {isSending ? "Sending…" : "Submit"}
             </button>
           </div>
         </form>
