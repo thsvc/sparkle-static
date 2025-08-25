@@ -329,24 +329,6 @@ const PerspectiveSection = () => {
           <div className="mt-4 w-20 h-1 bg-gradient-to-r from-blue-500 to-emerald-400 mx-auto rounded-full" />
         </div>
 
-        {/* Manifeste court */}
-        <div className="text-center mb-6">
-          <h3 className="text-2xl md:text-3xl font-bold font-grotesk text-slate-900 dark:text-white mb-4">
-            Frontier tech becomes infrastructure.
-          </h3>
-          <p className="max-w-4xl mx-auto text-lg md:text-xl text-slate-700 dark:text-slate-300 leading-relaxed">
-            Frontier technologies begin as scarce, experimental, and resource-intensive.
-            Their trajectories are shaped by opposing forces: scalability versus cost,
-            performance versus accessibility, openness versus control.
-          </p>
-        </div>
-
-        {/* Transition courte (flèche) */}
-        <p className="text-center text-base md:text-lg italic text-slate-600 dark:text-slate-300 mb-8">
-          ➝ When these tensions are aligned, what was once rare becomes broadly standardized and globally distributed.
-          At that point, the technology is no longer optional, and becomes embedded infrastructure.
-        </p>
-
         {/* Schéma Manifold (sans titre) */}
         <div className="mt-2 mb-6">
           <PerspectiveManifold />
