@@ -57,7 +57,7 @@ const PerspectiveManifold = () => {
   return (
     <div className="my-16">
       {/* Phrase manifeste compactée */}
-      <div className="text-center mb-10">
+      <div className="text-center mb-12">
         <p className="font-grotesk text-2xl md:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
           Frontier tech <span className="underline decoration-blue-400/60 underline-offset-4">becomes</span> infrastructure.
         </p>
@@ -330,7 +330,7 @@ const PerspectiveSection = () => {
         </div>
 
         {/* Schéma Manifold (sans titre) */}
-        <div className="mt-2 mb-6">
+        <div className="mt-2 mb-8">
           <PerspectiveManifold />
         </div>
 
