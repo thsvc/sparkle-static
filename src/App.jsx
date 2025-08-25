@@ -57,16 +57,19 @@ const PerspectiveManifold = () => {
   return (
     <div className="my-16">
       {/* Phrase manifeste compactée */}
+     {/* Intro copy (sans titre répété) */}
       <div className="text-center mb-12">
-        <p className="font-grotesk text-2xl md:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
-          Frontier tech <span className="underline decoration-blue-400/60 underline-offset-4">becomes</span> infrastructure.
+        <p className="max-w-4xl mx-auto text-lg md:text-xl text-slate-700 dark:text-slate-300 leading-relaxed">
+          Frontier technologies begin as scarce, experimental, and resource-intensive.
+          Their trajectories are shaped by opposing forces: scalability versus cost,
+          performance versus accessibility, openness versus control.
         </p>
-        <p className="mt-3 max-w-4xl mx-auto text-lg md:text-xl text-slate-700 dark:text-slate-300 leading-relaxed">
-          Frontier technologies begin as scarce, experimental, and resource-intensive. Their trajectories are shaped by opposing forces: scalability versus cost, performance versus accessibility, openness versus control.
-        </p>
-        
-        <p className="mt-3 max-w-4xl mx-auto text-base md:text-lg italic text-slate-600 dark:text-slate-400">
-          ➝ When these tensions are aligned, what was once rare becomes broadly standardized and globally distributed. At that point, the technology is no longer optional, and becomes embedded infrastructure.
+      
+        <p className="mt-4 max-w-4xl mx-auto text-base md:text-lg italic text-slate-600 dark:text-slate-400">
+          <span aria-hidden="true" className="mr-1">➝</span>
+          When these tensions are aligned, what was once rare becomes broadly standardized and
+          globally distributed. At that point, the technology is no longer optional, and becomes
+          embedded infrastructure.
         </p>
       </div>
 
