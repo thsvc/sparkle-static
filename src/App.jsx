@@ -1277,7 +1277,7 @@ const Footer = () => {
         </p>
         <div className="border-t border-slate-700 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p>
-            Sparkle Ventures · CIF/ORIAS: 22001079 · ANACOFI-CIF · RCS Paris 905 339 966 · Registered office: 46 Boulevard Henri IV, 75004 Paris · Share capital: €1,650.00
+             .
           </p>
           <p className="text-slate-500">© {new Date().getFullYear()} Sparkle Ventures</p>
         </div>
