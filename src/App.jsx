@@ -329,7 +329,7 @@ const PerspectiveSection = () => {
         {/* En-tête de section */}
         <SectionHeader
           title="Perspective"
-          subtitle="Frontier tech becomes infrastructure."
+          subtitle="Frontier Tech Becomes Infrastructure."
         />
 
         {/* Schéma Manifold (sans titre) */}
@@ -887,7 +887,7 @@ const BusinessCardIntro = () => {
 const HeroSection = () => {
   return (
     <section
-      id="overview"
+      id="about"
       className="relative min-h-screen flex items-center justify-center"
     >
       {/* Animated background */}
@@ -920,7 +920,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-3xl md:text-5xl lg:text-6xl font-bold font-grotesk mb-6 text-slate-900 dark:text-white leading-tight"
         >
-          Frontier tech becomes infrastructure.
+          Frontier Tech Becomes Infrastructure.
         </motion.h1>
 
         {/* Trait horizontal animé + glow */}
@@ -994,7 +994,7 @@ const BusinessSection = () => {
         {/* Section header with pipe */}
         <SectionHeader
           title="Business"
-          subtitle="Our tailored offerings to capture value"
+          subtitle="Our Tailored Offerings To Capture Value"
         />
 
         {/* Grid des cartes */}
@@ -1121,7 +1121,7 @@ const CompaniesSection = () => {
       <div className="mb-10">
         <SectionHeader
           title="Companies"
-          subtitle="20+ teams shaping tomorrow’s infrastructure"
+          subtitle="20+ Teams Shaping Tomorrow’s Infrastructure"
         />
       </div>
 
@@ -1157,7 +1157,7 @@ const CompaniesSection = () => {
       </div>
 
       <p className="mt-10 text-center text-xs text-slate-500">
-        +20 founding teams transforming frontier technologies into global infrastructure.
+        Selected multistage portfolio overview.
       </p>
     </Section>
   );
@@ -1725,12 +1725,12 @@ const FounderForm = ({ isOpen, onClose }) => {
 
 // --- MAIN PAGE COMPONENT ---
 export default function SparkleVenturesPage() {
-  const [activeSection, setActiveSection] = useState('overview');
+  const [activeSection, setActiveSection] = useState('about');
   const [showInvestorForm, setShowInvestorForm] = useState(false);
   const [showFounderForm, setShowFounderForm] = useState(false);
 
   const sections = [
-  { id: 'overview',    label: 'Overview' },
+  { id: 'about',    label: 'About' },
   { id: 'business',    label: 'Business' },     // ex-Capabilities
   { id: 'perspective', label: 'Perspective' },
   { id: 'companies',   label: 'Companies' },    // ex-Universe
