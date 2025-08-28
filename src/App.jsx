@@ -479,6 +479,14 @@ const companyData = [
 // --- TEAM DATA (ordre mis à jour) ---
 const teamData = [
   {
+    name: "Dr. Victoria Reullin",
+    title: "Operating Partner",
+    blurb:
+      "Former independent Semiologist and Talent Manager at Allianz.",
+    photo: import.meta.env.BASE_URL + "images/team/victoria-reullin.png",
+    linkedin: "https://www.linkedin.com/in/victoria-r-b72173274/"
+  },
+  {
     name: "Eng. Julien Pageaud",
     title: "Managing Partner",
     blurb:
@@ -493,14 +501,6 @@ const teamData = [
       "Former Head of adoption and technical support at Nomadic Labs and Computer Scientist at IBM.",
     photo: import.meta.env.BASE_URL + "images/team/thibaut-chesse.png",
     linkedin: "https://fr.linkedin.com/in/thibautchesse"
-  },
-  {
-    name: "Dr. Victoria Reullin",
-    title: "Operating Partner",
-    blurb:
-      "Former independent Semiologist and Talent Manager at Allianz.",
-    photo: import.meta.env.BASE_URL + "images/team/victoria-reullin.png",
-    linkedin: "https://www.linkedin.com/in/victoria-r-b72173274/"
   },
   {
     name: "Prof. Michal Valko",
@@ -1168,7 +1168,7 @@ const TeamSection = () => {
     <Section id="team" className="bg-white dark:bg-slate-900">
     <SectionHeader
       title="Team"
-      subtitle="Cultivating expertise from operators, researchers, and partners"
+      subtitle="Cultivating Expertise From Operators, Researchers, and Partners"
     />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -1244,10 +1244,10 @@ const ContactSection = ({ onInvestorClick, onFounderClick }) => {
   return (
     <Section id="contact" className="bg-slate-50 dark:bg-slate-900/50">
       <div className="text-center">
-        <SectionTitle>Contact</SectionTitle>
-        <p className="max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-300 mb-12">
-          Connect with our team to explore investment opportunities or share your innovation.
-        </p>
+        <SectionHeader
+          title="Contact"
+          subtitle="Connect With Our Team to Explore Investment Opportunities."
+        />
         <div className="flex flex-col sm:flex-row gap-6 justify-center">
           <button
             onClick={onInvestorClick}
