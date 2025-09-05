@@ -845,14 +845,14 @@ const BusinessCardIntro = () => {
       <p className="text-base md:text-lg leading-relaxed text-slate-700 dark:text-slate-300">
         Sparkle Ventures is an{" "}
         <span className="font-semibold text-slate-900 dark:text-white">
-          independent investment firm
-        </span>{" "}
-        established in 2021, with offices in Luxembourg, Paris, New York, and Abu Dhabi. 
-        Authorized as a fund manager and{" "}
-        <span className="font-semibold text-slate-900 dark:text-white">
-          regulated by the Luxembourg CSSF
+          independent multistage investment firm
         </span>
-        , we serve a select group of global investors.
+        , established in 2021. We partner with a select group of global investors to back companies
+        where frontier technologies evolve into global infrastructure.
+        <br className="hidden md:block" />
+        <br className="hidden md:block" />
+        Our mandate spans high-net-worth individuals, family offices, corporates, and financial
+        institutions, positioning capital at the inflection point of technological transformation.
       </p>
 
       {/* Mandat */}
@@ -1273,7 +1273,7 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto px-6 text-xs leading-relaxed">
         <h3 className="font-bold text-sm text-slate-200 mb-4 font-grotesk">Disclaimer</h3>
         <p className="mb-6">
-          For professional/qualified investors only. Nothing herein constitutes an offer to the public or investment advice. Certain documentation or administration may be handled by an affiliated entity in the United Arab Emirates, subject to local regulations. Information regarding investment vehicles is illustrative only. Investing involves risk, including loss of capital. Past performance is not a reliable indicator of future results.
+          For professional/qualified investors only. Nothing herein constitutes an offer to the public or investment advice. Sparkle ventures GP is an authorised AIFM, regulated by the Luxembourg CSSF. Certain documentation or administration may be handled by an affiliated entity in the United Arab Emirates, subject to local regulations. Information regarding investment vehicles is illustrative only. Investing involves risk, including loss of capital. Past performance is not a reliable indicator of future results.
         </p>
         <div className="border-t border-slate-700 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p>
