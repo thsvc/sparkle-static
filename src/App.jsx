@@ -851,15 +851,9 @@ const BusinessCardIntro = () => {
         where frontier technologies evolve into global infrastructure.
         <br className="hidden md:block" />
         <br className="hidden md:block" />
-        Our mandate spans high-net-worth individuals, family offices, corporates, and financial
-        institutions, positioning capital at the inflection point of technological transformation.
-      </p>
-
-      {/* Mandat */}
-      <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-        Our mandate is to position capital on behalf of{" "}
+        Our mandate spans{" "}
         <span className="font-semibold text-slate-900 dark:text-white">
-          HNWI
+          high-net-worth individuals
         </span>
         ,{" "}
         <span className="font-semibold text-slate-900 dark:text-white">
@@ -872,10 +866,10 @@ const BusinessCardIntro = () => {
         , and{" "}
         <span className="font-semibold text-slate-900 dark:text-white">
           financial institutions
-        </span>{" "}
-        where frontier technologies evolve into{" "}
+        </span>
+        , positioning capital at the{" "}
         <span className="font-semibold text-slate-900 dark:text-white">
-          mission-critical infrastructure
+          inflection point of technological transformation
         </span>
         .
       </p>
