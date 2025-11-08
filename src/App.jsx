@@ -3,51 +3,64 @@
 // Imports (React, framer-motion, icônes, etc.)
 import React, { useState, useEffect, createContext, useContext, useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Linkedin, Menu, X, Sun, Moon, Briefcase, BarChart, Zap, Handshake, ChevronDown, Check, Rocket, Network, ServerCog, ArrowUpRight, RefreshCcw, ChevronRight } from 'lucide-react';
-import * as HoverCard from "@radix-ui/react-hover-card";
+import {
+  ExternalLink,
+  Linkedin,
+  Menu,
+  X,
+  Sun,
+  Moon,
+  Briefcase,
+  BarChart,
+  Zap,
+  Handshake,
+  ChevronDown,
+  Check,
+  Rocket,
+  Network,
+  ServerCog,
+  ArrowUpRight,
+  RefreshCcw,
+  ChevronRight,
+} from 'lucide-react';
+import * as HoverCard from '@radix-ui/react-hover-card';
 
 // === PERSPECTIVE MANIFOLD — contenu enrichi pour HoverCards ===
 const PERSPECTIVE_DATA = {
   opportunities: [
     {
-      title: "Composability",
-      note:
-        "Modular building blocks and open interfaces let capabilities plug together and scale across ecosystems.",
-      link: "https://ethereum.org/en/developers/docs/scaling/" // ex: modular rollups & composability
+      title: 'Composability',
+      note: 'Modular building blocks and open interfaces let capabilities plug together and scale across ecosystems.',
+      link: 'https://ethereum.org/en/developers/docs/scaling/', // ex: modular rollups & composability
     },
     {
-      title: "Scalability",
-      note:
-        "Standards + orchestration enable predictable growth and multi-domain deployment at low friction.",
-      link: "https://kubernetes.io/docs/concepts/" // ex: Kubernetes as orchestration standard
+      title: 'Scalability',
+      note: 'Standards + orchestration enable predictable growth and multi-domain deployment at low friction.',
+      link: 'https://kubernetes.io/docs/concepts/', // ex: Kubernetes as orchestration standard
     },
     {
-      title: "Efficiency",
-      note:
-        "Falling cost/performance curves expand markets and unlock new use-cases as infra gets cheaper.",
-      link: "https://en.wikipedia.org/wiki/Moore%27s_law" // ex: Moore’s law as historical driver
-    }
+      title: 'Efficiency',
+      note: 'Falling cost/performance curves expand markets and unlock new use-cases as infra gets cheaper.',
+      link: 'https://en.wikipedia.org/wiki/Moore%27s_law', // ex: Moore’s law as historical driver
+    },
   ],
   counterforces: [
     {
-      title: "Commoditization",
-      note:
-        "As primitives standardize, differentiation shifts to integration, orchestration, data and trust layers.",
-      link: "https://en.wikipedia.org/wiki/Commoditization"
+      title: 'Commoditization',
+      note: 'As primitives standardize, differentiation shifts to integration, orchestration, data and trust layers.',
+      link: 'https://en.wikipedia.org/wiki/Commoditization',
     },
     {
-      title: "Lock-in",
-      note:
-        "Aggregation gravity and switching costs concentrate power; portability requires early design choices.",
-      link: "https://en.wikipedia.org/wiki/Vendor_lock-in"
+      title: 'Lock-in',
+      note: 'Aggregation gravity and switching costs concentrate power; portability requires early design choices.',
+      link: 'https://en.wikipedia.org/wiki/Vendor_lock-in',
     },
     {
-      title: "Deflation",
-      note:
-        "Each generation compresses unit margins; value migrates up-stack into systems, networks and services.",
-      link: "https://en.wikipedia.org/wiki/Experience_curve_effects"
-    }
-  ]
+      title: 'Deflation',
+      note: 'Each generation compresses unit margins; value migrates up-stack into systems, networks and services.',
+      link: 'https://en.wikipedia.org/wiki/Experience_curve_effects',
+    },
+  ],
 };
 
 const PerspectiveManifold = () => {
@@ -57,22 +70,23 @@ const PerspectiveManifold = () => {
   return (
     <div className="my-16">
       {/* Phrase manifeste compactée */}
-     {/* Intro copy (sans titre répété) */}
+      {/* Intro copy (sans titre répété) */}
       <div className="text-center mb-12">
         <p className="max-w-4xl mx-auto text-lg md:text-xl text-slate-700 dark:text-slate-300 leading-relaxed">
-          Frontier technologies begin as scarce, experimental, and resource-intensive.
-          Their trajectories are shaped by opposing forces: scalability versus cost,
-          performance versus accessibility, openness versus control.
+          Frontier technologies begin as scarce, experimental, and resource-intensive. Their
+          trajectories are shaped by opposing forces: scalability versus cost, performance versus
+          accessibility, openness versus control.
         </p>
-      
+
         <p className="mt-4 max-w-4xl mx-auto text-base md:text-lg italic text-slate-600 dark:text-slate-400">
-          <span aria-hidden="true" className="mr-1">➝</span>
+          <span aria-hidden="true" className="mr-1">
+            ➝
+          </span>
           When these tensions are aligned, what was once rare becomes broadly standardized and
           globally distributed. At that point, the technology is no longer optional, and becomes
           embedded infrastructure.
         </p>
       </div>
-
       {/* Timeline + arcs en SVG (vectoriel, léger) */}
       <motion.svg
         viewBox="0 0 1000 300"
@@ -83,9 +97,7 @@ const PerspectiveManifold = () => {
       >
         {/* --- defs pour halos & styles texte --- */}
         <defs>
-          <style>
-            {`.label-strong{font-weight:700;font-size:14px}`}
-          </style>
+          <style>{`.label-strong{font-weight:700;font-size:14px}`}</style>
           {/* Halo vert (Frontier) */}
           <radialGradient id="haloFrontier" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="rgba(16,185,129,0.40)" />
@@ -100,14 +112,17 @@ const PerspectiveManifold = () => {
 
         {/* Ligne de base Frontier → Infrastructure */}
         <motion.line
-          x1="60" y1="150" x2="940" y2="150"
+          x1="60"
+          y1="150"
+          x2="940"
+          y2="150"
           stroke="currentColor"
           className="text-slate-300 dark:text-slate-600"
           strokeWidth="2"
           strokeLinecap="round"
           variants={{
             hidden: { pathLength: 0 },
-            visible: { pathLength: 1, transition: { duration: 1.2, ease: "easeInOut" } },
+            visible: { pathLength: 1, transition: { duration: 1.2, ease: 'easeInOut' } },
           }}
           style={{ pathLength: 1 }}
         />
@@ -173,7 +188,11 @@ const PerspectiveManifold = () => {
               strokeLinecap="round"
               variants={{
                 hidden: { pathLength: 0, opacity: 0 },
-                visible: { pathLength: 1, opacity: 1, transition: { duration: 1.0, delay: 0.2 + i * 0.15 } },
+                visible: {
+                  pathLength: 1,
+                  opacity: 1,
+                  transition: { duration: 1.0, delay: 0.2 + i * 0.15 },
+                },
               }}
             />
 
@@ -196,7 +215,9 @@ const PerspectiveManifold = () => {
                     sideOffset={6}
                   >
                     <h4 className="font-semibold text-slate-900 dark:text-white mb-1">{o.title}</h4>
-                    <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{o.note}</p>
+                    <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                      {o.note}
+                    </p>
                     {o.link && (
                       <a
                         href={o.link}
@@ -215,73 +236,79 @@ const PerspectiveManifold = () => {
         ))}
 
         {/* Arcs Contre-forces (en dessous) */}
-{PERSPECTIVE_DATA.counterforces.map((c, i) => (
-  <g key={c.title}>
-    <motion.path
-      d={`M ${anchors[i]} 150 C ${anchors[i]} 220, ${anchors[i] + 80} 220, ${anchors[i] + 80} 150`}
-      fill="none"
-      className="stroke-rose-500 dark:stroke-rose-400"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      variants={{
-        hidden: { pathLength: 0, opacity: 0 },
-        visible: { pathLength: 1, opacity: 1, transition: { duration: 1.0, delay: 0.2 + i * 0.15 } },
-      }}
-    />
+        {PERSPECTIVE_DATA.counterforces.map((c, i) => (
+          <g key={c.title}>
+            <motion.path
+              d={`M ${anchors[i]} 150 C ${anchors[i]} 220, ${anchors[i] + 80} 220, ${anchors[i] + 80} 150`}
+              fill="none"
+              className="stroke-rose-500 dark:stroke-rose-400"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              variants={{
+                hidden: { pathLength: 0, opacity: 0 },
+                visible: {
+                  pathLength: 1,
+                  opacity: 1,
+                  transition: { duration: 1.0, delay: 0.2 + i * 0.15 },
+                },
+              }}
+            />
 
-    {/* Mot-clé en “pill” + HoverCard */}
-    <foreignObject x={anchors[i] + 0} y={226} width="180" height="40">
-      <HoverCard.Root>
-        <HoverCard.Trigger asChild>
-          <div
-            className="mx-auto w-max px-3 py-1.5 rounded-full border border-rose-300/60 bg-white/80 dark:bg-slate-900/40 backdrop-blur
+            {/* Mot-clé en “pill” + HoverCard */}
+            <foreignObject x={anchors[i] + 0} y={226} width="180" height="40">
+              <HoverCard.Root>
+                <HoverCard.Trigger asChild>
+                  <div
+                    className="mx-auto w-max px-3 py-1.5 rounded-full border border-rose-300/60 bg-white/80 dark:bg-slate-900/40 backdrop-blur
                        cursor-pointer text-[13px] font-semibold text-rose-700 dark:text-rose-400
                        hover:bg-rose-50 dark:hover:bg-rose-900/20 transition"
-          >
-            {c.title}
-          </div>
-        </HoverCard.Trigger>
-        <HoverCard.Portal>
-          <HoverCard.Content
-            side="bottom"
-            className="z-50 w-64 rounded-xl bg-white dark:bg-slate-800 p-4 shadow-xl border border-slate-200 dark:border-slate-700"
-            sideOffset={6}
-          >
-            <h4 className="font-semibold text-slate-900 dark:text-white mb-1">{c.title}</h4>
-            <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{c.note}</p>
-            {c.link && (
-              <a
-                href={c.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 inline-flex items-center text-xs text-rose-600 dark:text-rose-400 hover:underline"
-              >
-                Learn more <ArrowUpRight className="w-3 h-3 ml-1" />
-              </a>
-            )}
-          </HoverCard.Content>
-        </HoverCard.Portal>
-      </HoverCard.Root>
-    </foreignObject>
-  </g>
-))}
+                  >
+                    {c.title}
+                  </div>
+                </HoverCard.Trigger>
+                <HoverCard.Portal>
+                  <HoverCard.Content
+                    side="bottom"
+                    className="z-50 w-64 rounded-xl bg-white dark:bg-slate-800 p-4 shadow-xl border border-slate-200 dark:border-slate-700"
+                    sideOffset={6}
+                  >
+                    <h4 className="font-semibold text-slate-900 dark:text-white mb-1">{c.title}</h4>
+                    <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                      {c.note}
+                    </p>
+                    {c.link && (
+                      <a
+                        href={c.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-flex items-center text-xs text-rose-600 dark:text-rose-400 hover:underline"
+                      >
+                        Learn more <ArrowUpRight className="w-3 h-3 ml-1" />
+                      </a>
+                    )}
+                  </HoverCard.Content>
+                </HoverCard.Portal>
+              </HoverCard.Root>
+            </foreignObject>
+          </g>
+        ))}
 
-{/* Pont vers la galerie historique */}
-<text
-  x="940"
-  y="95"
-  textAnchor="end"
-  className="fill-slate-500 dark:fill-slate-400 text-[11px] italic"
->
-  Scarcity → Ubiquity (historical proof)
-</text>
-</motion.svg>  {/* ✅ unique fermeture ici */}
-
+        {/* Pont vers la galerie historique */}
+        <text
+          x="940"
+          y="95"
+          textAnchor="end"
+          className="fill-slate-500 dark:fill-slate-400 text-[11px] italic"
+        >
+          Scarcity → Ubiquity (historical proof)
+        </text>
+      </motion.svg>{' '}
+      {/* ✅ unique fermeture ici */}
       {/* Hybridity = next frontier */}
       <div className="mt-8 text-center">
         <span className="inline-block px-4 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-medium">
-          The journey is not about eliminating tradeoffs, but about aligning them — 
-          leveraging tension to unlock compounding opportunities at the right time.
+          The journey is not about eliminating tradeoffs, but about aligning them — leveraging
+          tension to unlock compounding opportunities at the right time.
         </span>
       </div>
     </div>
@@ -327,10 +354,7 @@ const PerspectiveSection = () => {
 
       <div className="relative z-10">
         {/* En-tête de section */}
-        <SectionHeader
-          title="Perspective"
-          subtitle="Frontier Tech Becomes Infrastructure."
-        />
+        <SectionHeader title="Perspective" subtitle="Frontier Tech Becomes Infrastructure." />
 
         {/* Schéma Manifold (sans titre) */}
         <div className="mt-2 mb-8">
@@ -377,8 +401,12 @@ const PerspectiveSection = () => {
                         decoding="async"
                       />
                     </div>
-                    <h4 className="text-lg font-bold font-grotesk text-slate-900 dark:text-white mb-3">{item.title}</h4>
-                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">{item.caption}</p>
+                    <h4 className="text-lg font-bold font-grotesk text-slate-900 dark:text-white mb-3">
+                      {item.title}
+                    </h4>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                      {item.caption}
+                    </p>
                   </motion.div>
                 ))}
               </div>
@@ -400,7 +428,7 @@ const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     const storedTheme = window.localStorage.getItem('theme');
-    setTheme(storedTheme || 'light');   // light par défaut
+    setTheme(storedTheme || 'light'); // light par défaut
   }, []);
 
   useEffect(() => {
@@ -411,164 +439,178 @@ const ThemeProvider = ({ children }) => {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
 };
 
 // --- DATA DEFINITIONS ---
 const capabilitiesData = [
   {
     icon: Briefcase,
-    title: "Capital Programs",
-    description: "Discretionary or deal-by-deal exposure for professional investors with governance alignment and clear reporting lines."
+    title: 'Capital Programs',
+    description:
+      'Discretionary or deal-by-deal exposure for professional investors with governance alignment and clear reporting lines.',
   },
   {
     icon: BarChart,
-    title: "Secondary Solutions",
-    description: "Selective access to LP interests, directs, and structured/pre-IPO blocks across deep-tech adjacencies."
+    title: 'Secondary Solutions',
+    description:
+      'Selective access to LP interests, directs, and structured/pre-IPO blocks across deep-tech adjacencies.',
   },
   {
     icon: Zap,
-    title: "Direct & Co-Invest",
-    description: "Primary exposure where our infrastructure lens identifies durable advantage and operating leverage."
+    title: 'Direct & Co-Invest',
+    description:
+      'Primary exposure where our infrastructure lens identifies durable advantage and operating leverage.',
   },
   {
     icon: Handshake,
-    title: "Advisory",
-    description: "Technical/product diligence, category mapping, infra/vendor selection, and transaction support for corporates and family offices."
-  }
+    title: 'Advisory',
+    description:
+      'Technical/product diligence, category mapping, infra/vendor selection, and transaction support for corporates and family offices.',
+  },
 ];
 
 const companyData = [
   {
-    group: "AI Compute & Platforms",
-    companies: [ { name: "x.ai", url: "https://x.ai" }, { name: "FedML", url: "https://fedml.ai" } ]
+    group: 'AI Compute & Platforms',
+    companies: [
+      { name: 'x.ai', url: 'https://x.ai' },
+      { name: 'FedML', url: 'https://fedml.ai' },
+    ],
   },
   {
-    group: "Applied AI Products",
-    companies: [ { name: "Knode", url: "https://www.knode.com" }, { name: "Rowads", url: "https://www.rowads.com" }, { name: "Kinetix", url: "https://www.kinetix.tech" } ]
+    group: 'Applied AI Products',
+    companies: [
+      { name: 'Knode', url: 'https://www.knode.com' },
+      { name: 'Rowads', url: 'https://www.rowads.com' },
+      { name: 'Kinetix', url: 'https://www.kinetix.tech' },
+    ],
   },
   {
-    group: "Privacy-Preserving Compute",
-    companies: [ { name: "QED Protocol", url: "https://www.qedprotocol.com" }, { name: "Polyhedra Network", url: "https://polyhedra.network" } ]
+    group: 'Privacy-Preserving Compute',
+    companies: [
+      { name: 'QED Protocol', url: 'https://www.qedprotocol.com' },
+      { name: 'Polyhedra Network', url: 'https://polyhedra.network' },
+    ],
   },
   {
-    group: "Identity, Naming & Addressability",
-    companies: [ { name: "Freename", url: "https://freename.io" }, { name: "The Open Network", url: "https://ton.org" } ]
+    group: 'Identity, Naming & Addressability',
+    companies: [
+      { name: 'Freename', url: 'https://freename.io' },
+      { name: 'The Open Network', url: 'https://ton.org' },
+    ],
   },
   {
-    group: "Distributed Finance Infrastructure",
-    companies: [ { name: "Kiln", url: "https://www.kiln.fi" }, { name: "THORChain", url: "https://thorchain.org" }, { name: "Gattaca", url: "https://www.gattaca.io" } ]
+    group: 'Distributed Finance Infrastructure',
+    companies: [
+      { name: 'Kiln', url: 'https://www.kiln.fi' },
+      { name: 'THORChain', url: 'https://thorchain.org' },
+      { name: 'Gattaca', url: 'https://www.gattaca.io' },
+    ],
   },
   {
-    group: "Data, CRM & Growth Infrastructure",
-    companies: [ { name: "Absolute Labs", url: "https://www.absolutelabs.io" } ]
+    group: 'Data, CRM & Growth Infrastructure',
+    companies: [{ name: 'Absolute Labs', url: 'https://www.absolutelabs.io' }],
   },
   {
-    group: "Spatial Tech",
-    companies: [ { name: "Loft Orbital", url: "https://www.loftorbital.com" } ]
-  }
+    group: 'Spatial Tech',
+    companies: [{ name: 'Loft Orbital', url: 'https://www.loftorbital.com' }],
+  },
 ];
 
 // --- TEAM DATA (ordre mis à jour) ---
 const teamData = [
   {
-    name: "Dr. Victoria Reullin",
-    title: "Operating Partner",
-    blurb:
-      "Former independent Semiologist and Talent Manager at Allianz.",
-    photo: import.meta.env.BASE_URL + "images/team/victoria-reullin.png",
-    linkedin: "https://www.linkedin.com/in/victoria-r-b72173274/"
+    name: 'Dr. Victoria Reullin',
+    title: 'Operating Partner',
+    blurb: 'Former independent Semiologist and Talent Manager at Allianz.',
+    photo: import.meta.env.BASE_URL + 'images/team/victoria-reullin.png',
+    linkedin: 'https://www.linkedin.com/in/victoria-r-b72173274/',
   },
   {
-    name: "Eng. Julien Pageaud",
-    title: "Managing Partner",
+    name: 'Eng. Julien Pageaud',
+    title: 'Managing Partner',
     blurb:
-      "Former Computer Vision Engineer at Safran Defense, Director at Goldman Sachs, and CIO at Nomura DO.",
-    photo: import.meta.env.BASE_URL + "images/team/julien-pageaud.png",
-    linkedin: "https://www.linkedin.com/in/julien-pageaud-5ba56b10/"
+      'Former Computer Vision Engineer at Safran Defense, Director at Goldman Sachs, and CIO at Nomura DO.',
+    photo: import.meta.env.BASE_URL + 'images/team/julien-pageaud.png',
+    linkedin: 'https://www.linkedin.com/in/julien-pageaud-5ba56b10/',
   },
   {
-    name: "Eng. Thibaut Chessé",
-    title: "Research Partner",
+    name: 'Eng. Thibaut Chessé',
+    title: 'Research Partner',
     blurb:
-      "Former Head of adoption and technical support at Nomadic Labs and Computer Scientist at IBM.",
-    photo: import.meta.env.BASE_URL + "images/team/thibaut-chesse.png",
-    linkedin: "https://fr.linkedin.com/in/thibautchesse"
+      'Former Head of adoption and technical support at Nomadic Labs and Computer Scientist at IBM.',
+    photo: import.meta.env.BASE_URL + 'images/team/thibaut-chesse.png',
+    linkedin: 'https://fr.linkedin.com/in/thibautchesse',
   },
   {
-    name: "Prof. Michal Valko",
-    title: "AI/ML Venture Partner",
-    blurb:
-      "Former Principal Engineer Llama at Meta, and Research Director at Google DeepMind.",
-    photo: import.meta.env.BASE_URL + "images/team/michal-valko.png",
-    linkedin: "https://www.linkedin.com/in/michalvalko/"
+    name: 'Prof. Michal Valko',
+    title: 'AI/ML Venture Partner',
+    blurb: 'Former Principal Engineer Llama at Meta, and Research Director at Google DeepMind.',
+    photo: import.meta.env.BASE_URL + 'images/team/michal-valko.png',
+    linkedin: 'https://www.linkedin.com/in/michalvalko/',
   },
   {
-    name: "Dr. Armand Joulin",
-    title: "AI/ML Research Advisor",
+    name: 'Dr. Armand Joulin',
+    title: 'AI/ML Research Advisor',
     blurb:
-      "Research Director for Google DeepMind, and former head of EMEA at Facebook AI Research.",
-    photo: import.meta.env.BASE_URL + "images/team/armand-joulin.png",
-    linkedin: "https://www.linkedin.com/in/armand-joulin-0274254/"
+      'Research Director for Google DeepMind, and former head of EMEA at Facebook AI Research.',
+    photo: import.meta.env.BASE_URL + 'images/team/armand-joulin.png',
+    linkedin: 'https://www.linkedin.com/in/armand-joulin-0274254/',
   },
   {
-    name: "Aurélie Astruc",
-    title: "Board Member",
-    blurb:
-      "Corporate Director at Edmond de Rothschild.",
-    photo: import.meta.env.BASE_URL + "images/team/aurelie-astruc.png",
-    linkedin: "https://www.linkedin.com/in/aurelieastruc/"
+    name: 'Aurélie Astruc',
+    title: 'Board Member',
+    blurb: 'Corporate Director at Edmond de Rothschild.',
+    photo: import.meta.env.BASE_URL + 'images/team/aurelie-astruc.png',
+    linkedin: 'https://www.linkedin.com/in/aurelieastruc/',
   },
   {
-    name: "Prof. Steve Liu",
-    title: "AI/ML Research Advisor",
-    blurb:
-      "Professor & Associate VP Research at MBZUAI, Professor at McGill University.",
-    photo: import.meta.env.BASE_URL + "images/team/steve-liu.png",
-    linkedin: "https://ca.linkedin.com/in/xueliu"
+    name: 'Prof. Steve Liu',
+    title: 'AI/ML Research Advisor',
+    blurb: 'Professor & Associate VP Research at MBZUAI, Professor at McGill University.',
+    photo: import.meta.env.BASE_URL + 'images/team/steve-liu.png',
+    linkedin: 'https://ca.linkedin.com/in/xueliu',
   },
   {
-    name: "Hugo Vautier",
-    title: "Board Member",
-    blurb:
-      "Partner at Opportunity Financial Services.",
-    photo: import.meta.env.BASE_URL + "images/team/hugo-vautier.png",
-    linkedin: "https://www.linkedin.com/in/hugo-vautier-01a74042/"
+    name: 'Hugo Vautier',
+    title: 'Board Member',
+    blurb: 'Partner at Opportunity Financial Services.',
+    photo: import.meta.env.BASE_URL + 'images/team/hugo-vautier.png',
+    linkedin: 'https://www.linkedin.com/in/hugo-vautier-01a74042/',
   },
   {
-    name: "Dr. Gerald Heng",
-    title: "General Counsel",
-    blurb:
-      "Former Lawyer at Baker McKenzie Wong & Leow.",
-    photo: import.meta.env.BASE_URL + "images/team/gerald-heng.png",
-    linkedin: "https://www.linkedin.com/in/gerald-heng-b14577a3/"
-  }
+    name: 'Dr. Gerald Heng',
+    title: 'General Counsel',
+    blurb: 'Former Lawyer at Baker McKenzie Wong & Leow.',
+    photo: import.meta.env.BASE_URL + 'images/team/gerald-heng.png',
+    linkedin: 'https://www.linkedin.com/in/gerald-heng-b14577a3/',
+  },
 ];
 
 // Historical technology evolution data
 const historyData = [
   {
-    title: "Automotive, 13 years to ubiquity (1900–1913)",
+    title: 'Automotive, 13 years to ubiquity (1900–1913)',
     beforeImage: import.meta.env.BASE_URL + 'images/automotive.png', // Corrected URL from outline to match intended image
-    caption: "In 1900, cars were a rarity on New York's Fifth Avenue. By 1913, they had become the norm, reshaping mobility, industry, and the urban landscape. From scarcity to ubiquity in barely a decade."
+    caption:
+      "In 1900, cars were a rarity on New York's Fifth Avenue. By 1913, they had become the norm, reshaping mobility, industry, and the urban landscape. From scarcity to ubiquity in barely a decade.",
   },
   {
-    title: "Semiconductors, 75 years to mass adoption (1947–Today)",
+    title: 'Semiconductors, 75 years to mass adoption (1947–Today)',
     beforeImage: import.meta.env.BASE_URL + 'images/semiconductors.png',
-    caption: "The transistor began as a fragile experiment at Bell Labs in 1947. Today, billions are manufactured daily, powering everything from smartphones to satellites. What was once scarce is now the invisible backbone of modern life."
+    caption:
+      'The transistor began as a fragile experiment at Bell Labs in 1947. Today, billions are manufactured daily, powering everything from smartphones to satellites. What was once scarce is now the invisible backbone of modern life.',
   },
   {
-    title: "Satellites, 60 years to global scale (1962–Today)",
+    title: 'Satellites, 60 years to global scale (1962–Today)',
     beforeImage: import.meta.env.BASE_URL + 'images/satellites.png',
-    caption: "The Telstar satellite of 1962 opened the era of space-based communications. Today, constellations of satellites provide global internet, defense, and earth observation—once experimental, now indispensable."
-  }
+    caption:
+      'The Telstar satellite of 1962 opened the era of space-based communications. Today, constellations of satellites provide global internet, defense, and earth observation—once experimental, now indispensable.',
+  },
 ];
 
 // --- STYLED COMPONENTS & HELPERS ---
@@ -576,12 +618,10 @@ const Section = ({ id, children, className = '', full = false }) => (
   <section
     id={id}
     className={`snap-start scroll-mt-[88px] md:scroll-mt-[96px] ${
-      full ? "min-h-[100svh] py-16 md:py-20" : "py-20 md:py-28"
+      full ? 'min-h-[100svh] py-16 md:py-20' : 'py-20 md:py-28'
     } ${className}`}
   >
-    <div className="max-w-6xl mx-auto px-6">
-      {children}
-    </div>
+    <div className="max-w-6xl mx-auto px-6">{children}</div>
   </section>
 );
 
@@ -592,7 +632,7 @@ const SectionSeparator = () => (
 );
 
 const SectionTitle = ({ children }) => (
-  <motion.h2 
+  <motion.h2
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, amount: 0.5 }}
@@ -606,10 +646,10 @@ const SectionTitle = ({ children }) => (
 const SectionHeader = ({
   title,
   subtitle,
-  className = "",
+  className = '',
   // tu peux ajuster ces classes si besoin
-  titleClass = "text-3xl md:text-4xl font-bold text-slate-900 dark:text-white",
-  subtitleClass = "text-base md:text-lg font-medium text-slate-600 dark:text-slate-300"
+  titleClass = 'text-3xl md:text-4xl font-bold text-slate-900 dark:text-white',
+  subtitleClass = 'text-base md:text-lg font-medium text-slate-600 dark:text-slate-300',
 }) => {
   return (
     <div className={`mb-10 md:mb-12`}>
@@ -621,7 +661,6 @@ const SectionHeader = ({
     </div>
   );
 };
-
 
 // --- REVEAL (fade-in + slide-up réutilisable) ---
 const Reveal = ({ children, delay = 0 }) => (
@@ -671,10 +710,8 @@ const Header = ({ sections, activeSection, scrollToSection }) => {
   const headerBgOpacity = useTransform(scrollY, [0, 50], [0, 0.8]);
 
   return (
-    <motion.header
-      className="fixed top-0 w-full z-50 font-sans"
-    >
-      <motion.div 
+    <motion.header className="fixed top-0 w-full z-50 font-sans">
+      <motion.div
         className="absolute inset-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-900/10 dark:border-white/10"
         style={{ opacity: headerBgOpacity }}
       />
@@ -712,7 +749,9 @@ const Header = ({ sections, activeSection, scrollToSection }) => {
                 key={id}
                 onClick={() => scrollToSection(id)}
                 className={`relative font-medium transition-colors hover:text-blue-600 dark:hover:text-blue-400 ${
-                  activeSection === id ? 'text-blue-600 dark:text-blue-400' : 'text-slate-600 dark:text-slate-300'
+                  activeSection === id
+                    ? 'text-blue-600 dark:text-blue-400'
+                    : 'text-slate-600 dark:text-slate-300'
                 }`}
               >
                 {label}
@@ -725,7 +764,7 @@ const Header = ({ sections, activeSection, scrollToSection }) => {
               </button>
             ))}
           </nav>
-          
+
           <div className="flex items-center gap-2">
             <ThemeToggle />
             <button
@@ -734,7 +773,12 @@ const Header = ({ sections, activeSection, scrollToSection }) => {
               aria-label="Toggle menu"
             >
               <AnimatePresence initial={false} mode="wait">
-                <motion.div key={isMenuOpen ? 'close' : 'open'} initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
+                <motion.div
+                  key={isMenuOpen ? 'close' : 'open'}
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                >
                   {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
                 </motion.div>
               </AnimatePresence>
@@ -755,9 +799,14 @@ const Header = ({ sections, activeSection, scrollToSection }) => {
               {sections.map(({ id, label }) => (
                 <button
                   key={id}
-                  onClick={() => { scrollToSection(id); setIsMenuOpen(false); }}
+                  onClick={() => {
+                    scrollToSection(id);
+                    setIsMenuOpen(false);
+                  }}
                   className={`block w-full text-left py-2 px-3 rounded-lg font-medium text-base transition-colors ${
-                    activeSection === id ? 'bg-blue-50 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300' : 'text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800'
+                    activeSection === id
+                      ? 'bg-blue-50 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300'
+                      : 'text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800'
                   }`}
                 >
                   {label}
@@ -773,13 +822,13 @@ const Header = ({ sections, activeSection, scrollToSection }) => {
 
 const TechnologyMaturationDiagram = () => {
   const stages = [
-    { label: "Scarcity", description: "Experimental, Capital-intensive" },
-    { label: "Standardization", description: "Interoperable, Orchestrated" },
-    { label: "Ubiquity", description: "Composable, Invisible" }
+    { label: 'Scarcity', description: 'Experimental, Capital-intensive' },
+    { label: 'Standardization', description: 'Interoperable, Orchestrated' },
+    { label: 'Ubiquity', description: 'Composable, Invisible' },
   ];
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 0.3 }}
@@ -788,7 +837,7 @@ const TechnologyMaturationDiagram = () => {
       <div className="relative max-w-4xl mx-auto">
         {/* Background flow line */}
         <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-slate-300 via-blue-400 to-cyan-400 dark:from-slate-600 dark:via-blue-500 dark:to-cyan-500 transform -translate-y-1/2" />
-        
+
         {/* Stage nodes */}
         <div className="relative flex justify-between items-center">
           {stages.map((stage, index) => (
@@ -796,12 +845,14 @@ const TechnologyMaturationDiagram = () => {
               key={stage.label}
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.5 + (index * 0.2), duration: 0.6, type: "spring" }}
+              transition={{ delay: 0.5 + index * 0.2, duration: 0.6, type: 'spring' }}
               className="flex flex-col items-center text-center bg-white dark:bg-slate-800 px-6 py-4 rounded-2xl border-2 border-white dark:border-slate-700 shadow-lg min-w-[120px] md:min-w-[160px]"
             >
-              <div className={`w-4 h-4 rounded-full mb-3 ${
-                index === 0 ? 'bg-slate-400' : index === 1 ? 'bg-blue-500' : 'bg-cyan-500'
-              }`} />
+              <div
+                className={`w-4 h-4 rounded-full mb-3 ${
+                  index === 0 ? 'bg-slate-400' : index === 1 ? 'bg-blue-500' : 'bg-cyan-500'
+                }`}
+              />
               <h3 className="font-bold font-grotesk text-sm md:text-base text-slate-900 dark:text-white mb-1">
                 {stage.label}
               </h3>
@@ -811,22 +862,22 @@ const TechnologyMaturationDiagram = () => {
             </motion.div>
           ))}
         </div>
-        
+
         {/* Animated flow arrows */}
         {[0, 1].map((index) => (
           <motion.div
             key={index}
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ 
-              delay: 1 + (index * 0.3), 
+            transition={{
+              delay: 1 + index * 0.3,
               duration: 0.8,
               repeat: Infinity,
               repeatDelay: 3,
-              repeatType: "loop"
+              repeatType: 'loop',
             }}
             className="absolute top-1/2 transform -translate-y-1/2"
-            style={{ left: `${30 + (index * 35)}%` }}
+            style={{ left: `${30 + index * 35}%` }}
           >
             <ChevronRight className="w-5 h-5 text-blue-500" />
           </motion.div>
@@ -840,10 +891,9 @@ const TechnologyMaturationDiagram = () => {
 const BusinessCardIntro = () => {
   return (
     <div className="mx-auto max-w-3xl text-left md:text-center bg-white/70 dark:bg-slate-900/40 backdrop-blur-md border border-slate-200/60 dark:border-slate-700/60 rounded-xl p-6 md:p-8 shadow-sm">
-      
       {/* Paragraphe institutionnel */}
       <p className="text-base md:text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-        Sparkle Ventures is an{" "}
+        Sparkle Ventures is an{' '}
         <span className="font-semibold text-slate-900 dark:text-white">
           independent multistage investment firm
         </span>
@@ -851,23 +901,14 @@ const BusinessCardIntro = () => {
         where frontier technologies evolve into global infrastructure.
         <br className="hidden md:block" />
         <br className="hidden md:block" />
-        Our mandate spans{" "}
+        Our mandate spans{' '}
         <span className="font-semibold text-slate-900 dark:text-white">
           high-net-worth individuals
         </span>
-        ,{" "}
-        <span className="font-semibold text-slate-900 dark:text-white">
-          family offices
-        </span>
-        ,{" "}
-        <span className="font-semibold text-slate-900 dark:text-white">
-          corporates
-        </span>
-        , and{" "}
-        <span className="font-semibold text-slate-900 dark:text-white">
-          financial institutions
-        </span>
-        , positioning capital at the{" "}
+        , <span className="font-semibold text-slate-900 dark:text-white">family offices</span>,{' '}
+        <span className="font-semibold text-slate-900 dark:text-white">corporates</span>, and{' '}
+        <span className="font-semibold text-slate-900 dark:text-white">financial institutions</span>
+        , positioning capital at the{' '}
         <span className="font-semibold text-slate-900 dark:text-white">
           inflection point of technological transformation
         </span>
@@ -880,10 +921,7 @@ const BusinessCardIntro = () => {
 // === Hero Section mise à jour ===
 const HeroSection = () => {
   return (
-    <section
-      id="about"
-      className="relative min-h-screen flex items-center justify-center"
-    >
+    <section id="about" className="relative min-h-screen flex items-center justify-center">
       {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-cyan-50/30 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900" />
@@ -895,11 +933,11 @@ const HeroSection = () => {
               key={i}
               className="absolute w-96 h-96 opacity-5 dark:opacity-10"
               animate={{ x: [0, 100, 0], y: [0, -50, 0], rotate: [0, 180, 360] }}
-              transition={{ duration: 20 + i * 5, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 20 + i * 5, repeat: Infinity, ease: 'linear' }}
               style={{
                 left: `${10 + i * 15}%`,
                 top: `${10 + (i % 3) * 30}%`,
-                background: `linear-gradient(45deg, ${i % 2 ? "#0f172a" : "#1e40af"}, transparent)`,
+                background: `linear-gradient(45deg, ${i % 2 ? '#0f172a' : '#1e40af'}, transparent)`,
               }}
             />
           ))}
@@ -911,7 +949,7 @@ const HeroSection = () => {
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
           className="text-3xl md:text-5xl lg:text-6xl font-bold font-grotesk mb-6 text-slate-900 dark:text-white leading-tight"
         >
           Frontier Tech Becomes Infrastructure.
@@ -963,21 +1001,21 @@ const HeroSection = () => {
 const BusinessSection = () => {
   const items = [
     {
-      title: "Private Investment",
+      title: 'Private Investment',
       description:
-        "We originate and structure selective investments across frontier-to-infrastructure themes, with governance alignment and transparent reporting.",
+        'We originate and structure selective investments across frontier-to-infrastructure themes, with governance alignment and transparent reporting.',
       icon: <Briefcase className="w-6 h-6 text-emerald-500" />,
     },
     {
-      title: "Partnership Program",
+      title: 'Partnership Program',
       description:
-        "We partner with established managers to create cross–asset-class synergies, accessing hard-to-reach opportunities.",
+        'We partner with established managers to create cross–asset-class synergies, accessing hard-to-reach opportunities.',
       icon: <Network className="w-6 h-6 text-blue-500" />,
     },
     {
-      title: "Capital Advisory",
+      title: 'Capital Advisory',
       description:
-        "Technical/product diligence, category mapping, infra/vendor selection, and transaction support for corporates and family offices.",
+        'Technical/product diligence, category mapping, infra/vendor selection, and transaction support for corporates and family offices.',
       icon: <ServerCog className="w-6 h-6 text-cyan-500" />,
     },
   ];
@@ -986,10 +1024,7 @@ const BusinessSection = () => {
     <section id="business" className="py-24 bg-white dark:bg-slate-900">
       <div className="max-w-6xl mx-auto px-6 text-center">
         {/* Section header with pipe */}
-        <SectionHeader
-          title="Business"
-          subtitle="Our Tailored Offerings To Capture Value"
-        />
+        <SectionHeader title="Business" subtitle="Our Tailored Offerings To Capture Value" />
 
         {/* Grid des cartes */}
         <div className="grid gap-10 md:grid-cols-3">
@@ -1011,68 +1046,66 @@ const BusinessSection = () => {
 
         {/* Footer réglementaire */}
         <p className="mt-12 text-xs text-slate-500 dark:text-slate-400 max-w-3xl mx-auto">
-          All activities are conducted in compliance with applicable regulations
-          for professional and qualified investors.
+          All activities are conducted in compliance with applicable regulations for professional
+          and qualified investors.
         </p>
       </div>
     </section>
   );
 };
 
-
-
 // === UNIVERSE PORTFOLIO ===
 const PORTFOLIO_CATEGORIES = [
   {
-    title: "AI Compute & Platforms",
+    title: 'AI Compute & Platforms',
     items: [
-      { name: "x.ai", url: "https://x.ai/", logo: "xai.svg" },
-      { name: "FedML", url: "https://fedml.ai/home", logo: "fedml.webp" },
+      { name: 'x.ai', url: 'https://x.ai/', logo: 'xai.svg' },
+      { name: 'FedML', url: 'https://fedml.ai/home', logo: 'fedml.webp' },
     ],
   },
   {
-    title: "Privacy-Preserving Compute",
-    items: [{ name: "Proof", url: "https://proof.cloud/", logo: "proofcloud.png" }],
+    title: 'Privacy-Preserving Compute',
+    items: [{ name: 'Proof', url: 'https://proof.cloud/', logo: 'proofcloud.png' }],
   },
   {
-    title: "Applied AI Products",
+    title: 'Applied AI Products',
     items: [
-      { name: "Rowads", url: "https://rowads.app/", logo: "rowads.webp" },
-      { name: "Knode", url: "https://www.knode.ai/", logo: "knode.webp" },
-      { name: "Kinetix", url: "https://www.kinetix.tech/", logo: "kinetix.webp" },
+      { name: 'Rowads', url: 'https://rowads.app/', logo: 'rowads.webp' },
+      { name: 'Knode', url: 'https://www.knode.ai/', logo: 'knode.webp' },
+      { name: 'Kinetix', url: 'https://www.kinetix.tech/', logo: 'kinetix.webp' },
     ],
   },
   {
-    title: "Digital Identity",
+    title: 'Digital Identity',
     items: [
-      { name: "TON", url: "https://ton.org/", logo: "ton.webp" },
-      { name: "Freename", url: "https://freename.com/home/", logo: "freename.webp" },
+      { name: 'TON', url: 'https://ton.org/', logo: 'ton.webp' },
+      { name: 'Freename', url: 'https://freename.com/home/', logo: 'freename.webp' },
     ],
   },
   {
-    title: "Distributed Finance Infrastructure",
+    title: 'Distributed Finance Infrastructure',
     items: [
-      { name: "Kiln", url: "https://www.kiln.fi/", logo: "kiln.svg" },
-      { name: "Gattaca", url: "https://gattaca.com/", logo: "gattaca.webp" },
-      { name: "THORChain", url: "https://thorchain.org/", logo: "thorchain.webp" },
+      { name: 'Kiln', url: 'https://www.kiln.fi/', logo: 'kiln.svg' },
+      { name: 'Gattaca', url: 'https://gattaca.com/', logo: 'gattaca.webp' },
+      { name: 'THORChain', url: 'https://thorchain.org/', logo: 'thorchain.webp' },
     ],
   },
   {
-    title: "Data Intelligence",
-    items: [{ name: "Absolute Labs", url: "https://absolutelabs.io/", logo: "absolutelabs.png" }],
+    title: 'Data Intelligence',
+    items: [{ name: 'Absolute Labs', url: 'https://absolutelabs.io/', logo: 'absolutelabs.png' }],
   },
   {
-    title: "Spatial Tech",
-    items: [{ name: "Loft Orbital", url: "https://loftorbital.com/", logo: "loftorbital.jpg" }],
+    title: 'Spatial Tech',
+    items: [{ name: 'Loft Orbital', url: 'https://loftorbital.com/', logo: 'loftorbital.jpg' }],
   },
   {
-    title: "Autonomous Robotics",
-    items: [{ name: "Figure", url: "https://www.figure.ai/", logo: "figure.webp" }],
+    title: 'Autonomous Robotics',
+    items: [{ name: 'Figure', url: 'https://www.figure.ai/', logo: 'figure.webp' }],
   },
 ];
 
 function PortfolioCell({ name, url, logo }) {
-  const src = import.meta.env.BASE_URL + "images/logos/" + logo;
+  const src = import.meta.env.BASE_URL + 'images/logos/' + logo;
   return (
     <a
       href={url}
@@ -1101,11 +1134,11 @@ function PortfolioCell({ name, url, logo }) {
 const CompaniesSection = () => {
   // On aplatit PORTFOLIO_CATEGORIES -> [{ name, url, logo, category }]
   const allCompanies = React.useMemo(() => {
-    return PORTFOLIO_CATEGORIES.flatMap(cat =>
-      cat.items.map(item => ({
+    return PORTFOLIO_CATEGORIES.flatMap((cat) =>
+      cat.items.map((item) => ({
         ...item,
         category: cat.title,
-        src: import.meta.env.BASE_URL + "images/logos/" + item.logo,
+        src: import.meta.env.BASE_URL + 'images/logos/' + item.logo,
       }))
     );
   }, []);
@@ -1113,14 +1146,11 @@ const CompaniesSection = () => {
   return (
     <Section id="companies" className="bg-white dark:bg-slate-900">
       <div className="mb-10">
-        <SectionHeader
-          title="Companies"
-          subtitle="20+ Teams Shaping Tomorrow’s Infrastructure"
-        />
+        <SectionHeader title="Companies" subtitle="20+ Teams Shaping Tomorrow’s Infrastructure" />
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-6 md:gap-8">
-        {allCompanies.map(c => (
+        {allCompanies.map((c) => (
           <a
             key={`${c.category}-${c.name}`}
             href={c.url}
@@ -1131,9 +1161,11 @@ const CompaniesSection = () => {
             aria-label={c.name}
           >
             {/* Pastille catégorie */}
-            <span className="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-full text-[10px] font-medium
+            <span
+              className="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-full text-[10px] font-medium
                              bg-slate-100/90 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700
-                             text-slate-700 dark:text-slate-300">
+                             text-slate-700 dark:text-slate-300"
+            >
               {c.category}
             </span>
 
@@ -1160,10 +1192,10 @@ const CompaniesSection = () => {
 const TeamSection = () => {
   return (
     <Section id="team" className="bg-white dark:bg-slate-900">
-    <SectionHeader
-      title="Team"
-      subtitle="Cultivating Expertise From Operators, Researchers, and Partners"
-    />
+      <SectionHeader
+        title="Team"
+        subtitle="Cultivating Expertise From Operators, Researchers, and Partners"
+      />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {teamData.map((member, index) => (
@@ -1183,19 +1215,25 @@ const TeamSection = () => {
                   alt={member.name}
                   className="w-full h-full object-cover"
                   onError={(e) => {
-                    e.currentTarget.style.display = "none";
+                    e.currentTarget.style.display = 'none';
                     const fallback = e.currentTarget.nextElementSibling;
-                    if (fallback) fallback.classList.remove("hidden");
+                    if (fallback) fallback.classList.remove('hidden');
                   }}
                 />
                 {/* Fallback initiales */}
                 <div className="hidden w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white font-semibold text-2xl">
-                  {member.name.split(' ').map(n => n[0]).join('')}
+                  {member.name
+                    .split(' ')
+                    .map((n) => n[0])
+                    .join('')}
                 </div>
               </div>
             ) : (
               <div className="w-24 h-24 mx-auto mb-4 rounded-xl flex items-center justify-center bg-gradient-to-br from-blue-500 to-indigo-600 text-white font-semibold text-2xl ring-4 ring-white dark:ring-slate-800">
-                {member.name.split(' ').map(n => n[0]).join('')}
+                {member.name
+                  .split(' ')
+                  .map((n) => n[0])
+                  .join('')}
               </div>
             )}
 
@@ -1267,12 +1305,15 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto px-6 text-xs leading-relaxed">
         <h3 className="font-bold text-sm text-slate-200 mb-4 font-grotesk">Disclaimer</h3>
         <p className="mb-6">
-          For professional/qualified investors only. Nothing herein constitutes an offer to the public or investment advice. Sparkle ventures GP is an authorised AIFM, regulated by the Luxembourg CSSF. Certain documentation or administration may be handled by an affiliated entity in the United Arab Emirates, subject to local regulations. Information regarding investment vehicles is illustrative only. Investing involves risk, including loss of capital. Past performance is not a reliable indicator of future results.
+          For professional/qualified investors only. Nothing herein constitutes an offer to the
+          public or investment advice. Sparkle ventures GP is an authorised AIFM, regulated by the
+          Luxembourg CSSF. Certain documentation or administration may be handled by an affiliated
+          entity in the United Arab Emirates, subject to local regulations. Information regarding
+          investment vehicles is illustrative only. Investing involves risk, including loss of
+          capital. Past performance is not a reliable indicator of future results.
         </p>
         <div className="border-t border-slate-700 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p>
-             .
-          </p>
+          <p>.</p>
           <p className="text-slate-500">© {new Date().getFullYear()} Sparkle Ventures</p>
         </div>
       </div>
@@ -1303,7 +1344,7 @@ const FormDialog = ({ isOpen, onClose, children }) => {
         initial={{ scale: 0.95, y: 20, opacity: 0 }}
         animate={{ scale: 1, y: 0, opacity: 1 }}
         exit={{ scale: 0.95, y: 20, opacity: 0 }}
-        transition={{ ease: "easeOut", duration: 0.3 }}
+        transition={{ ease: 'easeOut', duration: 0.3 }}
         className="bg-white dark:bg-slate-800 rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
@@ -1317,18 +1358,18 @@ const InvestorForm = ({ isOpen, onClose }) => {
   const formRef = useRef(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState('');
 
   // ⚠️ Remplace par ton email destinataire
-  const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/thibaut@sparkle.vc";
+  const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/thibaut@sparkle.vc';
 
   const [formData, setFormData] = useState({
-    fullName: "",
-    organization: "",
-    workEmail: "",
-    country: "",
-    investorType: "",
-    message: "",
+    fullName: '',
+    organization: '',
+    workEmail: '',
+    country: '',
+    investorType: '',
+    message: '',
     professionalInvestor: false,
     notPublicOffering: false,
     privacyConsent: false,
@@ -1336,7 +1377,7 @@ const InvestorForm = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMsg("");
+    setErrorMsg('');
 
     // Validation HTML5 native
     if (!formRef.current.checkValidity()) {
@@ -1349,36 +1390,41 @@ const InvestorForm = ({ isOpen, onClose }) => {
 
       // Prépare la charge utile pour FormSubmit (AJAX)
       const data = new FormData();
-      data.append("Full Name", formData.fullName);
-      data.append("Organization", formData.organization);
-      data.append("Work Email", formData.workEmail);
-      data.append("Country", formData.country);
-      data.append("Investor Type", formData.investorType);
-      data.append("Message", formData.message);
-      data.append("Confirmed Professional/Qualified Investor", formData.professionalInvestor ? "Yes" : "No");
-      data.append("Acknowledged Not a Public Offering", formData.notPublicOffering ? "Yes" : "No");
-      data.append("Consented to Privacy Policy", formData.privacyConsent ? "Yes" : "No");
+      data.append('Full Name', formData.fullName);
+      data.append('Organization', formData.organization);
+      data.append('Work Email', formData.workEmail);
+      data.append('Country', formData.country);
+      data.append('Investor Type', formData.investorType);
+      data.append('Message', formData.message);
+      data.append(
+        'Confirmed Professional/Qualified Investor',
+        formData.professionalInvestor ? 'Yes' : 'No'
+      );
+      data.append('Acknowledged Not a Public Offering', formData.notPublicOffering ? 'Yes' : 'No');
+      data.append('Consented to Privacy Policy', formData.privacyConsent ? 'Yes' : 'No');
 
       // Options FormSubmit
-      data.append("_subject", "New Investment Inquiry — Website");
-      data.append("_template", "table");
-      data.append("_captcha", "false"); // désactive le captcha FormSubmit
+      data.append('_subject', 'New Investment Inquiry — Website');
+      data.append('_template', 'table');
+      data.append('_captcha', 'false'); // désactive le captcha FormSubmit
 
       const res = await fetch(FORMSUBMIT_ENDPOINT, {
-        method: "POST",
-        headers: { Accept: "application/json" },
+        method: 'POST',
+        headers: { Accept: 'application/json' },
         body: data,
       });
 
       if (!res.ok) {
         const txt = await res.text();
-        throw new Error(txt || "Submission failed");
+        throw new Error(txt || 'Submission failed');
       }
 
       setIsSubmitted(true);
     } catch (err) {
-      setErrorMsg("Sorry, something went wrong. Please try again in a moment or email us directly.");
-      console.error("FormSubmit error:", err);
+      setErrorMsg(
+        'Sorry, something went wrong. Please try again in a moment or email us directly.'
+      );
+      console.error('FormSubmit error:', err);
     } finally {
       setIsSending(false);
     }
@@ -1409,14 +1455,19 @@ const InvestorForm = ({ isOpen, onClose }) => {
           </motion.div>
           <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Thank you</h3>
           <p className="text-slate-600 dark:text-slate-300 max-w-md mx-auto">
-            Your inquiry has been received. Our investment team reviews submissions continuously and will reach out if there’s a strong fit.
+            Your inquiry has been received. Our investment team reviews submissions continuously and
+            will reach out if there’s a strong fit.
           </p>
-          <button onClick={onClose} className="mt-6 form-button-primary">Close</button>
+          <button onClick={onClose} className="mt-6 form-button-primary">
+            Close
+          </button>
         </div>
       ) : (
         <form ref={formRef} onSubmit={handleSubmit} className="space-y-6" noValidate>
           <div className="text-center">
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 font-grotesk">Investment Inquiry</h3>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 font-grotesk">
+              Investment Inquiry
+            </h3>
             <p className="text-slate-600 dark:text-slate-300">Connect with our investment team</p>
           </div>
 
@@ -1454,7 +1505,9 @@ const InvestorForm = ({ isOpen, onClose }) => {
               defaultValue=""
               onChange={(e) => setFormData({ ...formData, country: e.target.value })}
             >
-              <option value="" disabled>Select Country</option>
+              <option value="" disabled>
+                Select Country
+              </option>
               <option value="US">United States</option>
               <option value="FR">France</option>
               <option value="LU">Luxembourg</option>
@@ -1472,7 +1525,9 @@ const InvestorForm = ({ isOpen, onClose }) => {
             defaultValue=""
             onChange={(e) => setFormData({ ...formData, investorType: e.target.value })}
           >
-            <option value="" disabled>Investor Type</option>
+            <option value="" disabled>
+              Investor Type
+            </option>
             <option value="institutional">Institutional</option>
             <option value="professional">Professional</option>
             <option value="corporate">Corporate</option>
@@ -1492,7 +1547,9 @@ const InvestorForm = ({ isOpen, onClose }) => {
               <input
                 type="checkbox"
                 required
-                onChange={(e) => setFormData({ ...formData, professionalInvestor: e.target.checked })}
+                onChange={(e) =>
+                  setFormData({ ...formData, professionalInvestor: e.target.checked })
+                }
               />
               <span>I confirm I am a professional/qualified investor</span>
             </label>
@@ -1523,7 +1580,7 @@ const InvestorForm = ({ isOpen, onClose }) => {
               className="form-button-primary disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={!isReady || isSending}
             >
-              {isSending ? "Sending…" : "Submit"}
+              {isSending ? 'Sending…' : 'Submit'}
             </button>
           </div>
         </form>
@@ -1536,24 +1593,24 @@ const FounderForm = ({ isOpen, onClose }) => {
   const formRef = useRef(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState('');
 
   // ⚠️ Remplace par ton email destinataire pour les founders
-  const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/thibaut@sparkle.vc";
+  const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/thibaut@sparkle.vc';
 
   const [formData, setFormData] = useState({
-    fullName: "",
-    company: "",
-    workEmail: "",
-    url: "",
-    message: "",
+    fullName: '',
+    company: '',
+    workEmail: '',
+    url: '',
+    message: '',
     notPublicOffering: false,
     privacyConsent: false,
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMsg("");
+    setErrorMsg('');
 
     // Validation HTML5 native
     if (!formRef.current.checkValidity()) {
@@ -1566,34 +1623,36 @@ const FounderForm = ({ isOpen, onClose }) => {
 
       // Payload pour FormSubmit
       const data = new FormData();
-      data.append("Full Name", formData.fullName);
-      data.append("Company", formData.company);
-      data.append("Work Email", formData.workEmail);
-      if (formData.url) data.append("Deck/Website URL", formData.url);
-      data.append("Message", formData.message);
-      data.append("Acknowledged Not a Public Offering", formData.notPublicOffering ? "Yes" : "No");
-      data.append("Consented to Privacy Policy", formData.privacyConsent ? "Yes" : "No");
+      data.append('Full Name', formData.fullName);
+      data.append('Company', formData.company);
+      data.append('Work Email', formData.workEmail);
+      if (formData.url) data.append('Deck/Website URL', formData.url);
+      data.append('Message', formData.message);
+      data.append('Acknowledged Not a Public Offering', formData.notPublicOffering ? 'Yes' : 'No');
+      data.append('Consented to Privacy Policy', formData.privacyConsent ? 'Yes' : 'No');
 
       // Options FormSubmit
-      data.append("_subject", "New Founder Submission — Website");
-      data.append("_template", "table");
-      data.append("_captcha", "false");
+      data.append('_subject', 'New Founder Submission — Website');
+      data.append('_template', 'table');
+      data.append('_captcha', 'false');
 
       const res = await fetch(FORMSUBMIT_ENDPOINT, {
-        method: "POST",
-        headers: { Accept: "application/json" },
+        method: 'POST',
+        headers: { Accept: 'application/json' },
         body: data,
       });
 
       if (!res.ok) {
         const txt = await res.text();
-        throw new Error(txt || "Submission failed");
+        throw new Error(txt || 'Submission failed');
       }
 
       setIsSubmitted(true);
     } catch (err) {
-      setErrorMsg("Sorry, something went wrong. Please try again in a moment or email us directly.");
-      console.error("FormSubmit error:", err);
+      setErrorMsg(
+        'Sorry, something went wrong. Please try again in a moment or email us directly.'
+      );
+      console.error('FormSubmit error:', err);
     } finally {
       setIsSending(false);
     }
@@ -1621,15 +1680,20 @@ const FounderForm = ({ isOpen, onClose }) => {
           </motion.div>
           <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Thank you</h3>
           <p className="text-slate-600 dark:text-slate-300 max-w-md mx-auto">
-            We’ve received your submission. Our team reviews opportunities continuously and will reach out if there’s a strong fit.
-            You can share updates or additional materials by email at any time.
+            We’ve received your submission. Our team reviews opportunities continuously and will
+            reach out if there’s a strong fit. You can share updates or additional materials by
+            email at any time.
           </p>
-          <button onClick={onClose} className="mt-6 form-button-primary">Close</button>
+          <button onClick={onClose} className="mt-6 form-button-primary">
+            Close
+          </button>
         </div>
       ) : (
         <form ref={formRef} onSubmit={handleSubmit} className="space-y-6" noValidate>
           <div className="text-center">
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 font-grotesk">Founder Application</h3>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2 font-grotesk">
+              Founder Application
+            </h3>
             <p className="text-slate-600 dark:text-slate-300">Share your innovation with us</p>
           </div>
 
@@ -1708,7 +1772,7 @@ const FounderForm = ({ isOpen, onClose }) => {
               className="form-button-primary disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={!isReady || isSending}
             >
-              {isSending ? "Sending…" : "Submit"}
+              {isSending ? 'Sending…' : 'Submit'}
             </button>
           </div>
         </form>
@@ -1724,18 +1788,18 @@ export default function SparkleVenturesPage() {
   const [showFounderForm, setShowFounderForm] = useState(false);
 
   const sections = [
-  { id: 'about',    label: 'About' },
-  { id: 'business',    label: 'Business' },     // ex-Capabilities
-  { id: 'perspective', label: 'Perspective' },
-  { id: 'companies',   label: 'Companies' },    // ex-Universe
-  { id: 'team',        label: 'Team' },         // ex-Management
-  { id: 'contact',     label: 'Contact' },
-];
+    { id: 'about', label: 'About' },
+    { id: 'business', label: 'Business' }, // ex-Capabilities
+    { id: 'perspective', label: 'Perspective' },
+    { id: 'companies', label: 'Companies' }, // ex-Universe
+    { id: 'team', label: 'Team' }, // ex-Management
+    { id: 'contact', label: 'Contact' },
+  ];
 
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
-  
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -1745,23 +1809,26 @@ export default function SparkleVenturesPage() {
           }
         });
       },
-      { rootMargin: "-50% 0px -50% 0px" } // Trigger when section is in the middle of the viewport
+      { rootMargin: '-50% 0px -50% 0px' } // Trigger when section is in the middle of the viewport
     );
-  
+
     sections.forEach(({ id }) => {
       const element = document.getElementById(id);
       if (element) observer.observe(element);
     });
-  
+
     return () => observer.disconnect();
   }, []);
 
   return (
     <ThemeProvider>
       <div className="bg-white dark:bg-slate-900 font-sans text-slate-800 dark:text-slate-200 antialiased">
-        
-        <Header sections={sections} activeSection={activeSection} scrollToSection={scrollToSection} />
-        
+        <Header
+          sections={sections}
+          activeSection={activeSection}
+          scrollToSection={scrollToSection}
+        />
+
         <main>
           <HeroSection />
           <SectionSeparator />
@@ -1773,11 +1840,14 @@ export default function SparkleVenturesPage() {
           <SectionSeparator />
           <TeamSection />
           <SectionSeparator />
-          <ContactSection onInvestorClick={() => setShowInvestorForm(true)} onFounderClick={() => setShowFounderForm(true)} />
+          <ContactSection
+            onInvestorClick={() => setShowInvestorForm(true)}
+            onFounderClick={() => setShowFounderForm(true)}
+          />
         </main>
-        
+
         <Footer />
-        
+
         <AnimatePresence>
           <InvestorForm isOpen={showInvestorForm} onClose={() => setShowInvestorForm(false)} />
           <FounderForm isOpen={showFounderForm} onClose={() => setShowFounderForm(false)} />
