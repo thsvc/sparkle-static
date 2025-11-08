@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import * as HoverCard from '@radix-ui/react-hover-card';
-import { Section, SectionHeader } from '../components/common/Section.jsx';
-import { HISTORY_DATA, PERSPECTIVE_DATA } from '../lib/constants.js';
+import { Section, SectionHeader } from '@/components/common/Section.jsx';
+import { HISTORY_DATA, PERSPECTIVE_DATA } from '@/lib/constants.js';
 
 const PerspectiveManifold = () => {
   const anchors = [180, 500, 820];

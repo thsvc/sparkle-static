@@ -1,4 +1,4 @@
-import { Section, SectionHeader } from '../components/common/Section.jsx';
+import { Section, SectionHeader } from '@/components/common/Section.jsx';
 
 const ContactSection = ({ onInvestorClick, onFounderClick }) => (
   <Section id="contact" className="bg-slate-50 dark:bg-slate-900/50">

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Linkedin } from 'lucide-react';
-import { Section, SectionHeader } from '../components/common/Section.jsx';
-import { TEAM_MEMBERS } from '../lib/constants.js';
+import { Section, SectionHeader } from '@/components/common/Section.jsx';
+import { TEAM_MEMBERS } from '@/lib/constants.js';
 
 const initials = (name) =>
   name

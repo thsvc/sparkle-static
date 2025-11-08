@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { Section, SectionHeader } from '../components/common/Section.jsx';
-import { PORTFOLIO_CATEGORIES } from '../lib/constants.js';
+import { Section, SectionHeader } from '@/components/common/Section.jsx';
+import { PORTFOLIO_CATEGORIES } from '@/lib/constants.js';
 
 const getLogoSrc = (logo) => `${import.meta.env.BASE_URL}images/logos/${logo}`;
 

@@ -1,5 +1,5 @@
 import { Briefcase, Network, ServerCog } from 'lucide-react';
-import { SectionHeader } from '../components/common/Section.jsx';
+import { SectionHeader } from '@/components/common/Section.jsx';
 
 const items = [
   {
