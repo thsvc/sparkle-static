@@ -1,5 +1,4 @@
-const description = `Sparkle Ventures is a global deep-tech investment bank and fund manager. We bridge capital and technology between the United States and Europe Middle East.
-We partner with a select group of global investors to back companies where frontier technologies evolve into global infrastructure.`;
+const description = `A cross-border boutique operating at the intersection of US technology and Middle Eastern strategic capital. Sparkle Ventures acts as both a fund manager and a specialized advisor, orchestrating access to high-conviction opportunities where frontier science evolves into sovereign-grade infrastructure.`;
 
 const SparkleVenturesLanding = () => (
   <div className="min-h-screen bg-slate-50 text-slate-900 flex items-center justify-center px-6 py-16 sm:py-20">
