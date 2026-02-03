@@ -1,87 +1,39 @@
-import { useEffect, useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
-import Header from '@/components/layout/Header.jsx';
-import Footer from '@/components/layout/Footer.jsx';
-import { ThemeProvider } from '@/components/layout/ThemeProvider.jsx';
-import { SectionSeparator } from '@/components/common/Section.jsx';
-import HeroSection from '@/sections/HeroSection.jsx';
-import BusinessSection from '@/sections/BusinessSection.jsx';
-import PerspectiveSection from '@/sections/PerspectiveSection.jsx';
-import CompaniesSection from '@/sections/CompaniesSection.jsx';
-import TeamSection from '@/sections/TeamSection.jsx';
-import ContactSection from '@/sections/ContactSection.jsx';
-import InvestorForm from '@/components/forms/InvestorForm.jsx';
-import FounderForm from '@/components/forms/FounderForm.jsx';
+const description = `Sparkle Ventures is a global deep-tech investment bank and fund manager. We bridge capital and technology between the United States and Europe Middle East.
+We partner with a select group of global investors to back companies where frontier technologies evolve into global infrastructure.`;
 
-const SECTIONS = [
-  { id: 'about', label: 'About' },
-  { id: 'business', label: 'Business' },
-  { id: 'perspective', label: 'Perspective' },
-  { id: 'companies', label: 'Companies' },
-  { id: 'team', label: 'Team' },
-  { id: 'contact', label: 'Contact' },
-];
+const SparkleVenturesLanding = () => (
+  <div className="min-h-screen bg-slate-50 text-slate-900 flex items-center justify-center px-6 py-16 sm:py-20">
+    <div className="w-full max-w-5xl text-center">
+      <div className="flex flex-col items-center gap-8">
+        <img
+          src="/images/logo-sparkle.svg"
+          alt="Sparkle Ventures"
+          className="h-10 sm:h-12 md:h-14 w-auto mb-8 opacity-90"
+        />
 
-const SparkleVenturesPage = () => {
-  const [activeSection, setActiveSection] = useState('about');
-  const [showInvestorForm, setShowInvestorForm] = useState(false);
-  const [showFounderForm, setShowFounderForm] = useState(false);
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.05] text-slate-900">
+          Bridging Capital and Technologies Globally
+        </h1>
 
-  const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
+        <div className="max-w-3xl text-center mt-10">
+          <p className="text-base sm:text-lg leading-relaxed text-slate-600 whitespace-pre-line">
+            {description}
+          </p>
+        </div>
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-    (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: '-50% 0px -50% 0px' }
-    );
-
-    SECTIONS.forEach(({ id }) => {
-      const element = document.getElementById(id);
-      if (element) observer.observe(element);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <ThemeProvider>
-      <div className="bg-white dark:bg-slate-900 font-sans text-slate-800 dark:text-slate-200 antialiased">
-        <Header sections={SECTIONS} activeSection={activeSection} scrollToSection={scrollToSection} />
-
-        <main>
-          <HeroSection />
-          <SectionSeparator />
-          <BusinessSection />
-          <SectionSeparator />
-          <PerspectiveSection />
-          <SectionSeparator />
-          <CompaniesSection />
-          <SectionSeparator />
-          <TeamSection />
-          <SectionSeparator />
-          <ContactSection
-            onInvestorClick={() => setShowInvestorForm(true)}
-            onFounderClick={() => setShowFounderForm(true)}
-          />
-        </main>
-
-        <Footer />
-
-        <AnimatePresence>
-          <InvestorForm isOpen={showInvestorForm} onClose={() => setShowInvestorForm(false)} />
-          <FounderForm isOpen={showFounderForm} onClose={() => setShowFounderForm(false)} />
-        </AnimatePresence>
+        <a
+          href="mailto:contact@sparkle.vc"
+          className="mt-12 inline-flex items-center justify-center rounded-full border border-slate-200 px-6 py-3 text-base font-medium text-slate-900 shadow-sm transition hover:border-slate-300 hover:bg-slate-50"
+        >
+          contact@sparkle.vc
+        </a>
       </div>
-    </ThemeProvider>
-  );
-};
 
-export default SparkleVenturesPage;
+      <footer className="mt-16 text-sm text-slate-400">
+        © Sparkle Ventures
+      </footer>
+    </div>
+  </div>
+);
+
+export default SparkleVenturesLanding;
