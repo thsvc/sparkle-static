@@ -1,12 +1,12 @@
 name: Deploy Vite site to GitHub Pages
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: write
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: true
 jobs:
   build:

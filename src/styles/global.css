@@ -1,23 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap');
 
 :root {
   --font-sans: 'Inter', sans-serif;
   --font-grotesk: 'Space Grotesk', sans-serif;
   scroll-behavior: smooth;
 }
-.font-sans { font-family: var(--font-sans); }
-.font-grotesk { font-family: var(--font-grotesk); }
+.font-sans {
+  font-family: var(--font-sans);
+}
+.font-grotesk {
+  font-family: var(--font-grotesk);
+}
 
 @layer components {
   .form-input {
     @apply w-full px-4 py-3 rounded-xl border bg-transparent border-slate-200 dark:border-slate-600
            focus:border-blue-500 focus:ring-blue-500 focus:ring-1 focus:outline-none transition;
   }
-  .form-checkbox { @apply flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300; }
+  .form-checkbox {
+    @apply flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300;
+  }
   .form-checkbox input {
     @apply mt-0.5 h-4 w-4 rounded border-slate-300 dark:border-slate-500 text-blue-600 focus:ring-blue-500 bg-transparent;
   }
@@ -31,5 +37,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
