@@ -1,2 +1,7 @@
 dist
 node_modules
+
+# Local tooling / temp
+.mirror/
+__diff__/
+tools/
